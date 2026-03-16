@@ -906,159 +906,6 @@ nav {
 .ld-aberration { filter: drop-shadow(2px 0 0 rgba(255,0,120,0.7)) drop-shadow(-2px 0 0 rgba(0,200,255,0.7)); }
 
 
-/* ─── Apple-style cinematic scroll sections ─────── */
-.scroll-stmt {
-  padding: 150px 32px 130px;
-  text-align: center;
-  background: var(--bg);
-  position: relative;
-  overflow: hidden;
-}
-.scroll-stmt::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 5%; right: 5%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,122,26,.3), rgba(200,85,247,.2), transparent);
-}
-.scroll-stmt::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 5%; right: 5%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,122,26,.15), transparent);
-}
-.scroll-stmt-inner { max-width: 1100px; margin: 0 auto; }
-.scroll-stmt-hl {
-  font-size: clamp(3rem, 9vw, 8.5rem);
-  font-weight: 900;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  color: rgba(245,236,224,0.06);
-  margin: 0 0 48px;
-  user-select: none;
-}
-.sw { display: inline-block; margin: 0 0.05em; }
-.scroll-stmt-sub {
-  font-size: clamp(0.72rem, 1.2vw, 0.9rem);
-  color: rgba(138,112,96,.7);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.8s 0.3s ease, transform 0.8s 0.3s ease;
-}
-.scroll-stmt-sub.sss-vis { opacity: 1; transform: none; }
-
-/* ─── Key numbers row ─────────────────────────── */
-.key-numbers {
-  background: var(--srf);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.kn-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 1400px;
-  margin: 0 auto;
-}
-.kn-item {
-  padding: 56px 28px;
-  text-align: center;
-  border-right: 1px solid var(--border);
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.kn-item:last-child { border-right: none; }
-.kn-item.kv { opacity: 1; transform: none; }
-.kn-num {
-  font-size: clamp(3rem, 5.5vw, 5rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  background: linear-gradient(135deg, #ff7a1a 0%, #ffb86c 60%, #ff7a1a 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: num-shine 4s linear infinite;
-  margin-bottom: 12px;
-  display: block;
-}
-@keyframes num-shine {
-  0%   { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
-.kn-label {
-  font-size: 0.78rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
-}
-
-/* ─── Feature trio ───────────────────────────── */
-.feature-trio {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2px;
-  background: var(--border);
-}
-.ft-card {
-  background: var(--bg);
-  padding: 72px 48px 80px;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
-  position: relative;
-  overflow: hidden;
-}
-.ft-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,122,26,.04), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.ft-card:hover::before { opacity: 1; }
-.ft-card.fv { opacity: 1; transform: none; }
-.ft-icon {
-  width: 64px; height: 64px;
-  border-radius: 18px;
-  background: rgba(255,122,26,.07);
-  border: 1px solid rgba(255,122,26,.18);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 28px;
-  transition: background 0.35s, border-color 0.35s, transform 0.35s;
-}
-.ft-card:hover .ft-icon {
-  background: rgba(255,122,26,.14);
-  border-color: rgba(255,122,26,.4);
-  transform: scale(1.08) rotate(-3deg);
-}
-.ft-icon svg { width: 30px; height: 30px; stroke: var(--red-hi); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.ft-title { font-size: 1.25rem; font-weight: 700; color: var(--text); margin: 0 0 14px; letter-spacing: -0.01em; }
-.ft-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; max-width: 320px; margin: 0 auto; }
-
-@media (max-width: 900px) {
-  .feature-trio { grid-template-columns: 1fr; }
-  .kn-grid { grid-template-columns: 1fr 1fr; }
-  .kn-item:nth-child(2) { border-right: none; }
-  .kn-item:nth-child(3) { border-right: 1px solid var(--border); }
-  .scroll-stmt-hl { font-size: clamp(2.4rem, 8vw, 4.5rem); }
-  .ft-card { padding: 52px 32px 60px; }
-}
-@media (max-width: 540px) {
-  .kn-grid { grid-template-columns: 1fr 1fr; }
-}
-
-/* ─── Foggy cursor ───────────────────────────────── */
-@media (hover: none) {
-  #foggy-cursor, * { cursor: auto !important; }
-}
 
 /* ─── Canvas smoke cursor ───────────────────────── */
 * { cursor: none !important; }
@@ -1315,68 +1162,6 @@ nav {
   </div>
 
 </div>
-
-<!-- ── Apple-style scroll statement ───────────── -->
-<section class="scroll-stmt">
-  <div class="scroll-stmt-inner">
-    <p class="scroll-stmt-hl">
-      <span class="sw">Building</span>
-      <span class="sw">AI</span>
-      <span class="sw">platforms</span>
-      <span class="sw">that</span>
-      <span class="sw">serve</span>
-      <span class="sw">millions.</span>
-    </p>
-    <p class="scroll-stmt-sub">Distinguished Engineer &middot; Verizon &middot; Carrier-scale AI &middot; 15+ Years</p>
-  </div>
-</section>
-
-<!-- ── Key numbers ────────────────────────────── -->
-<section class="key-numbers">
-  <div class="kn-grid">
-    <div class="kn-item">
-      <span class="kn-num" data-count="15" data-suffix="+">15+</span>
-      <div class="kn-label">Years in Telecom &amp; AI</div>
-    </div>
-    <div class="kn-item">
-      <span class="kn-num" data-count="5">5</span>
-      <div class="kn-label">Enterprise Platforms Built</div>
-    </div>
-    <div class="kn-item">
-      <span class="kn-num" data-prefix="$" data-count="3" data-suffix="M+">$3M+</span>
-      <div class="kn-label">Annual Savings Generated</div>
-    </div>
-    <div class="kn-item">
-      <span class="kn-num" data-count="5" data-suffix="K+">5K+</span>
-      <div class="kn-label">Devices Monitored Live</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Feature trio ───────────────────────────── -->
-<section class="feature-trio">
-  <div class="ft-card">
-    <div class="ft-icon">
-      <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-    </div>
-    <h3 class="ft-title">AI Platform Architect</h3>
-    <p class="ft-desc">Defining and building AI strategy for one of America's largest carriers — from LLAMA-RAG knowledge platforms to predictive network intelligence.</p>
-  </div>
-  <div class="ft-card">
-    <div class="ft-icon">
-      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    </div>
-    <h3 class="ft-title">Telecom at Scale</h3>
-    <p class="ft-desc">5K+ devices. 800+ KPIs. Real-time telemetry pipelines turning modem-level signals into carrier-grade network health intelligence.</p>
-  </div>
-  <div class="ft-card">
-    <div class="ft-icon">
-      <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-    </div>
-    <h3 class="ft-title">Engineering Leader</h3>
-    <p class="ft-desc">Distinguished Member of Technical Staff — bridging telecom standards with cloud-native AI systems, leading cross-functional teams at Verizon.</p>
-  </div>
-</section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -1742,14 +1527,8 @@ function animateCounters() {
     setTimeout(() => { ldRing.classList.remove('pulse'); ldRing.classList.add('pulse'); }, 500);
   }
 
-  /* — subtle flash bloom (reduced intensity) — */
-  function flashBloom(onDone) {
-    gsap.fromTo(ldFlash,
-      { opacity: 0 },
-      { opacity: 0.28, duration: 0.1, ease: 'power2.in',
-        onComplete: () => gsap.to(ldFlash, { opacity: 0, duration: 0.22, ease: 'power1.out', onComplete: onDone }) }
-    );
-  }
+  /* — no flash; smooth exit only — */
+  function flashBloom(onDone) { if (onDone) onDone(); }
 
   /* — main loader timeline — */
   const ldTl = gsap.timeline();
@@ -1803,13 +1582,14 @@ function animateCounters() {
       textShadow: '0 0 60px rgba(255,122,26,1), 0 0 140px rgba(255,122,26,0.6), 0 0 280px rgba(255,122,26,0.3)',
       duration: 0.35
     }, 3.1)
-    /* flash bloom + center fade overlap */
-    .add(() => flashBloom(() => {}))
-    .to(ldCenter, { scale: 0.88, opacity: 0, duration: 0.38, ease: 'power2.in' }, '-=0.05')
-    /* iris close with dramatic ease */
+    /* smooth center fade + iris close (no flash) */
+    .to(ldCenter, {
+      scale: 0.82, opacity: 0, filter: 'blur(12px)',
+      duration: 0.5, ease: 'power3.in'
+    })
     .to(loader, {
       clipPath: 'circle(0% at 50% 50%)',
-      duration: 0.75, ease: 'expo.inOut',
+      duration: 0.72, ease: 'expo.inOut',
       onComplete: () => {
         loader.style.display = 'none';
         cancelAnimationFrame(rafId);
@@ -1819,8 +1599,35 @@ function animateCounters() {
         setTimeout(startPhotoFloat, 1400);
         setTimeout(startPhotoGlitch,4000);
         setTimeout(startChipFloat,  2000);
+        setTimeout(startBentoParallax, 600);
       }
     }, '-=0.2');
+
+  /* ── Bento card mouse parallax (depth effect) ── */
+  function startBentoParallax() {
+    const layers = [
+      { sel: '.bento-photo',  fx: 0.010, fy: 0.013 },
+      { sel: '.bento-bio',    fx:-0.005, fy: 0.007 },
+      { sel: '.bento-career', fx: 0.013, fy:-0.009 },
+      { sel: '.bento-plats',  fx:-0.007, fy: 0.011 },
+      { sel: '.bento-exprt',  fx: 0.009, fy:-0.006 },
+      { sel: '.bento-beyond', fx:-0.009, fy: 0.009 },
+    ].map(l => ({ el: document.querySelector(l.sel), fx: l.fx, fy: l.fy }))
+     .filter(l => l.el);
+    let tx = 0, ty = 0, cx2 = 0, cy2 = 0;
+    document.addEventListener('mousemove', e => {
+      tx = e.clientX - window.innerWidth  / 2;
+      ty = e.clientY - window.innerHeight / 2;
+    });
+    (function parLoop() {
+      cx2 += (tx - cx2) * 0.06;
+      cy2 += (ty - cy2) * 0.06;
+      layers.forEach(l => {
+        l.el.style.transform = `translate(${cx2*l.fx}px,${cy2*l.fy}px)`;
+      });
+      requestAnimationFrame(parLoop);
+    })();
+  }
 
   /* set initial clip-path so the exit animation works */
   gsap.set(loader, { clipPath: 'circle(150% at 50% 50%)' });
@@ -1831,64 +1638,7 @@ function animateCounters() {
 
 
 
-/* ── Apple word-reveal + feature trio ─────────── */
-(function() {
-  const sws = document.querySelectorAll('.sw');
-  if (sws.length) {
-    gsap.to(sws, {
-      color: '#f5ece0',
-      textShadow: '0 0 50px rgba(255,122,26,.2)',
-      stagger: 0.22,
-      scrollTrigger: {
-        trigger: '.scroll-stmt',
-        start: 'top 70%',
-        end: 'center 35%',
-        scrub: 1.4,
-      }
-    });
-    ScrollTrigger.create({
-      trigger: '.scroll-stmt',
-      start: 'top 62%',
-      onEnter: () => document.querySelector('.scroll-stmt-sub')?.classList.add('sss-vis')
-    });
-  }
-  // Feature trio staggered reveal
-  document.querySelectorAll('.ft-card').forEach((card, i) => {
-    card.style.transitionDelay = (i * 0.16) + 's';
-    new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { card.classList.add('fv'); } });
-    }, { threshold: 0.12 }).observe(card);
-  });
 
-  // Key numbers scroll reveal
-  document.querySelectorAll('.kn-item').forEach((el, i) => {
-    el.style.transitionDelay = (i * 0.1) + 's';
-    new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          el.classList.add('kv');
-          // animate number counting up
-          const numEl = el.querySelector('.kn-num');
-          if (numEl && numEl.dataset.count) {
-            const target = +numEl.dataset.count;
-            const prefix = numEl.dataset.prefix || '';
-            const suffix = numEl.dataset.suffix || '';
-            let start = 0;
-            const dur = 1400;
-            const startTime = performance.now();
-            function tick(now) {
-              const p = Math.min((now - startTime) / dur, 1);
-              const ease = 1 - Math.pow(1 - p, 3); // cubic ease out
-              numEl.textContent = prefix + Math.round(start + (target - start) * ease) + suffix;
-              if (p < 1) requestAnimationFrame(tick);
-            }
-            requestAnimationFrame(tick);
-          }
-        }
-      });
-    }, { threshold: 0.3 }).observe(el);
-  });
-})();
 
 /* ── Foggy cursor ──────────────────────────────── */
 (function() {

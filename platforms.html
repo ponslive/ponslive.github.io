@@ -480,6 +480,63 @@ nav {
 /* ─── Canvas smoke cursor ───────────────────────── */
 * { cursor: none !important; }
 @media (hover: none) { * { cursor: auto !important; } }
+
+/* ─── Apple-style blur-reveal ──────────────────── */
+.ab-reveal {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 0.85s cubic-bezier(.22,1,.36,1),
+              filter 0.85s cubic-bezier(.22,1,.36,1),
+              transform 0.85s cubic-bezier(.22,1,.36,1);
+}
+.ab-reveal.abv {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+}
+
+/* ─── Apple-style scroll statement breaker ─────── */
+.apple-stmt {
+  padding: 110px 32px 100px;
+  text-align: center;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.apple-stmt::before,
+.apple-stmt::after {
+  content: '';
+  position: absolute;
+  left: 6%; right: 6%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,122,26,.25), transparent);
+}
+.apple-stmt::before { top: 0; }
+.apple-stmt::after  { bottom: 0; }
+.as-line {
+  font-size: clamp(2.2rem, 6vw, 5.8rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: rgba(245,236,224,0.07);
+  margin: 0;
+  user-select: none;
+}
+.as-w {
+  display: inline-block;
+  margin: 0 0.06em;
+  transition: color 0.45s ease, text-shadow 0.45s ease;
+}
+.as-w.aswl {
+  color: var(--text);
+  text-shadow: 0 0 60px rgba(255,122,26,.18);
+}
+
+/* ─── Hero parallax wrapper ─────────────────────── */
+.hero-par-inner {
+  will-change: transform;
+}
 </style>
 </head>
 <body>
@@ -543,7 +600,11 @@ nav {
 
   <!-- FEATURED PLATFORMS -->
   <section class="section">
-    <div class="section-header">
+    <section class="apple-stmt">
+  <p class="as-line"><span class="as-w">Five</span> <span class="as-w">platforms.</span> <span class="as-w">One</span> <span class="as-w">architect.</span></p>
+</section>
+
+<div class="section-header">
       <h2 class="section-title">Featured Platforms</h2>
       <div class="section-line"></div>
       <span class="section-count">5 platforms</span>
@@ -1067,6 +1128,62 @@ nav {
     requestAnimationFrame(loop);
   })();
 })();
+</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Apple scroll effects ──────────────────────── */
+(function() {
+  // 1. Blur-reveal on all .ab-reveal elements
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, idx) => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const delay = parseFloat(el.dataset.abDelay || 0);
+        setTimeout(() => el.classList.add('abv'), delay * 1000);
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.ab-reveal').forEach(el => obs.observe(el));
+
+  // 2. Apple word-reveal on .apple-stmt
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    document.querySelectorAll('.apple-stmt').forEach(stmt => {
+      const words = stmt.querySelectorAll('.as-w');
+      if (!words.length) return;
+      gsap.to(words, {
+        color: '#f5ece0',
+        textShadow: '0 0 60px rgba(255,122,26,.2)',
+        stagger: 0.25,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: stmt,
+          start: 'top 70%',
+          end: 'center 40%',
+          scrub: 1.2,
+        }
+      });
+    });
+
+    // 3. Hero parallax — text drifts up as hero scrolls out
+    const heroInner = document.querySelector('.hero-par-inner');
+    if (heroInner) {
+      gsap.to(heroInner, {
+        y: -60,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroInner.closest('.hero') || heroInner,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
+    }
+  }
+})();
+
 </script>
 </body>
 </html>
