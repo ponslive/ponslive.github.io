@@ -718,6 +718,41 @@ footer {
   .philosophy-card { padding: 28px 20px 24px; }
   .connect-note { padding: 24px 20px; }
 }
+
+/* ─── Foggy cursor ───────────────────────────────── */
+* { cursor: none !important; }
+#foggy-cursor {
+  position: fixed;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  background: radial-gradient(circle, rgba(255,122,26,.22) 0%, rgba(255,122,26,.06) 45%, transparent 70%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid rgba(255,122,26,.18);
+  transition: width .25s ease, height .25s ease, background .25s ease, border-color .25s ease;
+  will-change: transform;
+}
+#foggy-cursor.expanded {
+  width: 72px; height: 72px;
+  background: radial-gradient(circle, rgba(255,122,26,.32) 0%, rgba(255,122,26,.1) 50%, transparent 75%);
+  border-color: rgba(255,122,26,.35);
+}
+#foggy-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff7a1a;
+  pointer-events: none;
+  z-index: 100000;
+  will-change: transform;
+  box-shadow: 0 0 8px rgba(255,122,26,.7);
+}
+@media (hover: none) {
+  #foggy-cursor, #foggy-dot { display: none; }
+  * { cursor: auto !important; }
+}
 </style>
 </head>
 <body>
@@ -1058,6 +1093,29 @@ footer {
       delay: 0.75
     });
   }
+</script>
+
+<script>
+/* Foggy cursor */
+(function() {
+  const cur = document.createElement('div'); cur.id = 'foggy-cursor';
+  const dot = document.createElement('div'); dot.id = 'foggy-dot';
+  document.body.appendChild(cur); document.body.appendChild(dot);
+  let mx=window.innerWidth/2,my=window.innerHeight/2,cx=mx,cy=my,dx=mx,dy=my;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  (function loop(){
+    cx=lerp(cx,mx,.09);cy=lerp(cy,my,.09);
+    dx=lerp(dx,mx,.45);dy=lerp(dy,my,.45);
+    cur.style.transform=`translate(${cx-24}px,${cy-24}px)`;
+    dot.style.transform=`translate(${dx-4}px,${dy-4}px)`;
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,.domain-card,.cert-card,.philosophy-quote,.stat-box,.platform-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('expanded'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('expanded'));
+  });
+})();
 </script>
 </body>
 </html>

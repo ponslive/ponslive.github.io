@@ -453,6 +453,59 @@ nav {
   .card-inner { padding: 20px; }
   .card-footer { flex-direction: column; align-items: flex-start; }
 }
+
+/* ─── Featured card (Analytics & AI — full width) ─ */
+.featured-card {
+  grid-column: 1 / -1;
+}
+.featured-card .card-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+  align-items: start;
+}
+.featured-card .card-top { grid-column: 1 / -1; }
+.featured-card .card-desc { grid-column: 1 / -1; }
+.featured-card .achievements-label { margin-top: 0; }
+.featured-card .card-footer { grid-column: 1 / -1; margin-top: 8px; }
+
+/* ─── Foggy cursor ───────────────────────────────── */
+* { cursor: none !important; }
+#foggy-cursor {
+  position: fixed;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  background: radial-gradient(circle, rgba(255,122,26,.22) 0%, rgba(255,122,26,.06) 45%, transparent 70%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid rgba(255,122,26,.18);
+  transition: width .25s ease, height .25s ease, background .25s ease, border-color .25s ease;
+  will-change: transform;
+}
+#foggy-cursor.expanded {
+  width: 72px; height: 72px;
+  background: radial-gradient(circle, rgba(255,122,26,.32) 0%, rgba(255,122,26,.1) 50%, transparent 75%);
+  border-color: rgba(255,122,26,.35);
+}
+#foggy-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff7a1a;
+  pointer-events: none;
+  z-index: 100000;
+  will-change: transform;
+  box-shadow: 0 0 8px rgba(255,122,26,.7);
+}
+@media (hover: none) {
+  #foggy-cursor, #foggy-dot { display: none; }
+  * { cursor: auto !important; }
+}
+@media (max-width: 768px) {
+  .featured-card .card-inner { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -524,7 +577,74 @@ nav {
 
     <div class="platforms-grid">
 
-      <!-- Card 1: Device Diagnostics -->
+      <!-- Card 1: Analytics & AI — featured full-width -->
+      <div class="platform-card featured-card" data-color="orange">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-title-group">
+              <div class="card-title">Analytics &amp; AI Platform</div>
+              <div class="card-period">2023 – Present</div>
+            </div>
+            <span class="status-badge badge-initiative">Active Initiative</span>
+          </div>
+          <p class="card-desc">Defining AI strategy for predictive network intelligence — surfacing call drop &amp; RAT change degradation signals before they impact subscribers across Verizon's carrier network.</p>
+          <div class="achievements-label">Key Achievements</div>
+          <ul class="achievements-list">
+            <li>Call drop &amp; RAT change prediction models using AI/ML pipelines</li>
+            <li>Network health KPI dashboards for real-time operational visibility</li>
+            <li>Big data pipeline for post-processing telemetry and analytics</li>
+            <li>User engagement platform for internal stakeholder reporting</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-metric">AI-Driven · Predictive Models · Carrier Scale</span>
+            <div class="stack-chips">
+              <span class="chip">AI/ML</span>
+              <span class="chip">Kafka</span>
+              <span class="chip">AWS</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Predictive Analytics</span>
+              <span class="chip">Elasticsearch</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: KnowledgeBot -->
+      <div class="platform-card" data-color="teal">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-title-group">
+              <div class="card-title">KnowledgeBot — AI Support Platform</div>
+              <div class="card-period">2023 – Present · <a href="https://kbanswers.verizon.com/knowledgebot-portal/" target="_blank" style="color:#14b8a6;text-decoration:none;">kbanswers.verizon.com ↗</a></div>
+            </div>
+            <span class="status-badge badge-ai">AI · Live</span>
+          </div>
+          <p class="card-desc">Led the architecture and development of an AI-powered chatbot platform that converts Confluence knowledge bases into conversational support assistants — resolving up to 99% of questions instantly.</p>
+          <div class="achievements-label">Key Achievements</div>
+          <ul class="achievements-list">
+            <li>Rapid deployment pipeline to create and launch product-specific chatbots</li>
+            <li>Smart Q&amp;A matching with advanced NLP for context-aware answers</li>
+            <li>Gap detection &amp; analytics — surfaces knowledge base content gaps automatically</li>
+            <li>Seamless Confluence ingestion pipeline feeding a Vector DB via automated scheduler</li>
+            <li>Embedded chatbot integration into Verizon product pages for real-time support</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-metric">99% query resolution · Gen AI + LLAMA-RAG</span>
+            <div class="stack-chips">
+              <span class="chip">Gen AI</span>
+              <span class="chip">LLAMA-RAG</span>
+              <span class="chip">Vector DB</span>
+              <span class="chip">AWS</span>
+              <span class="chip">Confluence API</span>
+              <span class="chip">NLP</span>
+              <span class="chip">NodeJS</span>
+              <span class="chip">Angular</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Device Diagnostics -->
       <div class="platform-card" data-color="blue">
         <div class="card-inner">
           <div class="card-top">
@@ -560,7 +680,7 @@ nav {
         </div>
       </div>
 
-      <!-- Card 2: Certification Automation -->
+      <!-- Card 4: Certification Automation -->
       <div class="platform-card" data-color="green">
         <div class="card-inner">
           <div class="card-top">
@@ -568,7 +688,7 @@ nav {
               <div class="card-title">Certification Automation Platform</div>
               <div class="card-period">Jun 2022 – Nov 2024</div>
             </div>
-            <span class="status-badge badge-completed">Completed</span>
+            <span class="status-badge badge-active">Running · Alumni</span>
           </div>
           <p class="card-desc">Delivered at-scale certification automation for 120–150 devices/year across LTE, 5G &amp; IoT — cutting release cycles from months to weeks.</p>
           <div class="achievements-label">Key Achievements</div>
@@ -595,7 +715,7 @@ nav {
         </div>
       </div>
 
-      <!-- Card 3: Device Compliance -->
+      <!-- Card 5: Device Compliance -->
       <div class="platform-card" data-color="purple">
         <div class="card-inner">
           <div class="card-top">
@@ -603,7 +723,7 @@ nav {
               <div class="card-title">Device Compliance Platform</div>
               <div class="card-period">Jan 2016 – Jun 2022</div>
             </div>
-            <span class="status-badge badge-completed">Completed</span>
+            <span class="status-badge badge-active">Running · Alumni</span>
           </div>
           <p class="card-desc">Led end-to-end device release transformation — aligning regulatory, vendor, and carrier stakeholders around automated compliance workflows.</p>
           <div class="achievements-label">Key Achievements</div>
@@ -628,76 +748,9 @@ nav {
         </div>
       </div>
 
-      <!-- Card 4: Analytics & AI -->
-      <div class="platform-card" data-color="orange">
-        <div class="card-inner">
-          <div class="card-top">
-            <div class="card-title-group">
-              <div class="card-title">Analytics &amp; AI Platform</div>
-              <div class="card-period">2023 – Present</div>
-            </div>
-            <span class="status-badge badge-initiative">Initiative</span>
-          </div>
-          <p class="card-desc">Defining AI strategy for predictive network intelligence — surfacing degradation before it impacts subscribers.</p>
-          <div class="achievements-label">Key Achievements</div>
-          <ul class="achievements-list">
-            <li>Call drop &amp; RAT change prediction models</li>
-            <li>Network health KPI dashboards</li>
-            <li>Big data pipeline for post-processing and analytics</li>
-            <li>User engagement platform for internal stakeholders</li>
-          </ul>
-          <div class="card-footer">
-            <span class="card-metric">AI-Driven · Predictive Models</span>
-            <div class="stack-chips">
-              <span class="chip">AI/ML</span>
-              <span class="chip">Kafka</span>
-              <span class="chip">AWS</span>
-              <span class="chip">TypeScript</span>
-              <span class="chip">Predictive Analytics</span>
-              <span class="chip">Elasticsearch</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Card 5: KnowledgeBot AI Platform -->
-      <div class="platform-card" data-color="teal">
-        <div class="card-inner">
-          <div class="card-top">
-            <div class="card-title-group">
-              <div class="card-title">KnowledgeBot — AI Support Platform</div>
-              <div class="card-period">2023 – Present · <a href="https://kbanswers.verizon.com/knowledgebot-portal/" target="_blank" style="color:#14b8a6;text-decoration:none;">kbanswers.verizon.com ↗</a></div>
-            </div>
-            <span class="status-badge badge-ai">AI · Live</span>
-          </div>
-          <p class="card-desc">Led the architecture and development of an AI-powered chatbot platform that converts Confluence knowledge bases into conversational support assistants — resolving up to 99% of customer questions instantly.</p>
-          <div class="achievements-label">Key Achievements</div>
-          <ul class="achievements-list">
-            <li>Rapid deployment pipeline to create and launch product-specific chatbots</li>
-            <li>Smart Q&amp;A matching with advanced NLP algorithms for context-aware answers</li>
-            <li>Gap detection &amp; analytics — surfaces knowledge base content gaps automatically</li>
-            <li>Personalized, human-like conversational responses tailored per user</li>
-            <li>Seamless Confluence ingestion pipeline feeding a Vector DB via automated scheduler</li>
-            <li>Embedded chatbot integration into Verizon product pages for real-time support</li>
-          </ul>
-          <div class="card-footer">
-            <span class="card-metric">99% query resolution · Gen AI + LLAMA-RAG</span>
-            <div class="stack-chips">
-              <span class="chip">Gen AI</span>
-              <span class="chip">LLAMA-RAG</span>
-              <span class="chip">Vector DB</span>
-              <span class="chip">AWS</span>
-              <span class="chip">Confluence API</span>
-              <span class="chip">NLP</span>
-              <span class="chip">NodeJS</span>
-              <span class="chip">Angular</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
+
+
   </section>
 
   <!-- CAREER TIMELINE -->
@@ -955,6 +1008,29 @@ nav {
     card.style.transition = 'opacity .55s ease, transform .55s cubic-bezier(.25,.46,.45,.94), box-shadow .35s ease, border-color .3s';
   });
 
+})();
+</script>
+
+<script>
+/* Foggy cursor */
+(function() {
+  const cur = document.createElement('div'); cur.id = 'foggy-cursor';
+  const dot = document.createElement('div'); dot.id = 'foggy-dot';
+  document.body.appendChild(cur); document.body.appendChild(dot);
+  let mx=window.innerWidth/2,my=window.innerHeight/2,cx=mx,cy=my,dx=mx,dy=my;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  (function loop(){
+    cx=lerp(cx,mx,.09);cy=lerp(cy,my,.09);
+    dx=lerp(dx,mx,.45);dy=lerp(dy,my,.45);
+    cur.style.transform=`translate(${cx-24}px,${cy-24}px)`;
+    dot.style.transform=`translate(${dx-4}px,${dy-4}px)`;
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,.platform-card,.stat-box').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('expanded'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('expanded'));
+  });
 })();
 </script>
 </body>

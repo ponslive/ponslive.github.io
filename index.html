@@ -248,11 +248,11 @@ nav {
 }
 .platforms-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   flex: 1;
 }
+.platforms-row .plat-card:first-child { grid-column: 1 / 3; }
 .plat-card {
   background: linear-gradient(160deg, var(--srf2) 0%, var(--srf) 100%);
   border: 1px solid var(--border); border-radius: 12px;
@@ -289,6 +289,9 @@ nav {
 }
 .plat-status.active    { animation: badge-glow 2.5s ease-in-out infinite; }
 .plat-status.initiative{ animation: badge-glow 1.8s ease-in-out infinite; }
+.plat-status.ai { color: #14b8a6; border-color: rgba(20,184,166,.45); background: rgba(20,184,166,.1); animation: badge-glow-teal 2s ease-in-out infinite; }
+@keyframes badge-glow-teal { 0%,100%{box-shadow:0 0 0 0 rgba(20,184,166,0);}50%{box-shadow:0 0 8px 2px rgba(20,184,166,.4);} }
+.bento-plats .plat-status.ai { color: #14b8a6; border-color: rgba(20,184,166,.4); background: rgba(20,184,166,.08); animation: badge-glow-teal 2s ease-in-out infinite; }
 .plat-card h3      { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.25; }
 .plat-card .plat-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; flex: 1; }
 .plat-stat {
@@ -650,10 +653,11 @@ nav {
 }
 
 /* Platform cards: each card gets a subtle accent tint */
-.plat-card:nth-child(1) { border-left: 2px solid rgba(200,85,0,.4); }
-.plat-card:nth-child(2) { border-left: 2px solid rgba(200,85,0,.4); }
-.plat-card:nth-child(3) { border-left: 2px solid var(--red-hi); box-shadow: inset 2px 0 12px rgba(255,122,26,.06); }
-.plat-card:nth-child(4) { border-left: 2px solid var(--red-hi); box-shadow: inset 2px 0 12px rgba(255,122,26,.06); }
+.plat-card:nth-child(1) { border-left: 2px solid rgba(255,122,26,.5); }
+.plat-card:nth-child(2) { border-left: 2px solid rgba(20,184,166,.5); }
+.plat-card:nth-child(3) { border-left: 2px solid rgba(59,130,246,.4); }
+.plat-card:nth-child(4) { border-left: 2px solid rgba(34,197,94,.4); }
+.plat-card:nth-child(5) { border-left: 2px solid rgba(168,85,247,.4); }
 
 /* Platform stat numbers: vibrant gradient */
 .plat-stat-num {
@@ -684,8 +688,8 @@ nav {
 .interest-chip:nth-child(4):hover { border-color: rgba(53,196,120,.6);  box-shadow: 0 6px 20px rgba(53,196,120,.25); }
 
 /* Staggered scan-line on each plat-card in different hue */
-.plat-card:nth-child(3)::before,
-.plat-card:nth-child(4)::before {
+.plat-card:nth-child(1)::before,
+.plat-card:nth-child(2)::before {
   background: linear-gradient(90deg, transparent, #ff7a1a, transparent);
 }
 
@@ -861,10 +865,11 @@ nav {
 .plat-icon svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .plat-card h3 { display: flex; align-items: center; }
 /* card-specific icon colors */
-.plat-card:nth-child(1) .plat-icon { background: rgba(168,85,247,.15); color: #a855f7; }
-.plat-card:nth-child(2) .plat-icon { background: rgba(34,197,94,.15);  color: #22c55e; }
+.plat-card:nth-child(1) .plat-icon { background: rgba(255,122,26,.15); color: #ff7a1a; }
+.plat-card:nth-child(2) .plat-icon { background: rgba(20,184,166,.15); color: #14b8a6; }
 .plat-card:nth-child(3) .plat-icon { background: rgba(59,130,246,.15); color: #3b82f6; }
-.plat-card:nth-child(4) .plat-icon { background: rgba(255,122,26,.15); color: #ff7a1a; }
+.plat-card:nth-child(4) .plat-icon { background: rgba(34,197,94,.15);  color: #22c55e; }
+.plat-card:nth-child(5) .plat-icon { background: rgba(168,85,247,.15); color: #a855f7; }
 
 #ld-canvas {
   position: absolute; inset: 0; z-index: 3;
@@ -900,6 +905,111 @@ nav {
 .ld-shake { animation: ld-shake 0.35s cubic-bezier(.36,.07,.19,.97) forwards; }
 .ld-aberration { filter: drop-shadow(2px 0 0 rgba(255,0,120,0.7)) drop-shadow(-2px 0 0 rgba(0,200,255,0.7)); }
 
+
+/* ─── Apple-style scroll sections ───────────────── */
+.scroll-stmt {
+  padding: 80px 24px 60px;
+  text-align: center;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-stmt::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,122,26,.22), transparent);
+}
+.scroll-stmt-inner { max-width: 960px; margin: 0 auto; }
+.scroll-stmt-hl {
+  font-size: clamp(2rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: rgba(245,236,224,0.08);
+  margin: 0 0 28px;
+  user-select: none;
+}
+.sw { display: inline-block; margin: 0 0.08em; }
+.scroll-stmt-sub {
+  font-size: clamp(0.75rem, 1.3vw, 0.95rem);
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s 0.4s ease, transform 0.7s 0.4s ease;
+}
+.scroll-stmt-sub.sss-vis { opacity: 1; transform: none; }
+.feature-trio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  margin: 0 0 2px;
+}
+.ft-card {
+  background: var(--bg);
+  padding: 48px 36px 56px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.ft-card.fv { opacity: 1; transform: none; }
+.ft-icon {
+  width: 54px; height: 54px;
+  border-radius: 14px;
+  background: rgba(255,122,26,.07);
+  border: 1px solid rgba(255,122,26,.18);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.ft-card:hover .ft-icon { background: rgba(255,122,26,.15); border-color: rgba(255,122,26,.35); }
+.ft-icon svg { width: 26px; height: 26px; stroke: var(--red-hi); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ft-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 0 0 12px; }
+.ft-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+@media (max-width: 768px) {
+  .feature-trio { grid-template-columns: 1fr; }
+  .scroll-stmt-hl { font-size: 1.9rem; }
+}
+
+/* ─── Foggy cursor ───────────────────────────────── */
+* { cursor: none !important; }
+#foggy-cursor {
+  position: fixed;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  background: radial-gradient(circle, rgba(255,122,26,.22) 0%, rgba(255,122,26,.06) 45%, transparent 70%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid rgba(255,122,26,.18);
+  transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+#foggy-cursor.expanded {
+  width: 72px; height: 72px;
+  background: radial-gradient(circle, rgba(255,122,26,.32) 0%, rgba(255,122,26,.1) 50%, transparent 75%);
+  border-color: rgba(255,122,26,.35);
+}
+#foggy-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff7a1a;
+  pointer-events: none;
+  z-index: 100000;
+  will-change: transform;
+  box-shadow: 0 0 8px rgba(255,122,26,.7);
+}
+@media (hover: none) {
+  #foggy-cursor, #foggy-dot { display: none; }
+  * { cursor: auto !important; }
+}
 </style>
 
 </head>
@@ -1023,25 +1133,56 @@ nav {
   <div class="bento-card bento-plats" id="platforms">
     <div class="panel-title">Platforms</div>
     <div class="platforms-row">
-        <div class="plat-card past">
-        <div class="plat-bg-icon"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065zM15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
-        <span class="plat-status completed">Completed</span>
-        <h3><span class="plat-icon"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065zM15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>Device Compliance Platform</h3>
-        <div class="plat-desc">Led end-to-end device release transformation — aligning regulatory, vendor, and carrier stakeholders around automated compliance workflows.</div>
+        <!-- 1: Analytics & AI — spans 2 columns -->
+        <div class="plat-card">
+        <div class="plat-bg-icon"><svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 014 4 4 4 0 01-1.2 2.84A6 6 0 0118 14H6a6 6 0 013.2-5.16A4 4 0 018 6a4 4 0 014-4zM5 20v-1a3 3 0 013-3h8a3 3 0 013 3v1M9 8h6M9 11h6M9 14h3"/></svg></div>
+        <span class="plat-status initiative">Active Initiative</span>
+        <h3><span class="plat-icon"><svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></span>Analytics &amp; AI Platform</h3>
+        <div class="plat-desc">Defining AI strategy for call drop &amp; RAT change prediction across Verizon's network — surfacing degradation signals before they impact millions of subscribers.</div>
         <div class="plat-stat">
-        <span class="plat-stat-num" data-count="1" data-prefix="$" data-suffix="M+">$1M+</span>
-        <span class="plat-stat-lbl">annual savings</span>
+        <span class="plat-stat-num">AI-Driven</span>
+        <span class="plat-stat-lbl">predictive models · Network Intelligence</span>
         </div>
         <div class="plat-tags">
-        <span class="tag">OMADM</span><span class="tag">LWM2M</span>
-        <span class="tag">Angular</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
+        <span class="tag">AI/ML</span><span class="tag">Kafka</span>
+        <span class="tag">AWS</span><span class="tag">TypeScript</span><span class="tag">Predictive Analytics</span>
         </div>
         </div>
+        <!-- 2: KnowledgeBot -->
+        <div class="plat-card">
+        <div class="plat-bg-icon"><svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
+        <span class="plat-status ai">AI · Live</span>
+        <h3><span class="plat-icon"><svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></span>KnowledgeBot — AI Support</h3>
+        <div class="plat-desc">Architected LLAMA-RAG knowledge platform for Verizon support agents — 99% query resolution using Gen AI + Vector DB.</div>
+        <div class="plat-stat">
+        <span class="plat-stat-num">99%</span>
+        <span class="plat-stat-lbl">query resolution</span>
+        </div>
+        <div class="plat-tags">
+        <span class="tag">Gen AI</span><span class="tag">LLAMA-RAG</span>
+        <span class="tag">Vector DB</span><span class="tag">NodeJS</span>
+        </div>
+        </div>
+        <!-- 3: Device Diagnostics -->
+        <div class="plat-card">
+        <div class="plat-bg-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <span class="plat-status active">Active</span>
+        <h3><span class="plat-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>Device Diagnostics Platform</h3>
+        <div class="plat-desc">Driving real-time telemetry product vision — modem signals from 5K+ devices into network health intelligence.</div>
+        <div class="plat-stat">
+        <span class="plat-stat-num" data-count="5" data-suffix="K+">5K+</span>
+        <span class="plat-stat-lbl">devices · 800+ KPIs</span>
+        </div>
+        <div class="plat-tags">
+        <span class="tag">Kafka</span><span class="tag">Elasticsearch</span>
+        <span class="tag">Grafana</span><span class="tag">MQTT</span>
+        </div>
+        </div>
+        <!-- 4: Certification Automation -->
         <div class="plat-card past">
         <div class="plat-bg-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-        <span class="plat-status completed">Completed</span>
         <h3><span class="plat-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>Certification Automation</h3>
-        <div class="plat-desc">Delivered at-scale certification automation for 120–150 devices/year across LTE, 5G &amp; IoT — cutting release cycles from months to weeks.</div>
+        <div class="plat-desc">120–150 devices/year across LTE, 5G &amp; IoT — cutting release cycles from months to weeks.</div>
         <div class="plat-stat">
         <span class="plat-stat-num" data-count="2" data-prefix="$" data-suffix="M+">$2M+</span>
         <span class="plat-stat-lbl">annual savings</span>
@@ -1051,32 +1192,18 @@ nav {
         <span class="tag">CI/CD</span><span class="tag">eUICC</span>
         </div>
         </div>
-        <div class="plat-card">
-        <div class="plat-bg-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <span class="plat-status active">Active</span>
-        <h3><span class="plat-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>Device Diagnostics Platform</h3>
-        <div class="plat-desc">Driving the product vision for real-time telemetry — turning modem-level signals from 5K+ devices into actionable network health intelligence.</div>
+        <!-- 5: Device Compliance -->
+        <div class="plat-card past">
+        <div class="plat-bg-icon"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065zM15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <h3><span class="plat-icon"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065zM15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>Device Compliance Platform</h3>
+        <div class="plat-desc">End-to-end device release transformation — aligning regulatory, vendor, and carrier stakeholders around automated compliance workflows.</div>
         <div class="plat-stat">
-        <span class="plat-stat-num" data-count="5" data-suffix="K+">5K+</span>
-        <span class="plat-stat-lbl">devices · 800+ KPIs</span>
+        <span class="plat-stat-num" data-count="1" data-prefix="$" data-suffix="M+">$1M+</span>
+        <span class="plat-stat-lbl">annual savings</span>
         </div>
         <div class="plat-tags">
-        <span class="tag">Kafka</span><span class="tag">Elasticsearch</span>
-        <span class="tag">Grafana</span><span class="tag">MQTT</span><span class="tag">OMADM</span>
-        </div>
-        </div>
-        <div class="plat-card">
-        <div class="plat-bg-icon"><svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 014 4 4 4 0 01-1.2 2.84A6 6 0 0118 14H6a6 6 0 013.2-5.16A4 4 0 018 6a4 4 0 014-4zM5 20v-1a3 3 0 013-3h8a3 3 0 013 3v1M9 8h6M9 11h6M9 14h3"/></svg></div>
-        <span class="plat-status initiative">Active Initiative</span>
-        <h3><span class="plat-icon"><svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></span>Analytics &amp; AI Platform</h3>
-        <div class="plat-desc">Defining AI strategy for call drop &amp; RAT change prediction — surfacing network degradation before it impacts subscribers.</div>
-        <div class="plat-stat">
-        <span class="plat-stat-num">AI-Driven</span>
-        <span class="plat-stat-lbl">predictive models</span>
-        </div>
-        <div class="plat-tags">
-        <span class="tag">AI/ML</span><span class="tag">Kafka</span>
-        <span class="tag">AWS</span><span class="tag">TypeScript</span><span class="tag">Predictive Analytics</span>
+        <span class="tag">OMADM</span><span class="tag">LWM2M</span>
+        <span class="tag">Angular</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
         </div>
         </div>
     </div>
@@ -1136,8 +1263,51 @@ nav {
 
 </div>
 
+<!-- ── Apple-style scroll statement ───────────── -->
+<section class="scroll-stmt">
+  <div class="scroll-stmt-inner">
+    <p class="scroll-stmt-hl">
+      <span class="sw">Building</span>
+      <span class="sw">AI</span>
+      <span class="sw">platforms</span>
+      <span class="sw">that</span>
+      <span class="sw">serve</span>
+      <span class="sw">millions.</span>
+    </p>
+    <p class="scroll-stmt-sub">Distinguished Engineer &middot; Verizon &middot; Carrier-scale AI &middot; 15+ Years</p>
+  </div>
+</section>
+
+<!-- ── Feature trio ───────────────────────────── -->
+<section class="feature-trio">
+  <div class="ft-card">
+    <div class="ft-icon">
+      <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+    </div>
+    <h3 class="ft-title">AI Platform Architect</h3>
+    <p class="ft-desc">Defining and building AI strategy for one of America's largest carriers — from LLAMA-RAG knowledge platforms to predictive network intelligence.</p>
+  </div>
+  <div class="ft-card">
+    <div class="ft-icon">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <h3 class="ft-title">Telecom at Scale</h3>
+    <p class="ft-desc">5K+ devices. 800+ KPIs. Real-time telemetry pipelines turning modem-level signals into carrier-grade network health intelligence.</p>
+  </div>
+  <div class="ft-card">
+    <div class="ft-icon">
+      <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+    </div>
+    <h3 class="ft-title">Engineering Leader</h3>
+    <p class="ft-desc">Distinguished Member of Technical Staff — bridging telecom standards with cloud-native AI systems, leading cross-functional teams at Verizon.</p>
+  </div>
+</section>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ── Hamburger ─────────────────────────────────── */
 const hamburger  = document.getElementById('hamburger');
@@ -1160,7 +1330,7 @@ gsap.set('.bento-bio',          { scale: 0.88, opacity: 0 });
 gsap.set('.bento-bio .bio-main > *, .bento-bio .contact', { y: 35, opacity: 0 });
 gsap.set('.bento-career',       { x: -80, opacity: 0, scale: 0.9 });
 gsap.set('.panel-title',        { opacity: 0, y: 14 });
-gsap.set('.plat-card',          { y: gsap.utils.wrap([-100,-100,100,100]), x: gsap.utils.wrap([-80,80,-80,80]), rotation: gsap.utils.wrap([-16,16,-12,12]), scale: 0.65, opacity: 0 });
+gsap.set('.plat-card',          { y: gsap.utils.wrap([-100,-100,100,100,0]), x: gsap.utils.wrap([0,80,-80,80,-80]), rotation: gsap.utils.wrap([0,16,-12,12,-8]), scale: 0.65, opacity: 0 });
 gsap.set('.skill-tile',         { x: 80, opacity: 0, scale: 0.75, rotation: 3 });
 gsap.set('.beyond-bg-photo img',{ opacity: 0 });
 gsap.set('.interest-chip',      { y: 28, opacity: 0, scale: 0.72 });
@@ -1586,6 +1756,68 @@ function animateCounters() {
   ldL2.textContent = 'PANDIYAN';
 })();
 
+
+
+/* ── Apple word-reveal + feature trio ─────────── */
+(function() {
+  const sws = document.querySelectorAll('.sw');
+  if (sws.length) {
+    gsap.to(sws, {
+      color: '#f5ece0',
+      textShadow: '0 0 50px rgba(255,122,26,.2)',
+      stagger: 0.22,
+      scrollTrigger: {
+        trigger: '.scroll-stmt',
+        start: 'top 70%',
+        end: 'center 35%',
+        scrub: 1.4,
+      }
+    });
+    ScrollTrigger.create({
+      trigger: '.scroll-stmt',
+      start: 'top 62%',
+      onEnter: () => document.querySelector('.scroll-stmt-sub')?.classList.add('sss-vis')
+    });
+  }
+  // Feature trio staggered reveal
+  document.querySelectorAll('.ft-card').forEach((card, i) => {
+    card.style.transitionDelay = (i * 0.14) + 's';
+    new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { card.classList.add('fv'); } });
+    }, { threshold: 0.15 }).observe(card);
+  });
+})();
+
+/* ── Foggy cursor ──────────────────────────────── */
+(function() {
+  const cur = document.createElement('div');
+  cur.id = 'foggy-cursor';
+  const dot = document.createElement('div');
+  dot.id = 'foggy-dot';
+  document.body.appendChild(cur);
+  document.body.appendChild(dot);
+  let mx = window.innerWidth/2, my = window.innerHeight/2;
+  let cx = mx, cy = my;
+  let dx = mx, dy = my;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  const lerp = (a, b, t) => a + (b - a) * t;
+  function loop() {
+    cx = lerp(cx, mx, 0.09);
+    cy = lerp(cy, my, 0.09);
+    dx = lerp(dx, mx, 0.45);
+    dy = lerp(dy, my, 0.45);
+    cur.style.transform = `translate(${cx - 24}px, ${cy - 24}px)`;
+    dot.style.transform = `translate(${dx - 4}px, ${dy - 4}px)`;
+    requestAnimationFrame(loop);
+  }
+  loop();
+  // scale up on hoverable elements
+  const hoverEls = document.querySelectorAll('a, button, .plat-card, .skill-tile, .interest-chip, .ft-card');
+  hoverEls.forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('expanded'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('expanded'));
+  });
+})();
 </script>
 </body>
 </html>
