@@ -140,7 +140,7 @@ section {
 /* ─── HERO ─── */
 .hero {
   max-width: 100%;
-  padding: 100px 32px 80px;
+  padding: 60px 32px 50px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -162,10 +162,7 @@ section {
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -.03em;
-  background: linear-gradient(135deg, #fff 20%, var(--red-hi) 60%, #e8a060 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
   margin-bottom: 24px;
 }
 .hero-sub {
@@ -690,7 +687,7 @@ footer {
   .hamburger { display: flex; }
 
   section { padding: 60px 20px; }
-  .hero { padding: 70px 20px 60px; }
+  .hero { padding: 40px 20px 40px; }
   .family-section, .interests-section, .philosophy-section { padding: 60px 20px; }
 
   .story-grid,
@@ -1015,6 +1012,13 @@ footer {
 
   // ─── Scroll reveal via IntersectionObserver ───
   const reveals = document.querySelectorAll('.reveal');
+  // Immediately show elements already in viewport (hero section)
+  requestAnimationFrame(() => {
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) el.classList.add('visible');
+    });
+  });
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1023,8 +1027,8 @@ footer {
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -20px 0px'
   });
   reveals.forEach(el => observer.observe(el));
 
