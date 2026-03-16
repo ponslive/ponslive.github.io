@@ -720,41 +720,13 @@ footer {
 }
 
 /* ─── Foggy cursor ───────────────────────────────── */
-* { cursor: none !important; }
-#foggy-cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  background: radial-gradient(circle, rgba(255,122,26,.22) 0%, rgba(255,122,26,.06) 45%, transparent 70%);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  border: 1px solid rgba(255,122,26,.18);
-  transition: width .25s ease, height .25s ease, background .25s ease, border-color .25s ease;
-  will-change: transform;
-}
-#foggy-cursor.expanded {
-  width: 72px; height: 72px;
-  background: radial-gradient(circle, rgba(255,122,26,.32) 0%, rgba(255,122,26,.1) 50%, transparent 75%);
-  border-color: rgba(255,122,26,.35);
-}
-#foggy-dot {
-  position: fixed;
-  top: 0; left: 0;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #ff7a1a;
-  pointer-events: none;
-  z-index: 100000;
-  will-change: transform;
-  box-shadow: 0 0 8px rgba(255,122,26,.7);
-}
 @media (hover: none) {
-  #foggy-cursor, #foggy-dot { display: none; }
-  * { cursor: auto !important; }
+  #foggy-cursor, * { cursor: auto !important; }
 }
+
+/* ─── Canvas smoke cursor ───────────────────────── */
+* { cursor: none !important; }
+@media (hover: none) { * { cursor: auto !important; } }
 </style>
 </head>
 <body>
@@ -1117,6 +1089,67 @@ footer {
     el.addEventListener('mouseenter',()=>cur.classList.add('expanded'));
     el.addEventListener('mouseleave',()=>cur.classList.remove('expanded'));
   });
+})();
+
+/* ── Canvas smoke cursor ──────────────────────── */
+(function() {
+  if (window.matchMedia('(hover: none)').matches) return;
+  const cv = document.createElement('canvas');
+  cv.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:999999;';
+  document.body.appendChild(cv);
+  const ctx = cv.getContext('2d');
+  function resize(){ cv.width=window.innerWidth; cv.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  const pal = [
+    [255,122,26],[255,55,110],[168,85,247],
+    [20,184,166],[255,190,50],[99,102,241]
+  ];
+  let pts=[], mx=-500, my=-500, lx=-500, ly=-500;
+  document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
+
+  function Smoke(x,y){
+    const c=pal[Math.floor(Math.random()*pal.length)];
+    this.r=c[0]; this.g=c[1]; this.b=c[2];
+    this.x=x+(Math.random()-.5)*14;
+    this.y=y+(Math.random()-.5)*14;
+    this.vx=(Math.random()-.5)*2.8;
+    this.vy=-(Math.random()*3.2+0.7);
+    this.sz=Math.random()*30+14;
+    this.a=Math.random()*.6+.25;
+    this.da=.012+Math.random()*.016;
+  }
+  Smoke.prototype.tick=function(){
+    this.x+=this.vx; this.y+=this.vy;
+    this.vx*=.96; this.vy*=.96;
+    this.sz*=.974; this.a-=this.da;
+  };
+  Smoke.prototype.draw=function(){
+    const g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.sz);
+    const a=Math.max(0,this.a);
+    g.addColorStop(0,  `rgba(${this.r},${this.g},${this.b},${a})`);
+    g.addColorStop(.4, `rgba(${this.r},${this.g},${this.b},${a*.28})`);
+    g.addColorStop(1,  `rgba(${this.r},${this.g},${this.b},0)`);
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.sz,0,Math.PI*2);
+    ctx.fillStyle=g; ctx.fill();
+  };
+
+  (function loop(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    const d=Math.hypot(mx-lx,my-ly);
+    if(d>4){
+      const n=Math.min(Math.floor(d/7)+2,6);
+      for(let i=0;i<n;i++) pts.push(new Smoke(mx,my));
+      lx=mx; ly=my;
+    }
+    pts=pts.filter(p=>{ p.tick(); if(p.a>0){p.draw();return true;} return false; });
+    if(mx>-400){
+      ctx.beginPath(); ctx.arc(mx,my,4.5,0,Math.PI*2);
+      ctx.shadowColor='#ff7a1a'; ctx.shadowBlur=14;
+      ctx.fillStyle='#ff7a1a'; ctx.fill(); ctx.shadowBlur=0;
+    }
+    requestAnimationFrame(loop);
+  })();
 })();
 </script>
 </body>
