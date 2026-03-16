@@ -217,6 +217,7 @@ nav {
 .platform-card[data-color="green"]::before  { background: linear-gradient(90deg, #22c55e, rgba(34,197,94,.2)); }
 .platform-card[data-color="purple"]::before { background: linear-gradient(90deg, #a855f7, rgba(168,85,247,.2)); }
 .platform-card[data-color="orange"]::before { background: linear-gradient(90deg, #ff7a1a, rgba(255,122,26,.2)); }
+.platform-card[data-color="teal"]::before   { background: linear-gradient(90deg, #14b8a6, rgba(20,184,166,.2)); }
 
 .platform-card:hover {
   transform: translateY(-6px);
@@ -226,6 +227,7 @@ nav {
 .platform-card[data-color="green"]:hover  { box-shadow: 0 20px 50px rgba(34,197,94,.15), 0 4px 16px rgba(0,0,0,.4); }
 .platform-card[data-color="purple"]:hover { box-shadow: 0 20px 50px rgba(168,85,247,.15), 0 4px 16px rgba(0,0,0,.4); }
 .platform-card[data-color="orange"]:hover { box-shadow: 0 20px 50px rgba(255,122,26,.15), 0 4px 16px rgba(0,0,0,.4); }
+.platform-card[data-color="teal"]:hover   { box-shadow: 0 20px 50px rgba(20,184,166,.15), 0 4px 16px rgba(0,0,0,.4); }
 
 .card-inner { padding: 28px; }
 .card-top {
@@ -250,6 +252,7 @@ nav {
 .badge-active     { background: rgba(34,197,94,.12); color: #22c55e; border: 1px solid rgba(34,197,94,.25); }
 .badge-completed  { background: rgba(139,92,246,.12); color: #a78bfa; border: 1px solid rgba(139,92,246,.25); }
 .badge-initiative { background: rgba(255,122,26,.12); color: var(--red-hi); border: 1px solid rgba(255,122,26,.25); }
+.badge-ai         { background: rgba(20,184,166,.12); color: #14b8a6; border: 1px solid rgba(20,184,166,.25); }
 
 .card-desc {
   font-size: 13.5px; color: var(--muted); line-height: 1.7;
@@ -278,6 +281,7 @@ nav {
 .platform-card[data-color="green"] .achievements-list li::before  { background: #22c55e; }
 .platform-card[data-color="purple"] .achievements-list li::before { background: #a855f7; }
 .platform-card[data-color="orange"] .achievements-list li::before { background: var(--red-hi); }
+.platform-card[data-color="teal"] .achievements-list li::before   { background: #14b8a6; }
 
 .card-footer {
   display: flex; align-items: center; justify-content: space-between;
@@ -291,6 +295,7 @@ nav {
 .platform-card[data-color="green"] .card-metric  { color: #22c55e; }
 .platform-card[data-color="purple"] .card-metric { color: #a855f7; }
 .platform-card[data-color="orange"] .card-metric { color: var(--red-hi); }
+.platform-card[data-color="teal"] .card-metric   { color: #14b8a6; }
 
 .stack-chips {
   display: flex; flex-wrap: wrap; gap: 5px;
@@ -514,7 +519,7 @@ nav {
     <div class="section-header">
       <h2 class="section-title">Featured Platforms</h2>
       <div class="section-line"></div>
-      <span class="section-count">4 platforms</span>
+      <span class="section-count">5 platforms</span>
     </div>
 
     <div class="platforms-grid">
@@ -650,6 +655,43 @@ nav {
               <span class="chip">TypeScript</span>
               <span class="chip">Predictive Analytics</span>
               <span class="chip">Elasticsearch</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Card 5: KnowledgeBot AI Platform -->
+      <div class="platform-card" data-color="teal">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-title-group">
+              <div class="card-title">KnowledgeBot — AI Support Platform</div>
+              <div class="card-period">2023 – Present · <a href="https://kbanswers.verizon.com/knowledgebot-portal/" target="_blank" style="color:#14b8a6;text-decoration:none;">kbanswers.verizon.com ↗</a></div>
+            </div>
+            <span class="status-badge badge-ai">AI · Live</span>
+          </div>
+          <p class="card-desc">Led the architecture and development of an AI-powered chatbot platform that converts Confluence knowledge bases into conversational support assistants — resolving up to 99% of customer questions instantly.</p>
+          <div class="achievements-label">Key Achievements</div>
+          <ul class="achievements-list">
+            <li>Rapid deployment pipeline to create and launch product-specific chatbots</li>
+            <li>Smart Q&amp;A matching with advanced NLP algorithms for context-aware answers</li>
+            <li>Gap detection &amp; analytics — surfaces knowledge base content gaps automatically</li>
+            <li>Personalized, human-like conversational responses tailored per user</li>
+            <li>Seamless Confluence ingestion pipeline feeding a Vector DB via automated scheduler</li>
+            <li>Embedded chatbot integration into Verizon product pages for real-time support</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-metric">99% query resolution · Gen AI + LLAMA-RAG</span>
+            <div class="stack-chips">
+              <span class="chip">Gen AI</span>
+              <span class="chip">LLAMA-RAG</span>
+              <span class="chip">Vector DB</span>
+              <span class="chip">AWS</span>
+              <span class="chip">Confluence API</span>
+              <span class="chip">NLP</span>
+              <span class="chip">NodeJS</span>
+              <span class="chip">Angular</span>
             </div>
           </div>
         </div>
