@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platforms — Ponmudi Pandiyan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #0a0703;
+  --srf:     #120d05;
+  --srf2:    #1a1008;
+  --border:  #2a1a08;
+  --border2: #3a2510;
+  --red:     #e06c10;
+  --red-hi:  #ff7a1a;
+  --red-lo:  #5a2d08;
+  --text:    #f5ece0;
+  --muted:   #8a7060;
+  --dim:     #4a3220;
+  --glow:    0 0 22px rgba(255,122,26,.35);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── ANIMATED BACKGROUND BLOBS ─────────────── */
+.bg-blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .18; }
+.blob-1 { width:500px; height:500px; background:radial-gradient(circle,#8b3a00,transparent 70%); top:-150px; left:-100px; animation:blob-drift-1 18s ease-in-out infinite alternate; }
+.blob-2 { width:440px; height:440px; background:radial-gradient(circle,#006622,transparent 70%); bottom:-100px; right:-80px; animation:blob-drift-2 22s ease-in-out infinite alternate; }
+.blob-3 { width:360px; height:360px; background:radial-gradient(circle,#8b1a00,transparent 70%); top:35%; left:38%; animation:blob-drift-3 28s ease-in-out infinite alternate; }
+.blob-4 { width:280px; height:280px; background:radial-gradient(circle,#3b1a6e,transparent 70%); top:10%; right:15%; animation:blob-drift-2 24s ease-in-out infinite alternate; opacity:.12; }
+@keyframes blob-drift-1 { from{transform:translate(0,0) scale(1)} to{transform:translate(80px,60px) scale(1.15)} }
+@keyframes blob-drift-2 { from{transform:translate(0,0) scale(1)} to{transform:translate(-60px,-80px) scale(1.2)} }
+@keyframes blob-drift-3 { from{transform:translate(0,0) scale(1);opacity:.12} to{transform:translate(40px,-50px) scale(1.3);opacity:.06} }
+
+/* ─── NAV ───────────────────────────────────── */
+nav {
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+  background: rgba(10,7,3,.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: fixed; top:0; left:0; right:0; z-index:200;
+}
+.logo { font-size:16px; font-weight:600; color:#fff; letter-spacing:.02em; text-decoration:none; }
+.logo span { color:var(--red-hi); }
+.nav-links { display:flex; align-items:center; }
+.nav-links a {
+  font-size:13px; color:var(--muted); text-decoration:none;
+  margin-left:28px; letter-spacing:.02em; transition:color .2s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-3px; left:0; right:0;
+  height:1px; background:var(--red-hi); transform:scaleX(0); transition:transform .25s ease;
+}
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after { transform:scaleX(1); }
+.nav-links a.active { color:var(--text); }
+.nav-links a.active::after { transform:scaleX(1); }
+.nav-links a.ext::after { display:none; }
+
+.hamburger {
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:36px; height:36px; background:none; border:1px solid var(--border2);
+  border-radius:6px; padding:7px; cursor:pointer;
+}
+.hamburger span {
+  display:block; height:2px; border-radius:1px; background:var(--muted);
+  transition:transform .25s ease, opacity .25s ease, background .2s;
+}
+.hamburger:hover span { background:var(--text); }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display:none; position:fixed; top:52px; left:0; right:0;
+  background:rgba(10,7,3,.97); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border); z-index:199;
+  flex-direction:column; padding:8px 0;
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a {
+  font-size:15px; color:var(--muted); text-decoration:none;
+  padding:14px 28px; border-bottom:1px solid var(--border);
+  transition:color .15s, background .15s;
+}
+.mobile-menu a:last-child { border-bottom:none; }
+.mobile-menu a:hover { color:var(--text); background:rgba(255,122,26,.05); }
+.mobile-menu a.active { color:var(--red-hi); }
+
+/* ─── MAIN CONTENT ───────────────────────────── */
+.main-content {
+  position: relative; z-index: 1;
+  margin-top: 52px;
+  padding-bottom: 80px;
+}
+
+/* ─── HERO ───────────────────────────────────── */
+.hero {
+  padding: 80px 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--red-hi);
+  padding: 5px 14px; border: 1px solid rgba(255,122,26,.3);
+  border-radius: 20px; background: rgba(255,122,26,.06);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -.03em; color: #fff;
+  margin-bottom: 20px;
+}
+.hero h1 span { color: var(--red-hi); }
+.hero .subtitle {
+  font-size: 17px; color: var(--muted); line-height: 1.7;
+  max-width: 620px; margin: 0 auto 52px;
+}
+
+/* ─── STATS ROW ──────────────────────────────── */
+.stats-row {
+  display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+}
+.stat-card {
+  background: var(--srf);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  min-width: 170px; flex: 1; max-width: 220px;
+  text-align: center;
+  transition: border-color .3s, transform .3s;
+  position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,122,26,.08), transparent 70%);
+}
+.stat-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+.stat-num {
+  display: block;
+  font-size: 32px; font-weight: 700; color: var(--red-hi);
+  letter-spacing: -.03em; line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 11px; font-weight: 500;
+  color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
+}
+
+/* ─── SECTIONS ───────────────────────────────── */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 40px 0;
+}
+.section-header {
+  display: flex; align-items: baseline; gap: 16px;
+  margin-bottom: 40px;
+}
+.section-title {
+  font-size: 28px; font-weight: 700; color: #fff;
+  letter-spacing: -.02em;
+}
+.section-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border2), transparent);
+}
+.section-count {
+  font-size: 11px; font-weight: 600; color: var(--dim);
+  text-transform: uppercase; letter-spacing: .08em;
+}
+
+/* ─── PLATFORM CARDS ─────────────────────────── */
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.platform-card {
+  background: var(--srf);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s ease, border-color .3s;
+  opacity: 0;
+  transform: translateY(28px);
+}
+.platform-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.platform-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.platform-card[data-color="blue"]::before   { background: linear-gradient(90deg, #3b82f6, rgba(59,130,246,.2)); }
+.platform-card[data-color="green"]::before  { background: linear-gradient(90deg, #22c55e, rgba(34,197,94,.2)); }
+.platform-card[data-color="purple"]::before { background: linear-gradient(90deg, #a855f7, rgba(168,85,247,.2)); }
+.platform-card[data-color="orange"]::before { background: linear-gradient(90deg, #ff7a1a, rgba(255,122,26,.2)); }
+
+.platform-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border2);
+}
+.platform-card[data-color="blue"]:hover   { box-shadow: 0 20px 50px rgba(59,130,246,.15), 0 4px 16px rgba(0,0,0,.4); }
+.platform-card[data-color="green"]:hover  { box-shadow: 0 20px 50px rgba(34,197,94,.15), 0 4px 16px rgba(0,0,0,.4); }
+.platform-card[data-color="purple"]:hover { box-shadow: 0 20px 50px rgba(168,85,247,.15), 0 4px 16px rgba(0,0,0,.4); }
+.platform-card[data-color="orange"]:hover { box-shadow: 0 20px 50px rgba(255,122,26,.15), 0 4px 16px rgba(0,0,0,.4); }
+
+.card-inner { padding: 28px; }
+.card-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 16px; gap: 12px;
+}
+.card-title-group { flex: 1; }
+.card-title {
+  font-size: 18px; font-weight: 700; color: #fff;
+  letter-spacing: -.02em; line-height: 1.3;
+  margin-bottom: 6px;
+}
+.card-period {
+  font-size: 11px; color: var(--dim); font-weight: 500;
+  letter-spacing: .04em;
+}
+.status-badge {
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; padding: 4px 10px; border-radius: 20px;
+  flex-shrink: 0; margin-top: 2px;
+}
+.badge-active     { background: rgba(34,197,94,.12); color: #22c55e; border: 1px solid rgba(34,197,94,.25); }
+.badge-completed  { background: rgba(139,92,246,.12); color: #a78bfa; border: 1px solid rgba(139,92,246,.25); }
+.badge-initiative { background: rgba(255,122,26,.12); color: var(--red-hi); border: 1px solid rgba(255,122,26,.25); }
+
+.card-desc {
+  font-size: 13.5px; color: var(--muted); line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.achievements-label {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--dim); margin-bottom: 10px;
+}
+.achievements-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 7px;
+  margin-bottom: 22px;
+}
+.achievements-list li {
+  font-size: 12.5px; color: var(--muted); line-height: 1.5;
+  padding-left: 16px; position: relative;
+}
+.achievements-list li::before {
+  content: '';
+  position: absolute; left: 0; top: 8px;
+  width: 5px; height: 5px; border-radius: 50%;
+}
+.platform-card[data-color="blue"] .achievements-list li::before   { background: #3b82f6; }
+.platform-card[data-color="green"] .achievements-list li::before  { background: #22c55e; }
+.platform-card[data-color="purple"] .achievements-list li::before { background: #a855f7; }
+.platform-card[data-color="orange"] .achievements-list li::before { background: var(--red-hi); }
+
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 18px; border-top: 1px solid var(--border);
+  gap: 12px; flex-wrap: wrap;
+}
+.card-metric {
+  font-size: 12px; font-weight: 600; color: var(--text);
+}
+.platform-card[data-color="blue"] .card-metric   { color: #3b82f6; }
+.platform-card[data-color="green"] .card-metric  { color: #22c55e; }
+.platform-card[data-color="purple"] .card-metric { color: #a855f7; }
+.platform-card[data-color="orange"] .card-metric { color: var(--red-hi); }
+
+.stack-chips {
+  display: flex; flex-wrap: wrap; gap: 5px;
+}
+.chip {
+  font-size: 10px; font-weight: 500; color: var(--muted);
+  background: var(--srf2); border: 1px solid var(--border);
+  border-radius: 6px; padding: 3px 8px;
+  letter-spacing: .02em;
+}
+
+/* ─── TIMELINE ───────────────────────────────── */
+.timeline-wrap {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline-line {
+  position: absolute; left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--red-hi), var(--border2) 80%, transparent);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 36px;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+.tl-dot {
+  position: absolute; left: -36px; top: 4px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--border2); border: 2px solid var(--srf);
+  z-index: 1;
+  transition: background .3s, box-shadow .3s;
+}
+.tl-dot.current {
+  background: var(--red-hi);
+  box-shadow: var(--glow);
+  animation: tl-pulse 2.4s ease-out infinite;
+}
+@keyframes tl-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,122,26,.5); }
+  70%  { box-shadow: 0 0 0 10px rgba(255,122,26,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,122,26,0); }
+}
+
+.tl-card {
+  background: var(--srf);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: border-color .3s, transform .3s;
+}
+.tl-card:hover { border-color: var(--border2); transform: translateX(4px); }
+.tl-card.current-card { border-color: rgba(255,122,26,.25); }
+.tl-card.current-card:hover { border-color: rgba(255,122,26,.4); }
+
+.tl-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; margin-bottom: 6px; flex-wrap: wrap;
+}
+.tl-role {
+  font-size: 14px; font-weight: 600; color: #fff;
+  line-height: 1.3;
+}
+.tl-period {
+  font-size: 11px; font-weight: 600; color: var(--red);
+  letter-spacing: .04em; flex-shrink: 0; white-space: nowrap;
+}
+.tl-company {
+  font-size: 12px; color: var(--muted); margin-bottom: 6px;
+}
+.tl-desc {
+  font-size: 12px; color: var(--dim); line-height: 1.6;
+}
+
+/* ─── EDUCATION ──────────────────────────────── */
+.edu-card {
+  background: var(--srf);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex; align-items: center; gap: 28px;
+  transition: border-color .3s, transform .3s;
+  opacity: 0; transform: translateY(20px);
+}
+.edu-card.visible { opacity: 1; transform: translateY(0); }
+.edu-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+.edu-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: rgba(255,122,26,.1); border: 1px solid rgba(255,122,26,.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 22px;
+}
+.edu-degree {
+  font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 5px;
+}
+.edu-school {
+  font-size: 13px; color: var(--muted); margin-bottom: 4px;
+}
+.edu-year {
+  font-size: 11px; font-weight: 600; color: var(--red); letter-spacing: .04em;
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+.footer {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding: 28px 40px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-back {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+  transition: color .2s;
+}
+.footer-back:hover { color: var(--red-hi); }
+.footer-back svg { transition: transform .2s; }
+.footer-back:hover svg { transform: translateX(-3px); }
+.footer-copy {
+  font-size: 11px; color: var(--dim);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 900px) {
+  .platforms-grid { grid-template-columns: 1fr; }
+  .hero { padding: 60px 24px 48px; }
+  .section { padding: 48px 24px 0; }
+  .footer { padding: 24px; }
+  .stats-row { gap: 10px; }
+  .stat-card { min-width: 130px; padding: 20px 16px; }
+  .stat-num { font-size: 26px; }
+}
+@media (max-width: 600px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero h1 { font-size: 32px; }
+  .hero .subtitle { font-size: 14px; }
+  .stats-row { gap: 8px; }
+  .stat-card { min-width: 100px; }
+  .section-title { font-size: 22px; }
+  .timeline-wrap { padding-left: 32px; }
+  .tl-dot { left: -28px; }
+  .edu-card { flex-direction: column; align-items: flex-start; }
+  .card-inner { padding: 20px; }
+  .card-footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Ponmudi <span>Pandiyan</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="expertise.html">Expertise</a>
+    <a href="platforms.html" class="active">Platforms</a>
+    <a href="personal.html">Personal</a>
+    <a href="https://linkedin.com/in/ponmudipandiyan" class="ext" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mob-menu">
+  <a href="index.html">Home</a>
+  <a href="expertise.html">Expertise</a>
+  <a href="platforms.html" class="active">Platforms</a>
+  <a href="personal.html">Personal</a>
+  <a href="https://linkedin.com/in/ponmudipandiyan" target="_blank" rel="noopener">LinkedIn ↗</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Enterprise Scale · 20 Years · Verizon</div>
+    <h1>Platforms Built<br><span>at Scale</span></h1>
+    <p class="subtitle">20 years of shipping enterprise platforms at Verizon — from device compliance to AI-driven diagnostics.</p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-num" data-target="4">0</span>
+        <span class="stat-label">Major Platforms</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" data-target="150" data-prefix="120–" data-static="120–150">0</span>
+        <span class="stat-label">Devices / Year</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" data-prefix="$" data-suffix="M+" data-target="3">0</span>
+        <span class="stat-label">Annual Savings</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" data-prefix="5K+" data-static="5K+">0</span>
+        <span class="stat-label">Connected Devices</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PLATFORMS -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Featured Platforms</h2>
+      <div class="section-line"></div>
+      <span class="section-count">4 platforms</span>
+    </div>
+
+    <div class="platforms-grid">
+
+      <!-- Card 1: Device Diagnostics -->
+      <div class="platform-card" data-color="blue">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-title-group">
+              <div class="card-title">Device Diagnostics &amp; Analytics Platform</div>
+              <div class="card-period">Nov 2024 – Present</div>
+            </div>
+            <span class="status-badge badge-active">Active</span>
+          </div>
+          <p class="card-desc">Driving product vision for real-time telemetry — turning modem-level signals from 5K+ devices into actionable network health intelligence.</p>
+          <div class="achievements-label">Key Achievements</div>
+          <ul class="achievements-list">
+            <li>Multi-component platform spanning client apps, servers, and operational portals</li>
+            <li>Automated log collection from Android, iOS, and network scanner devices</li>
+            <li>Geographical KPI visualization for network engineers</li>
+            <li>AI-driven predictive diagnostics — call drop &amp; RAT change prediction</li>
+            <li>Fixed Wireless Access (FWA) analysis and monitoring</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-metric">5K+ devices · 800+ KPIs</span>
+            <div class="stack-chips">
+              <span class="chip">Kafka</span>
+              <span class="chip">Elasticsearch</span>
+              <span class="chip">Grafana</span>
+              <span class="chip">MQTT</span>
+              <span class="chip">OMADM</span>
+              <span class="chip">AWS</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Angular</span>
+              <span class="chip">NodeJS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Certification Automation -->
+      <div class="platform-card" data-color="green">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-title-group">
+              <div class="card-title">Certification Automation Platform</div>
+              <div class="card-period">Jun 2022 – Nov 2024</div>
+            </div>
+            <span class="status-badge badge-completed">Completed</span>
+          </div>
+          <p class="card-desc">Delivered at-scale certification automation for 120–150 devices/year across LTE, 5G &amp; IoT — cutting release cycles from months to weeks.</p>
+          <div class="achievements-label">Key Achievements</div>
+          <ul class="achievements-list">
+            <li>Automated certification for CAT-M, CAT1, and CAT4+ IoT devices</li>
+            <li>GCF/PTCRB compliance automation at carrier scale</li>
+            <li>eUICC/RSP acceptance test components — LPA, SM-DS, SMDP+</li>
+            <li>Significantly reduced vendor test cycle time</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-metric">$2M+ annual savings · 120–150 devices/year</span>
+            <div class="stack-chips">
+              <span class="chip">3GPP</span>
+              <span class="chip">LTE</span>
+              <span class="chip">5G NR</span>
+              <span class="chip">eUICC</span>
+              <span class="chip">CI/CD</span>
+              <span class="chip">Angular</span>
+              <span class="chip">NodeJS</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Kafka</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Device Compliance -->
+      <div class="platform-card" data-color="purple">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-title-group">
+              <div class="card-title">Device Compliance Platform</div>
+              <div class="card-period">Jan 2016 – Jun 2022</div>
+            </div>
+            <span class="status-badge badge-completed">Completed</span>
+          </div>
+          <p class="card-desc">Led end-to-end device release transformation — aligning regulatory, vendor, and carrier stakeholders around automated compliance workflows.</p>
+          <div class="achievements-label">Key Achievements</div>
+          <ul class="achievements-list">
+            <li>Certification Requirement Tool with cloud visualization</li>
+            <li>Device Subsystem Database Tool for structured compliance tracking</li>
+            <li>LTE protocol conformance validations</li>
+            <li>Architected big data solutions with MongoDB sharding and replicas</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-metric">$1M+ annual savings</span>
+            <div class="stack-chips">
+              <span class="chip">OMADM</span>
+              <span class="chip">LWM2M</span>
+              <span class="chip">Angular</span>
+              <span class="chip">NodeJS</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Kafka</span>
+              <span class="chip">MQTT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Analytics & AI -->
+      <div class="platform-card" data-color="orange">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-title-group">
+              <div class="card-title">Analytics &amp; AI Platform</div>
+              <div class="card-period">2023 – Present</div>
+            </div>
+            <span class="status-badge badge-initiative">Initiative</span>
+          </div>
+          <p class="card-desc">Defining AI strategy for predictive network intelligence — surfacing degradation before it impacts subscribers.</p>
+          <div class="achievements-label">Key Achievements</div>
+          <ul class="achievements-list">
+            <li>Call drop &amp; RAT change prediction models</li>
+            <li>Network health KPI dashboards</li>
+            <li>Big data pipeline for post-processing and analytics</li>
+            <li>User engagement platform for internal stakeholders</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-metric">AI-Driven · Predictive Models</span>
+            <div class="stack-chips">
+              <span class="chip">AI/ML</span>
+              <span class="chip">Kafka</span>
+              <span class="chip">AWS</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Predictive Analytics</span>
+              <span class="chip">Elasticsearch</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CAREER TIMELINE -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Career Timeline</h2>
+      <div class="section-line"></div>
+      <span class="section-count">20 years</span>
+    </div>
+
+    <div class="timeline-wrap">
+      <div class="timeline-line"></div>
+
+      <!-- Item 1 -->
+      <div class="timeline-item">
+        <div class="tl-dot current"></div>
+        <div class="tl-card current-card">
+          <div class="tl-header">
+            <div class="tl-role">Distinguished Member of Technical Staff — Product Manager</div>
+            <div class="tl-period">Nov 2024 – Present</div>
+          </div>
+          <div class="tl-company">Verizon Wireless</div>
+          <div class="tl-desc">Device Diagnostics &amp; Analytics — Leading product vision for real-time telemetry and AI-driven network health intelligence across 5K+ connected devices.</div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div class="tl-role">Distinguished Member of Technical Staff — Product Manager</div>
+            <div class="tl-period">Jun 2022 – Nov 2024</div>
+          </div>
+          <div class="tl-company">Verizon Wireless</div>
+          <div class="tl-desc">Certification Tools — Delivered certification automation for 120–150 devices per year across LTE, 5G, and IoT device categories.</div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div class="tl-role">Principal Engineer</div>
+            <div class="tl-period">Sep 2019 – Jun 2022</div>
+          </div>
+          <div class="tl-company">Verizon Wireless</div>
+          <div class="tl-desc">Platform Architecture — Architected device compliance and certification platforms with MongoDB sharding, Kafka event streaming, and OMADM/LWM2M integrations.</div>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div class="tl-role">Lead Front-End Developer</div>
+            <div class="tl-period">Jan 2016 – Sep 2019</div>
+          </div>
+          <div class="tl-company">Diversant / Verizon</div>
+          <div class="tl-desc">Device Certification Tools — Built the Certification Requirement Tool and Device Subsystem Database Tool with LTE protocol conformance workflows.</div>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div class="tl-role">Lead Front-End Developer</div>
+            <div class="tl-period">Mar 2014 – Dec 2015</div>
+          </div>
+          <div class="tl-company">Diversant / Verizon</div>
+          <div class="tl-desc">Cloud Web Portal — Designed and developed internal cloud portal interfaces for device management workflows at Verizon.</div>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div class="tl-role">Technical Analyst</div>
+            <div class="tl-period">Nov 2010 – Mar 2014</div>
+          </div>
+          <div class="tl-company">Infosys / Nike</div>
+          <div class="tl-desc">Equipment &amp; Apparel Product System — Built enterprise product systems for Nike's global equipment and apparel catalog management.</div>
+        </div>
+      </div>
+
+      <!-- Item 7 -->
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div class="tl-role">Senior System Engineer</div>
+            <div class="tl-period">Jun 2006 – Nov 2010</div>
+          </div>
+          <div class="tl-company">Infosys / Multiple Clients</div>
+          <div class="tl-desc">Various enterprise projects across Comcast, Baker Hughes, Cable Vision, and AOL — delivering scalable system integrations and front-end solutions.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">B.E. Computer Science &amp; Engineering</div>
+        <div class="edu-school">Karunya Institute of Technology, Anna University</div>
+        <div class="edu-year">2002 – 2006</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="index.html" class="footer-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back to Portfolio
+    </a>
+    <span class="footer-copy">© 2025 Ponmudi Pandiyan. All rights reserved.</span>
+  </footer>
+
+</div><!-- /.main-content -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  // ─── NAV HAMBURGER ─────────────────────────
+  const ham = document.getElementById('ham');
+  const mobMenu = document.getElementById('mob-menu');
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    mobMenu.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!ham.contains(e.target) && !mobMenu.contains(e.target)) {
+      ham.classList.remove('open');
+      mobMenu.classList.remove('open');
+    }
+  });
+
+  // ─── STAT COUNTER ANIMATION ────────────────
+  function animateCounters() {
+    const nums = document.querySelectorAll('.stat-num[data-target]');
+    nums.forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+      const isStatic = el.getAttribute('data-static');
+      if (isStatic) { el.textContent = isStatic; return; }
+      let start = 0;
+      const duration = 1800;
+      const step = 16;
+      const increment = target / (duration / step);
+      const counter = setInterval(() => {
+        start = Math.min(start + increment, target);
+        el.textContent = prefix + Math.floor(start) + suffix;
+        if (start >= target) {
+          el.textContent = prefix + target + suffix;
+          clearInterval(counter);
+        }
+      }, step);
+    });
+    // static ones
+    document.querySelectorAll('.stat-num[data-static]').forEach(el => {
+      el.textContent = el.getAttribute('data-static');
+    });
+  }
+
+  // Trigger counters when hero is visible
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounters(); heroObserver.disconnect(); } });
+  }, { threshold: 0.3 });
+  const statsRow = document.querySelector('.stats-row');
+  if (statsRow) heroObserver.observe(statsRow);
+
+  // ─── GSAP SETUP ────────────────────────────
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    gsap.from('.hero-eyebrow', { opacity: 0, y: -16, duration: 0.6, ease: 'power2.out', delay: 0.1 });
+    gsap.from('.hero h1', { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out', delay: 0.25 });
+    gsap.from('.hero .subtitle', { opacity: 0, y: 18, duration: 0.7, ease: 'power2.out', delay: 0.45 });
+    gsap.from('.stat-card', {
+      opacity: 0, y: 20, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 0.65
+    });
+
+    // Section headers
+    gsap.utils.toArray('.section-header').forEach(el => {
+      gsap.from(el, {
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+        opacity: 0, y: 20, duration: 0.6, ease: 'power2.out'
+      });
+    });
+  }
+
+  // ─── INTERSECTION OBSERVER: PLATFORM CARDS ─
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        cardObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.platform-card').forEach((card, i) => {
+    card.style.transitionDelay = (i % 2 === 0 ? '0ms' : '80ms');
+    cardObserver.observe(card);
+  });
+
+  // ─── INTERSECTION OBSERVER: TIMELINE ITEMS ─
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), 60);
+        tlObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    tlObserver.observe(item);
+  });
+
+  // ─── INTERSECTION OBSERVER: EDUCATION ──────
+  const eduObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        eduObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.edu-card').forEach(el => eduObserver.observe(el));
+
+  // ─── STAGGER TRANSITION ON PLATFORM CARDS ──
+  // Ensure CSS transitions are used properly
+  document.querySelectorAll('.platform-card').forEach(card => {
+    card.style.transition = 'opacity .55s ease, transform .55s cubic-bezier(.25,.46,.45,.94), box-shadow .35s ease, border-color .3s';
+  });
+
+})();
+</script>
+</body>
+</html>

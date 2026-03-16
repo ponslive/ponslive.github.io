@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expertise — Ponmudi Pandiyan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #0a0703;
+  --srf:     #120d05;
+  --srf2:    #1a1008;
+  --border:  #2a1a08;
+  --border2: #3a2510;
+  --red:     #e06c10;
+  --red-hi:  #ff7a1a;
+  --text:    #f5ece0;
+  --muted:   #8a7060;
+  --dim:     #4a3220;
+  --glow:    0 0 22px rgba(255,122,26,.35);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── ANIMATED BACKGROUND BLOBS ─────────────── */
+.bg-blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .15; }
+.blob-1 { width:600px; height:600px; background:radial-gradient(circle,#8b3a00,transparent 70%); top:-200px; left:-150px; animation:blob-drift-1 18s ease-in-out infinite alternate; }
+.blob-2 { width:500px; height:500px; background:radial-gradient(circle,#00441a,transparent 70%); bottom:-150px; right:-100px; animation:blob-drift-2 22s ease-in-out infinite alternate; }
+.blob-3 { width:400px; height:400px; background:radial-gradient(circle,#8b1a00,transparent 70%); top:40%; left:40%; animation:blob-drift-3 28s ease-in-out infinite alternate; }
+.blob-4 { width:320px; height:320px; background:radial-gradient(circle,#6a0a50,transparent 70%); top:15%; right:10%; animation:blob-drift-2 24s ease-in-out infinite alternate; opacity:.12; }
+@keyframes blob-drift-1 { from{transform:translate(0,0) scale(1)} to{transform:translate(80px,60px) scale(1.15)} }
+@keyframes blob-drift-2 { from{transform:translate(0,0) scale(1)} to{transform:translate(-60px,-80px) scale(1.2)} }
+@keyframes blob-drift-3 { from{transform:translate(0,0) scale(1);opacity:.1} to{transform:translate(40px,-50px) scale(1.3);opacity:.05} }
+
+/* ─── NAV ───────────────────────────────────── */
+nav {
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+  background: rgba(10,7,3,.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: fixed; top:0; left:0; right:0; z-index:200;
+}
+.logo { font-size:16px; font-weight:600; color:#fff; letter-spacing:.02em; text-decoration:none; }
+.logo span { color:var(--red-hi); }
+.nav-links a {
+  font-size:13px; color:var(--muted); text-decoration:none;
+  margin-left:28px; letter-spacing:.02em; transition:color .2s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-3px; left:0; right:0;
+  height:1px; background:var(--red-hi); transform:scaleX(0); transition:transform .25s ease;
+}
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after { transform:scaleX(1); }
+.nav-links a.active { color:var(--red-hi); }
+.nav-links a.active::after { transform:scaleX(1); }
+.nav-links a[target="_blank"]:hover { color:var(--text); }
+
+.hamburger {
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:36px; height:36px; background:none; border:1px solid var(--border2);
+  border-radius:6px; padding:7px; cursor:pointer;
+}
+.hamburger span {
+  display:block; height:2px; border-radius:1px; background:var(--muted);
+  transition:transform .25s ease, opacity .25s ease, background .2s;
+}
+.hamburger:hover span { background:var(--text); }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display:none; position:fixed; top:52px; left:0; right:0;
+  background:rgba(10,7,3,.97); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border); z-index:199;
+  flex-direction:column; padding:8px 0;
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a {
+  font-size:15px; color:var(--muted); text-decoration:none;
+  padding:14px 28px; border-bottom:1px solid var(--border);
+  transition:color .15s, background .15s;
+}
+.mobile-menu a:last-child { border-bottom:none; }
+.mobile-menu a:hover { color:var(--text); background:rgba(255,122,26,.05); }
+.mobile-menu a.active { color:var(--red-hi); }
+
+/* ─── PAGE WRAPPER ───────────────────────────── */
+.page-wrapper {
+  position: relative; z-index: 1;
+  padding-top: 52px;
+}
+
+/* ─── SECTION WRAPPER ────────────────────────── */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+.section-sm { padding: 60px 32px; }
+
+/* ─── SECTION HEADER ─────────────────────────── */
+.section-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 56px;
+}
+.section-header::before {
+  content: '';
+  display: block;
+  width: 4px; height: 36px;
+  background: linear-gradient(180deg, var(--red-hi), var(--red));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.section-header h2 {
+  font-size: 28px; font-weight: 700; color: #fff;
+  letter-spacing: -.02em;
+}
+.section-header p {
+  font-size: 14px; color: var(--muted); margin-top: 4px;
+}
+
+/* ─── HERO ───────────────────────────────────── */
+.hero {
+  min-height: calc(100vh - 52px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 80px 32px;
+  position: relative;
+}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--red-hi);
+  margin-bottom: 24px;
+  opacity: 0;
+}
+.hero h1 {
+  font-size: clamp(44px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  background: linear-gradient(135deg, #fff 0%, var(--red-hi) 50%, var(--red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 28px;
+  opacity: 0;
+}
+.hero-subtitle {
+  font-size: clamp(15px, 2vw, 20px);
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.65;
+  margin-bottom: 64px;
+  opacity: 0;
+}
+
+/* ─── STATS ROW ──────────────────────────────── */
+.stats-row {
+  display: flex; gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--srf);
+  overflow: hidden;
+  opacity: 0;
+}
+.stat-item {
+  flex: 1;
+  padding: 32px 40px;
+  text-align: center;
+  position: relative;
+  transition: background .3s;
+}
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute; top: 20%; right: 0; bottom: 20%;
+  width: 1px;
+  background: var(--border2);
+}
+.stat-item:hover { background: var(--srf2); }
+.stat-value {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--red-hi);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 500;
+}
+
+/* ─── SCROLL INDICATOR ───────────────────────── */
+.scroll-hint {
+  position: absolute; bottom: 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--dim); font-size: 11px; letter-spacing: .06em;
+  text-transform: uppercase;
+  animation: pulse-down 2.5s ease-in-out infinite;
+}
+.scroll-hint svg { opacity: .5; }
+@keyframes pulse-down {
+  0%,100% { transform: translateY(0); opacity: .6; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+
+/* ─── CORE DOMAINS ───────────────────────────── */
+.domains-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.domain-card {
+  background: var(--srf);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s, transform .3s, box-shadow .3s;
+  opacity: 0;
+  transform: translateY(32px);
+}
+.domain-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--card-accent);
+  opacity: 0; transition: opacity .3s;
+}
+.domain-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, color-mix(in srgb, var(--card-accent) 8%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.domain-card:hover {
+  border-color: var(--card-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.4), 0 0 0 1px var(--card-accent);
+}
+.domain-card:hover::before { opacity: 1; }
+
+.domain-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  background: color-mix(in srgb, var(--card-accent) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 30%, transparent);
+  font-size: 22px;
+}
+.domain-card h3 {
+  font-size: 20px; font-weight: 700; color: #fff;
+  margin-bottom: 12px; letter-spacing: -.01em;
+}
+.domain-tag-row {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px;
+}
+.domain-tag {
+  font-size: 11px; font-weight: 500;
+  padding: 3px 10px; border-radius: 20px;
+  background: color-mix(in srgb, var(--card-accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 25%, transparent);
+  color: color-mix(in srgb, var(--card-accent) 90%, #fff);
+  letter-spacing: .02em;
+}
+.domain-desc {
+  font-size: 13.5px; color: var(--muted); line-height: 1.7;
+  border-top: 1px solid var(--border);
+  padding-top: 16px; margin-top: auto;
+}
+
+/* ─── TECH STACK ─────────────────────────────── */
+.stack-section { background: var(--srf); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stack-inner { max-width: 1200px; margin: 0 auto; padding: 80px 32px; }
+
+.stack-categories { display: flex; flex-direction: column; gap: 36px; }
+.stack-category { opacity: 0; transform: translateY(20px); }
+.stack-category-label {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); margin-bottom: 14px;
+}
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  font-size: 12.5px; font-weight: 500;
+  padding: 6px 16px; border-radius: 20px;
+  background: color-mix(in srgb, var(--pill-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pill-color) 28%, transparent);
+  color: color-mix(in srgb, var(--pill-color) 85%, #fff);
+  transition: background .2s, transform .2s, box-shadow .2s;
+  cursor: default;
+}
+.pill:hover {
+  background: color-mix(in srgb, var(--pill-color) 22%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--pill-color) 20%, transparent);
+}
+
+/* ─── PHILOSOPHY ─────────────────────────────── */
+.philosophy-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.principle-card {
+  background: var(--srf);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px 28px;
+  position: relative; overflow: hidden;
+  transition: border-color .3s, transform .3s;
+  opacity: 0; transform: translateY(28px);
+}
+.principle-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-3px);
+}
+.principle-number {
+  font-size: 72px; font-weight: 800;
+  color: var(--border);
+  position: absolute; top: -8px; right: 20px;
+  line-height: 1; letter-spacing: -.05em;
+  user-select: none; pointer-events: none;
+}
+.principle-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,122,26,.15), rgba(224,108,16,.08));
+  border: 1px solid rgba(255,122,26,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 24px;
+}
+.principle-card h3 {
+  font-size: 19px; font-weight: 700; color: #fff;
+  margin-bottom: 12px; letter-spacing: -.01em;
+}
+.principle-card p { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+.principle-highlight {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--red-hi);
+}
+
+/* ─── CERTIFICATIONS ─────────────────────────── */
+.cert-section { background: var(--srf); border-top: 1px solid var(--border); }
+.cert-inner { max-width: 1200px; margin: 0 auto; padding: 80px 32px; }
+.cert-grid {
+  display: flex; flex-wrap: wrap; gap: 12px;
+}
+.cert-pill {
+  font-size: 13px; font-weight: 500;
+  padding: 10px 20px; border-radius: 10px;
+  background: var(--srf2);
+  border: 1px solid var(--border2);
+  color: var(--text);
+  transition: border-color .2s, color .2s, transform .2s;
+  opacity: 0; transform: scale(.95);
+}
+.cert-pill:hover {
+  border-color: var(--red-hi);
+  color: var(--red-hi);
+  transform: scale(1.02);
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 32px;
+  text-align: center;
+  position: relative; z-index: 1;
+}
+.footer-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 500;
+  color: var(--muted); text-decoration: none;
+  padding: 10px 20px; border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: color .2s, border-color .2s, background .2s;
+}
+.footer-back:hover {
+  color: var(--red-hi); border-color: var(--red-hi);
+  background: rgba(255,122,26,.04);
+}
+.footer-copy {
+  margin-top: 20px;
+  font-size: 12px; color: var(--dim);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero { padding: 60px 20px; }
+  .stats-row { flex-direction: column; gap: 0; }
+  .stat-item:not(:last-child)::after { top: auto; bottom: 0; left: 20%; right: 20%; width: auto; height: 1px; }
+
+  .section { padding: 60px 20px; }
+  .section-sm { padding: 40px 20px; }
+  .stack-inner { padding: 60px 20px; }
+  .cert-inner { padding: 60px 20px; }
+
+  .domains-grid { grid-template-columns: 1fr; }
+  .philosophy-grid { grid-template-columns: 1fr; }
+
+  .section-header h2 { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+  .stat-item { padding: 24px 20px; }
+  .domain-card { padding: 28px 22px; }
+  .principle-card { padding: 28px 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background blobs -->
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="logo">Ponmudi <span>Pandiyan</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="expertise.html" class="active">Expertise</a>
+    <a href="platforms.html">Platforms</a>
+    <a href="personal.html">Personal</a>
+    <a href="https://linkedin.com/in/ponmudipandiyan" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="expertise.html" class="active">Expertise</a>
+  <a href="platforms.html">Platforms</a>
+  <a href="personal.html">Personal</a>
+  <a href="https://linkedin.com/in/ponmudipandiyan" target="_blank" rel="noopener">LinkedIn ↗</a>
+</div>
+
+<!-- Page wrapper -->
+<div class="page-wrapper">
+
+  <!-- ═══ HERO ═══════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-eyebrow" id="hero-eyebrow">Senior Staff Engineer · 20+ Years</div>
+    <h1 id="hero-title">Technical<br>Mastery</h1>
+    <p class="hero-subtitle" id="hero-subtitle">20+ years building at the intersection of telecom, cloud, and AI — from RAN protocols to enterprise-scale real-time platforms.</p>
+
+    <div class="stats-row" id="stats-row">
+      <div class="stat-item">
+        <span class="stat-value" data-count="20" data-suffix="+">0</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" data-count="5000" data-suffix="+" data-prefix="" data-format="k">0</span>
+        <span class="stat-label">Devices Managed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" data-count="3" data-suffix="M+" data-prefix="$">0</span>
+        <span class="stat-label">Cost Savings Driven</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" data-count="800" data-suffix="+">0</span>
+        <span class="stat-label">KPIs Tracked</span>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll to explore</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══ CORE DOMAINS ═══════════════════════════ -->
+  <section class="section">
+    <div class="section-header fade-up">
+      <div>
+        <h2>Core Domains</h2>
+        <p>Four pillars of deep, compounding expertise</p>
+      </div>
+    </div>
+
+    <div class="domains-grid">
+
+      <!-- Telecom & Networks -->
+      <div class="domain-card" style="--card-accent:#3b82f6">
+        <div class="domain-icon">📡</div>
+        <h3>Telecom &amp; Networks</h3>
+        <div class="domain-tag-row">
+          <span class="domain-tag">3G/4G/5G</span>
+          <span class="domain-tag">3GPP</span>
+          <span class="domain-tag">LTE</span>
+          <span class="domain-tag">eUICC</span>
+          <span class="domain-tag">RSP</span>
+          <span class="domain-tag">LPA</span>
+          <span class="domain-tag">SMDS</span>
+          <span class="domain-tag">SMDP+</span>
+          <span class="domain-tag">LWM2M</span>
+          <span class="domain-tag">OMADM</span>
+          <span class="domain-tag">COAP</span>
+          <span class="domain-tag">UDP</span>
+          <span class="domain-tag">TCP</span>
+        </div>
+        <p class="domain-desc">20 years deep in wireless protocols — from RAN architecture to device compliance certification. Embedded in every generation of cellular from 3G through 5G NR.</p>
+      </div>
+
+      <!-- Cloud & Architecture -->
+      <div class="domain-card" style="--card-accent:#22c55e">
+        <div class="domain-icon">☁️</div>
+        <h3>Cloud &amp; Architecture</h3>
+        <div class="domain-tag-row">
+          <span class="domain-tag">AWS</span>
+          <span class="domain-tag">Microservices</span>
+          <span class="domain-tag">Kafka</span>
+          <span class="domain-tag">MQTT</span>
+          <span class="domain-tag">MongoDB</span>
+          <span class="domain-tag">Elasticsearch</span>
+          <span class="domain-tag">Grafana</span>
+          <span class="domain-tag">Docker</span>
+          <span class="domain-tag">Kubernetes</span>
+        </div>
+        <p class="domain-desc">Architected enterprise-scale platforms handling real-time telemetry from 5K+ devices. Designed event-driven systems with sub-second latency for device diagnostic pipelines.</p>
+      </div>
+
+      <!-- AI & Analytics -->
+      <div class="domain-card" style="--card-accent:#ff7a1a">
+        <div class="domain-icon">🧠</div>
+        <h3>AI &amp; Analytics</h3>
+        <div class="domain-tag-row">
+          <span class="domain-tag">Predictive Analytics</span>
+          <span class="domain-tag">ML Models</span>
+          <span class="domain-tag">Call Drop Prediction</span>
+          <span class="domain-tag">RAT Change Prediction</span>
+          <span class="domain-tag">KPI Visualization</span>
+          <span class="domain-tag">Big Data Pipelines</span>
+        </div>
+        <p class="domain-desc">Building AI-driven diagnostics that surface network degradation before it impacts subscribers. Predictive models that turn raw telemetry into proactive network intelligence.</p>
+      </div>
+
+      <!-- Frontend & Product -->
+      <div class="domain-card" style="--card-accent:#f472b6">
+        <div class="domain-icon">🎨</div>
+        <h3>Frontend &amp; Product</h3>
+        <div class="domain-tag-row">
+          <span class="domain-tag">Angular</span>
+          <span class="domain-tag">TypeScript</span>
+          <span class="domain-tag">React</span>
+          <span class="domain-tag">NodeJS</span>
+          <span class="domain-tag">ExpressJS</span>
+          <span class="domain-tag">HTML5</span>
+          <span class="domain-tag">CSS3</span>
+          <span class="domain-tag">SASS</span>
+          <span class="domain-tag">UI/UX Design</span>
+          <span class="domain-tag">Data Viz</span>
+        </div>
+        <p class="domain-desc">18 years crafting interfaces that turn complex data into actionable clarity. From component architecture to pixel-perfect dashboards that engineers and executives both trust.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ TECH STACK ══════════════════════════════ -->
+  <div class="stack-section">
+    <div class="stack-inner">
+      <div class="section-header fade-up">
+        <div>
+          <h2>Full Tech Stack</h2>
+          <p>Every tool that has shipped production systems</p>
+        </div>
+      </div>
+
+      <div class="stack-categories">
+
+        <div class="stack-category">
+          <div class="stack-category-label">Languages &amp; Frameworks</div>
+          <div class="pill-row">
+            <span class="pill" style="--pill-color:#f472b6">Angular</span>
+            <span class="pill" style="--pill-color:#f472b6">TypeScript</span>
+            <span class="pill" style="--pill-color:#f472b6">JavaScript</span>
+            <span class="pill" style="--pill-color:#f472b6">NodeJS</span>
+            <span class="pill" style="--pill-color:#f472b6">ExpressJS</span>
+            <span class="pill" style="--pill-color:#f472b6">HTML5</span>
+            <span class="pill" style="--pill-color:#f472b6">CSS3</span>
+            <span class="pill" style="--pill-color:#f472b6">SASS</span>
+            <span class="pill" style="--pill-color:#f472b6">BackboneJS</span>
+            <span class="pill" style="--pill-color:#f472b6">React</span>
+            <span class="pill" style="--pill-color:#f472b6">Java</span>
+            <span class="pill" style="--pill-color:#f472b6">Python</span>
+          </div>
+        </div>
+
+        <div class="stack-category">
+          <div class="stack-category-label">Wireless / Telecom</div>
+          <div class="pill-row">
+            <span class="pill" style="--pill-color:#3b82f6">3GPP</span>
+            <span class="pill" style="--pill-color:#3b82f6">LTE</span>
+            <span class="pill" style="--pill-color:#3b82f6">5G NR</span>
+            <span class="pill" style="--pill-color:#3b82f6">eUICC</span>
+            <span class="pill" style="--pill-color:#3b82f6">RSP</span>
+            <span class="pill" style="--pill-color:#3b82f6">LPA</span>
+            <span class="pill" style="--pill-color:#3b82f6">SMDS</span>
+            <span class="pill" style="--pill-color:#3b82f6">SMDP+</span>
+            <span class="pill" style="--pill-color:#3b82f6">LWM2M</span>
+            <span class="pill" style="--pill-color:#3b82f6">OMADM</span>
+            <span class="pill" style="--pill-color:#3b82f6">COAP</span>
+            <span class="pill" style="--pill-color:#3b82f6">UDP</span>
+            <span class="pill" style="--pill-color:#3b82f6">TCP</span>
+            <span class="pill" style="--pill-color:#3b82f6">MQTT</span>
+          </div>
+        </div>
+
+        <div class="stack-category">
+          <div class="stack-category-label">Cloud &amp; Data</div>
+          <div class="pill-row">
+            <span class="pill" style="--pill-color:#22c55e">AWS</span>
+            <span class="pill" style="--pill-color:#22c55e">Kafka</span>
+            <span class="pill" style="--pill-color:#22c55e">MongoDB</span>
+            <span class="pill" style="--pill-color:#22c55e">Elasticsearch</span>
+            <span class="pill" style="--pill-color:#22c55e">Grafana</span>
+            <span class="pill" style="--pill-color:#22c55e">Oracle</span>
+            <span class="pill" style="--pill-color:#22c55e">MySQL</span>
+            <span class="pill" style="--pill-color:#22c55e">Docker</span>
+            <span class="pill" style="--pill-color:#22c55e">Kubernetes</span>
+          </div>
+        </div>
+
+        <div class="stack-category">
+          <div class="stack-category-label">Tools &amp; Methods</div>
+          <div class="pill-row">
+            <span class="pill" style="--pill-color:#f59e0b">GitHub</span>
+            <span class="pill" style="--pill-color:#f59e0b">CI/CD</span>
+            <span class="pill" style="--pill-color:#f59e0b">Agile</span>
+            <span class="pill" style="--pill-color:#f59e0b">OOAD</span>
+            <span class="pill" style="--pill-color:#f59e0b">UX Design</span>
+            <span class="pill" style="--pill-color:#f59e0b">Data Visualization</span>
+            <span class="pill" style="--pill-color:#f59e0b">Performance Profiling</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ENGINEERING PHILOSOPHY ═════════════════ -->
+  <section class="section">
+    <div class="section-header fade-up">
+      <div>
+        <h2>Engineering Philosophy</h2>
+        <p>Principles forged over 20 years of shipping</p>
+      </div>
+    </div>
+
+    <div class="philosophy-grid">
+
+      <div class="principle-card">
+        <div class="principle-number">01</div>
+        <div class="principle-icon">⚡</div>
+        <h3>Scale First</h3>
+        <p>Architect for 10x before you need it. A system that crumbles under growth isn't a product — it's a prototype with a deadline. Every design decision bets on the future you're building toward.</p>
+        <span class="principle-highlight">Design for what's coming</span>
+      </div>
+
+      <div class="principle-card">
+        <div class="principle-number">02</div>
+        <div class="principle-icon">📊</div>
+        <h3>Data as a Product</h3>
+        <p>Every system should produce insight, not just output. Telemetry, logs, and metrics are first-class deliverables. If you can't measure it, you can't improve it — and you can't sell the story.</p>
+        <span class="principle-highlight">Instrument everything</span>
+      </div>
+
+      <div class="principle-card">
+        <div class="principle-number">03</div>
+        <div class="principle-icon">🚀</div>
+        <h3>Ship, then Refine</h3>
+        <p>Velocity and quality are not opposites. The fastest path to a great product is a working product in production. Real users surface real problems — no amount of internal review matches it.</p>
+        <span class="principle-highlight">Iterate in the open</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CERTIFICATIONS & STANDARDS ════════════════ -->
+  <div class="cert-section">
+    <div class="cert-inner">
+      <div class="section-header fade-up">
+        <div>
+          <h2>Certifications &amp; Standards</h2>
+          <p>Compliance frameworks and industry standards actively worked with</p>
+        </div>
+      </div>
+
+      <div class="cert-grid" id="cert-grid">
+        <span class="cert-pill">GCF</span>
+        <span class="cert-pill">PTCRB</span>
+        <span class="cert-pill">3GPP Release Compliance</span>
+        <span class="cert-pill">OMADM</span>
+        <span class="cert-pill">LWM2M</span>
+        <span class="cert-pill">CAT-M</span>
+        <span class="cert-pill">CAT1</span>
+        <span class="cert-pill">CAT4+</span>
+        <span class="cert-pill">IoT Standards</span>
+        <span class="cert-pill">eUICC / eSIM (GSMA SGP.02)</span>
+        <span class="cert-pill">RSP (GSMA SGP.21/22)</span>
+        <span class="cert-pill">5G NR Standards</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ══════════════════════════════════ -->
+  <footer>
+    <a href="index.html" class="footer-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back to Portfolio
+    </a>
+    <p class="footer-copy">&copy; 2024 Ponmudi Pandiyan — Senior Staff Engineer</p>
+  </footer>
+
+</div><!-- end page-wrapper -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+// ─── MOBILE NAV ───────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
+
+// ─── GSAP HERO ENTRANCE ───────────────────────────
+gsap.registerPlugin(ScrollTrigger);
+
+const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+tl.to('#hero-eyebrow', { opacity: 1, y: 0, duration: .8, delay: .2 })
+  .to('#hero-title',   { opacity: 1, y: 0, duration: .9 }, '-=.4')
+  .to('#hero-subtitle',{ opacity: 1, y: 0, duration: .8 }, '-=.5')
+  .to('#stats-row',    { opacity: 1, y: 0, duration: .7 }, '-=.4');
+
+// Set initial positions
+gsap.set(['#hero-eyebrow','#hero-title','#hero-subtitle'], { y: 30 });
+gsap.set('#stats-row', { y: 20 });
+
+// ─── COUNTER ANIMATION ────────────────────────────
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count, 10);
+  const suffix = el.dataset.suffix || '';
+  const prefix = el.dataset.prefix || '';
+  const isK    = el.dataset.format === 'k';
+
+  gsap.fromTo({ val: 0 }, { val: target }, {
+    val: target,
+    duration: 1.8,
+    ease: 'power2.out',
+    delay: .5,
+    onUpdate: function() {
+      const v = Math.round(this.targets()[0].val);
+      el.textContent = prefix + (isK ? (v >= 1000 ? (v/1000).toFixed(0) + 'K' : v) : v) + suffix;
+    },
+    onComplete: function() {
+      el.textContent = prefix + (isK ? (target >= 1000 ? (target/1000).toFixed(0) + 'K' : target) : target) + suffix;
+    }
+  });
+}
+
+// Trigger counters when stats row becomes visible
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.stat-value[data-count]').forEach(animateCounter);
+      statsObserver.disconnect();
+    }
+  });
+}, { threshold: .3 });
+statsObserver.observe(document.getElementById('stats-row'));
+
+// ─── SCROLL ANIMATIONS ────────────────────────────
+// Domain cards
+gsap.utils.toArray('.domain-card').forEach((card, i) => {
+  ScrollTrigger.create({
+    trigger: card,
+    start: 'top 85%',
+    onEnter: () => {
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: .7,
+        ease: 'power3.out',
+        delay: (i % 2) * .12
+      });
+    },
+    once: true
+  });
+});
+
+// Principle cards
+gsap.utils.toArray('.principle-card').forEach((card, i) => {
+  ScrollTrigger.create({
+    trigger: card,
+    start: 'top 88%',
+    onEnter: () => {
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: .7,
+        ease: 'power3.out',
+        delay: i * .12
+      });
+    },
+    once: true
+  });
+});
+
+// Stack categories
+gsap.utils.toArray('.stack-category').forEach((cat, i) => {
+  ScrollTrigger.create({
+    trigger: cat,
+    start: 'top 90%',
+    onEnter: () => {
+      gsap.to(cat, {
+        opacity: 1, y: 0, duration: .6,
+        ease: 'power3.out',
+        delay: i * .1
+      });
+    },
+    once: true
+  });
+});
+
+// Cert pills
+gsap.utils.toArray('.cert-pill').forEach((pill, i) => {
+  ScrollTrigger.create({
+    trigger: pill,
+    start: 'top 92%',
+    onEnter: () => {
+      gsap.to(pill, {
+        opacity: 1, scale: 1, duration: .5,
+        ease: 'back.out(1.4)',
+        delay: i * .05
+      });
+    },
+    once: true
+  });
+});
+
+// Section headers with .fade-up class
+gsap.utils.toArray('.fade-up').forEach(el => {
+  gsap.set(el, { opacity: 0, y: 20 });
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 88%',
+    onEnter: () => {
+      gsap.to(el, { opacity: 1, y: 0, duration: .7, ease: 'power3.out' });
+    },
+    once: true
+  });
+});
+</script>
+</body>
+</html>
