@@ -1,0 +1,8 @@
+# Source images and assets (already embedded as base64 in index.html)
+*.png
+*.jpeg
+*.jpg
+*.pdf
+
+# macOS
+.DS_Store
