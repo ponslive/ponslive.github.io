@@ -6,3 +6,13 @@
 
 # macOS
 .DS_Store
+
+# Capacitor / Android
+node_modules/
+android/
+www/lib/
+*.iml
+.gradle/
+local.properties
+.idea/
+*.keystore
