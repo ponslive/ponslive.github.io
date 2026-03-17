@@ -572,7 +572,8 @@ nav {
   .bento-photo img { width: 65%; height: 100%; object-fit: contain; }
   .bento-bio { padding: 20px; gap: 10px; flex-direction: column; }
   .contact { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 12px; flex-direction: row; flex-wrap: wrap; min-width: 0; }
-  .platforms-row { grid-template-columns: 1fr 1fr; }
+  .platforms-row { grid-template-columns: 1fr; }
+  .platforms-row .plat-card:first-child { grid-column: 1; }
   .bento-career .v-timeline { flex-direction: row; flex-wrap: wrap; gap: 10px; }
   .bento-career .v-item { flex: 0 0 48%; padding-bottom: 0; }
   .bento-career .v-item::after { display: none !important; }
@@ -581,6 +582,7 @@ nav {
 @media (max-width: 420px) {
   .bento-bio h1 { font-size: 15px; }
   .platforms-row { grid-template-columns: 1fr; }
+  .platforms-row .plat-card:first-child { grid-column: 1; }
   .bento-career .v-timeline { flex-direction: column; }
   .bento-career .v-item { flex: none; }
 }
