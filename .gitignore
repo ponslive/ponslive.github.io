@@ -1,8 +1,9 @@
-# Source images and assets (already embedded as base64 in index.html)
+# Source photos and documents stay local; web-ready copies live in assets/
 *.png
 *.jpeg
 *.jpg
 *.pdf
+!assets/**
 
 # macOS
 .DS_Store
@@ -11,8 +12,26 @@
 node_modules/
 android/
 www/lib/
+www/assets/
 *.iml
 .gradle/
 local.properties
 .idea/
 *.keystore
+
+# Local backups kept on disk, not published
+graphics/
+constellation.html
+assets/css/site.css
+assets/fonts/geist-var-latin.woff2
+assets/fonts/geist-mono-var-latin.woff2
+assets/fonts/inter-var-latin.woff2
+assets/img/spare-lab.jpg
+assets/img/eras/foundations-generated.jpg
+assets/img/platforms/cert-wide.jpg
+assets/img/family.webp
+.impeccable/
+
+# Local editor settings
+.claude/
+.vscode/

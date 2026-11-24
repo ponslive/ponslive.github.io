@@ -1,0 +1,41 @@
+{
+ "_comment": "Personal photos supplied by the user. Never name or date the child in alt text or captions.",
+ "files": [
+  {
+   "file": "me-new-york.jpg",
+   "use": "New York place chapter",
+   "alt": "Ponmudi on a bench in Central Park in winter",
+   "orientation": "landscape"
+  },
+  {
+   "file": "family-autumn.jpg",
+   "use": "New Jersey place chapter / family",
+   "alt": "Ponmudi lifting his son into the air under autumn trees",
+   "orientation": "portrait"
+  },
+  {
+   "file": "family-studio.jpg",
+   "use": "Family section",
+   "alt": "Ponmudi holding his son, both smiling",
+   "orientation": "portrait"
+  },
+  {
+   "file": "little-one-piano.jpg",
+   "use": "Family section (supporting)",
+   "alt": "His son playing a toy piano",
+   "orientation": "portrait"
+  },
+  {
+   "file": "family-temple.jpg",
+   "use": "Family section",
+   "alt": "Ponmudi, Monisha and their son in traditional dress on temple steps",
+   "orientation": "portrait"
+  },
+  {
+   "file": "family-beach.jpg",
+   "use": "Family section",
+   "alt": "Ponmudi, Monisha and their son laughing in a beach selfie",
+   "orientation": "landscape"
+  }
+ ]
+}

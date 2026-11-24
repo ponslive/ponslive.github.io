@@ -1,0 +1,6 @@
+{
+ "_comment": "Optional extras for the journey pages. Every era always loads <id>.jpg. List <id>.webp here to prefer it, and assets/video/<id>.mp4 paths (e.g. \"../../video/intelligence.mp4\") to use a looping video backdrop.",
+ "files": [
+  "../../video/network.mp4"
+ ]
+}

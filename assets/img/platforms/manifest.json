@@ -1,0 +1,10 @@
+{
+ "_comment": "List platform images here once they exist, e.g. \"cert.jpg\". Only listed files are requested; unlisted chapters use their 3D scene.",
+ "files": [
+  "cert.jpg",
+  "diag.jpg",
+  "compliance.jpg",
+  "aiplat.jpg",
+  "aiplat-mobile.jpg"
+ ]
+}

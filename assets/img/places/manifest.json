@@ -1,0 +1,11 @@
+{
+ "_comment": "Personal page place photos, keyed by PROFILE.personal.places[].place (lowercased, spaces to dashes).",
+ "files": [
+  "madurai.jpg",
+  "coimbatore.jpg",
+  "chennai.jpg",
+  "new-york.jpg",
+  "burbank.jpg",
+  "new-jersey.jpg"
+ ]
+}

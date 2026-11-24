@@ -1,12 +1,13 @@
 {
   "name": "ponmudi-portfolio",
   "version": "1.0.0",
-  "description": "Ponmudi Pandiyan — Distinguished Engineer Portfolio",
+  "description": "Ponmudi Pandiyan \u2014 Distinguished Engineer Portfolio",
   "main": "index.js",
   "scripts": {
-    "sync": "npx cap sync",
+    "copy:web": "rm -rf www/*.html www/assets www/lib && cp index.html career.html personal.html timeline.html platforms.html expertise.html journey.html journey-chapters.html www/ && rsync -a --exclude site.css --exclude 'geist-*' --exclude 'inter-*' --exclude spare-lab.jpg --exclude foundations-generated.jpg --exclude cert-wide.jpg --exclude family.webp assets/ www/assets/",
+    "sync": "npm run copy:web && npx cap sync",
     "open:android": "npx cap open android",
-    "build:android": "npx cap sync android && npx cap open android"
+    "build:android": "npm run copy:web && npx cap sync android && npx cap open android"
   },
   "dependencies": {
     "@capacitor/android": "^6.0.0",

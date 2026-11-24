@@ -1,0 +1,1528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Career · Ponmudi Pandiyan</title>
+<meta name="description" content="Twenty years, rewound: the roles, platforms and places from AI and device analytics at Verizon today back to Computer Science at Karunya in 2002, with the work behind each era.">
+<meta name="theme-color" content="#050403">
+<link rel="canonical" href="https://ponslive.github.io/career.html">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ponmudi Pandiyan">
+<meta property="og:title" content="Career · Ponmudi Pandiyan">
+<meta property="og:description" content="Twenty years, rewound: the roles, platforms and places from AI and device analytics at Verizon today back to Computer Science at Karunya in 2002, with the work behind each era.">
+<meta property="og:url" content="https://ponslive.github.io/career.html">
+<meta property="og:image" content="https://ponslive.github.io/assets/img/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/instrument-sans-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/system.css">
+<link rel="preload" href="assets/fonts/martian-mono-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script src="assets/js/site.js"></script>
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx');}catch(e){}</script>
+<script type="importmap">{ "imports": { "three": "./assets/vendor/three.module.min.js", "three/addons/": "./assets/vendor/three-addons/" } }</script>
+<style>
+body { background: var(--void); }
+
+#stage { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; }
+.scrim { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(5,4,3,.9) 0%, rgba(5,4,3,.7) 32%, rgba(5,4,3,0) 60%),
+    linear-gradient(0deg, rgba(5,4,3,.6) 0%, rgba(5,4,3,0) 22%); }
+
+#year {
+  position: fixed; z-index: 1; pointer-events: none; user-select: none;
+  right: calc(var(--gutter) * .6); bottom: 3vh;
+  font: 200 clamp(8rem, 25vw, 26rem)/.8 var(--mono);
+  letter-spacing: -.07em; font-variant-numeric: tabular-nums;
+  color: rgba(255,150,80,.07);
+  -webkit-text-stroke: 1px rgba(255,178,107,.22);
+  transition: opacity .6s var(--ease-out);
+  mix-blend-mode: screen;
+}
+
+  position: absolute; top: calc(var(--nav-h) + 22px); left: var(--gutter); z-index: 5;
+  display: inline-flex; padding: 4px; border-radius: 999px; border: 1px solid var(--line-2);
+  background: rgba(13,10,7,.6); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.close 
+/* Era rail */
+.rail { position: fixed; z-index: 6; right: var(--gutter); top: 50%; transform: translateY(-50%); }
+.rail ol { list-style: none; display: grid; gap: 2px; }
+.rail button { display: grid; grid-template-columns: auto 28px; align-items: center; justify-items: end; gap: 14px; min-height: 40px; padding: 4px 0 4px 12px; color: var(--ink-3); text-align: right; transition: color .3s; }
+.rail .r-name { font-size: .86rem; font-weight: 520; letter-spacing: -.01em; opacity: 0; transform: translateX(6px); transition: opacity .35s, transform .45s var(--ease-out); }
+.rail .r-mark { width: 28px; height: 1px; background: currentColor; transform-origin: right; transform: scaleX(.45); transition: transform .5s var(--ease-out), background .3s; }
+.rail button .r-yr { grid-column: 1; grid-row: 1; justify-self: end; font: 500 .74rem/1 var(--mono); letter-spacing: .04em; opacity: .75; transition: opacity .3s; }
+.rail button .r-name { grid-column: 1; grid-row: 1; }
+.rail button:hover, .rail button:focus-visible { color: var(--ink); }
+.rail button:hover .r-name, .rail button:focus-visible .r-name, .rail button[aria-current="step"] .r-name { opacity: 1; transform: none; }
+.rail button:hover .r-yr, .rail button:focus-visible .r-yr, .rail button[aria-current="step"] .r-yr { opacity: 0; }
+.rail button[aria-current="step"] { color: var(--ink); }
+.rail button[aria-current="step"] .r-mark { transform: scaleX(1); background: var(--amber); }
+
+main { position: relative; z-index: 3; }
+
+/* Intro */
+.intro { min-height: 100svh; display: flex; align-items: center; padding-top: var(--nav-h); }
+.intro-copy { max-width: min(720px, 56vw); }
+.intro h1 { margin-bottom: 32px; }
+.intro h1 .ln2 { display: block; color: var(--amber-hi); }
+.intro .lede { max-width: 40ch; }
+.cue { margin-top: 56px; display: flex; align-items: center; gap: 18px; color: var(--ink-2); }
+.cue-line { width: 1px; height: 56px; background: linear-gradient(var(--amber), transparent); position: relative; overflow: hidden; }
+.cue-line::after { content: ''; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: #fff; animation: cue 2.2s var(--ease-io) infinite; }
+@keyframes cue { to { top: 110%; } }
+.cue strong { display: block; color: var(--ink); font-weight: 560; font-size: .98rem; letter-spacing: -.01em; }
+
+/* Eras */
+.era { position: relative; }
+.era-stage { position: relative; height: 165vh; }
+.era-pin { position: sticky; top: 0; height: 100svh; display: flex; align-items: center; }
+.era-copy { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.era-copy > * { max-width: min(600px, 46vw); }
+.era-name { margin-bottom: 18px; }
+.mask { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.mask .ln { display: block; }
+.era-meta { color: var(--amber-hi); margin-bottom: 30px; display: flex; gap: 14px; align-items: center; }
+.era-meta .bar { width: 36px; height: 1px; background: var(--amber); }
+.era-line { margin-bottom: 22px; }
+.era-line .serif { color: var(--amber-hi); }
+.era-body { color: var(--ink-2); font-size: 1.08rem; line-height: 1.62; max-width: 50ch; margin-bottom: 36px; }
+.proof { list-style: none; display: flex; flex-wrap: wrap; gap: 28px 40px; margin-bottom: 32px; }
+.proof li { padding-top: 14px; border-top: 1px solid var(--line-2); min-width: 120px; max-width: 220px; }
+.proof strong { display: block; font-size: clamp(1.7rem, 2.6vw, 2.35rem); font-weight: 600; letter-spacing: -.035em; line-height: 1; color: var(--ink); margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+.proof span { font-size: .9rem; color: var(--ink-2); line-height: 1.4; display: block; }
+.era-ghost { display: none; }
+
+/* Origin + close */
+.origin { min-height: 120vh; display: flex; align-items: center; }
+.origin .wrap > * { max-width: min(760px, 60vw); }
+.origin h2 { margin-bottom: 28px; }
+.origin h2 .serif { color: var(--amber-hi); }
+.origin-edu { display: grid; gap: 6px; margin-bottom: 30px; padding-left: 0; }
+.origin-edu .h3 { color: var(--ink); }
+.origin-edu .mono { color: var(--amber-hi); margin-top: 6px; }
+.close { min-height: 100svh; display: flex; align-items: center; text-align: left; }
+.close h2 { margin-bottom: 26px; max-width: 14ch; }
+.close h2 .serif { color: var(--amber-hi); }
+.close .lede { margin-bottom: 40px; }
+.close .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+.foot { position: relative; z-index: 3; background: var(--void); }
+
+/* Initial hidden state while the animated mode boots */
+.fx .intro-copy, .fx .era-copy { opacity: 0; }
+
+/* Static (no WebGL / reduced motion) */
+.static #stage, .static #year, .static .scrim { display: none; }
+.static body { background:
+  radial-gradient(60vw 50vw at 85% 10%, rgba(255,138,42,.10), transparent 60%),
+  radial-gradient(50vw 40vw at 0% 60%, rgba(255,90,31,.06), transparent 60%), var(--void); background-attachment: fixed; }
+.static .era-stage { height: auto; }
+.static .era-pin { position: relative; height: auto; padding-block: clamp(96px, 14vw, 180px); border-top: 1px solid var(--line); overflow: hidden; }
+.static .era-copy > * { max-width: 640px; }
+.static .era-ghost { display: block; position: absolute; right: var(--gutter); top: 50%; transform: translateY(-50%); font: 200 clamp(6rem, 20vw, 18rem)/.8 var(--mono); letter-spacing: -.07em; color: rgba(255,150,80,.06); -webkit-text-stroke: 1px rgba(255,178,107,.2); pointer-events: none; z-index: -1; }
+.static .origin { min-height: auto; padding-block: 160px; }
+.static .rail { display: none; }
+.static .era-pin.has-plate::before { content: ''; position: absolute; inset: 0; z-index: -2;
+  background-image: linear-gradient(90deg, rgba(5,4,3,.96) 0%, rgba(5,4,3,.82) 45%, rgba(5,4,3,.55) 100%), var(--plate), linear-gradient(var(--tone, #5a2a0c), var(--tone, #5a2a0c));
+  background-size: cover, cover, cover; background-position: center; background-blend-mode: normal, luminosity, normal; filter: blur(1.5px); opacity: .9; }
+.credits { margin-top: 56px; max-width: 72ch; font-size: .8rem; line-height: 1.6; color: var(--ink-3); }
+.credits a { color: var(--ink-2); }
+
+@media (max-width: 960px) {
+  .rail { right: 10px; }
+  .rail .r-name, .rail .r-yr { display: none; }
+  .rail button { grid-template-columns: 22px; padding: 0; min-width: 44px; min-height: 36px; justify-items: center; }
+  .rail .r-mark { width: 18px; }
+}
+@media (max-width: 760px) {
+  .scrim { background: linear-gradient(0deg, rgba(5,4,3,.94) 0%, rgba(5,4,3,.82) 42%, rgba(5,4,3,0) 70%); }
+  #year { right: auto; left: calc(var(--gutter) - .04em); bottom: auto; top: calc(var(--nav-h) + 70px); font-size: clamp(6.5rem, 34vw, 10rem); }
+  .intro { align-items: flex-end; padding-bottom: 12vh; }
+  .intro-copy, .era-copy > *, .origin .wrap > * { max-width: none; }
+  .era-pin { align-items: flex-end; padding-bottom: 6vh; }
+  .era-name { font-size: clamp(2.8rem, 13vw, 4rem); }
+  .era-body { font-size: 1rem; margin-bottom: 26px; }
+  .proof { gap: 18px 26px; margin-bottom: 22px; }
+  .proof li { min-width: 0; flex: 1 1 40%; }
+  .era .chips .chip { padding: 7px 10px; font-size: .74rem; }
+    .static .era-ghost { top: 64px; transform: none; }
+}
+
+
+.ch { scroll-margin-top: var(--nav-h); }
+.ch + .ch { padding-top: 0; }
+.stage { position: relative; margin: 0 0 clamp(56px, 7vw, 96px); border-radius: 28px; overflow: hidden; aspect-ratio: 21 / 9; isolation: isolate; border: 1px solid var(--line); background: var(--deep); }
+.plate { position: absolute; inset: 0; z-index: -3; background: var(--plate, none) center / cover no-repeat; opacity: 0; transform: scale(1.06); filter: saturate(.6) brightness(.55) contrast(1.1) sepia(.25); transition: opacity 1.4s var(--ease-out), transform 2.4s var(--ease-out); }
+.has-photo .plate { filter: saturate(.88) brightness(.8) contrast(1.05); }
+.has-plate .plate { opacity: 1; }
+.stage.is-near .plate { transform: none; }
+.gl-slot { position: absolute; inset: 0; z-index: -2; }
+.gl-slot canvas { width: 100%; height: 100%; display: block; }
+.stage::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(to top, rgba(5,4,3,.88) 0%, rgba(5,4,3,.15) 42%, transparent 60%), linear-gradient(90deg, color-mix(in srgb, var(--c) 10%, transparent), transparent 55%); }
+.stage figcaption { position: absolute; left: clamp(20px, 3vw, 40px); right: clamp(20px, 3vw, 40px); bottom: clamp(18px, 2.6vw, 32px); display: flex; flex-wrap: wrap; gap: 8px 26px; color: var(--ink-2); }
+.stage .st { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); }
+.stage .st::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 22%, transparent); }
+.ch-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 120px); align-items: start; }
+.pull { font-size: clamp(2.6rem, 6vw, 5.2rem); font-weight: 640; letter-spacing: -.04em; line-height: .98; position: sticky; top: calc(var(--nav-h) + 48px); text-wrap: balance; }
+.pull .serif { color: var(--c); }
+.ch-metric strong { display: block; font-size: clamp(2.2rem, 4.2vw, 3.6rem); font-weight: 620; letter-spacing: -.045em; line-height: .95; color: var(--c); }
+.ch-metric span { display: block; margin-top: 12px; color: var(--ink-3); }
+.ch-summary { margin-top: 36px; font-size: clamp(1.1rem, 1.5vw, 1.32rem); line-height: 1.65; color: var(--ink-2); text-wrap: pretty; }
+.ach { list-style: none; margin-top: 40px; border-top: 1px solid var(--line); }
+.ach li { position: relative; padding: 18px 0 18px 30px; border-bottom: 1px solid var(--line); color: var(--ink-2); text-wrap: pretty; transition: color .4s; }
+.ach li::before { content: ''; position: absolute; left: 0; top: 1.55em; width: 14px; height: 1px; background: var(--c); transition: width .5s var(--ease-out); }
+.ach li:hover { color: var(--ink); }
+.ach li:hover::before { width: 20px; }
+@media (max-width: 860px) { .ch-story { grid-template-columns: 1fr; } .pull { position: static; } }
+@media (max-width: 760px) { .stage { aspect-ratio: 4 / 3; border-radius: 20px; } }
+
+/* Flow, rounded like the Personal panels */
+.flowx { margin: clamp(56px, 7vw, 96px) 0 0; position: relative; overflow: hidden; border-radius: 28px; border: 1px solid var(--line); padding: clamp(36px, 4.4vw, 64px) clamp(18px, 3vw, 48px) clamp(28px, 3.4vw, 44px); background: radial-gradient(ellipse 70% 120% at 50% -10%, color-mix(in srgb, var(--c) 8%, transparent), transparent 70%), rgba(255,214,170,.012); }
+.steps { list-style: none; display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); position: relative; }
+.steps::before { content: ''; position: absolute; top: 36px; left: calc(50% / var(--n, 4)); right: calc(50% / var(--n, 4)); height: 1px; background: var(--line-2); }
+.steps-run { position: absolute; top: 36px; left: calc(50% / var(--n, 4)); width: calc(100% - 100% / var(--n, 4)); height: 0; pointer-events: none; animation: fx-run 6s linear infinite; }
+.steps-run i { position: absolute; top: -1px; left: -60px; width: 120px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--c), transparent); }
+.steps-run i::after { content: ''; position: absolute; right: 54px; top: -4px; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, #fff 0 25%, var(--c) 45%, transparent 72%); }
+@keyframes fx-run { 0% { transform: translateX(0); opacity: 0; } 4% { opacity: 1; } 94% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+.steps li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; padding-inline: 12px; }
+.badge { position: relative; z-index: 1; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: var(--deep); border: 1px solid var(--line-2); color: var(--ink-2); animation: lit 6s linear infinite; animation-delay: calc(var(--k) * 2s); }
+.badge svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes lit { 0%, 16%, 100% { border-color: var(--line-2); color: var(--ink-2); background: var(--deep); } 2%, 8% { border-color: var(--c); color: var(--ink); background: color-mix(in srgb, var(--c) 18%, var(--deep)); } }
+.steps h4 { font-size: clamp(1rem, 1.25vw, 1.15rem); font-weight: 600; letter-spacing: -.015em; line-height: 1.25; max-width: 15ch; }
+.flowx figcaption { margin-top: clamp(28px, 3.4vw, 42px); padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--ink-3); }
+.ch-stack { margin-top: 32px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+.ch-stack > .mono { color: var(--ink-3); min-width: 6ch; }
+@media (max-width: 760px) {
+  .steps { grid-template-columns: 1fr; gap: 24px; }
+  .steps::before { top: 36px; bottom: 36px; left: 36px; right: auto; width: 1px; height: auto; }
+  .steps-run { top: 36px; left: 36px; width: 0; height: calc(100% - 72px); animation-name: fx-run-y; }
+  .steps-run i { top: -60px; left: -1px; width: 2px; height: 120px; background: linear-gradient(180deg, transparent, var(--c), transparent); }
+  .steps-run i::after { right: auto; left: -4px; top: 54px; }
+  @keyframes fx-run-y { 0% { transform: translateY(0); opacity: 0; } 4% { opacity: 1; } 94% { opacity: 1; } 100% { transform: translateY(100%); opacity: 0; } }
+  .steps li { flex-direction: row; text-align: left; gap: 18px; padding-inline: 0; }
+}
+
+/* EXPERTISE — Personal's ruled "drives" rows, each with a graded thumb */
+.x-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); gap: 24px 64px; align-items: end; margin-bottom: clamp(40px, 6vw, 72px); }
+.x-head .h1 .serif { color: var(--amber-hi); }
+.doms { list-style: none; border-top: 1px solid var(--line); }
+.dom { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) minmax(0, 1.25fr); gap: 20px clamp(28px, 4vw, 64px); align-items: start; padding: clamp(28px, 3.6vw, 48px) 0; border-bottom: 1px solid var(--line); position: relative; scroll-margin-top: var(--nav-h); }
+.dom::after { content: ''; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--c); transform: scaleX(0); transform-origin: left; transition: transform .9s var(--ease-out); }
+.dom:hover::after { transform: scaleX(1); }
+.dom .thumb { display: block; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; position: relative; isolation: isolate; border: 1px solid var(--line); }
+.dom .thumb img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.62) saturate(.7) sepia(.22) contrast(1.08); transform: scale(1.06); transition: transform 1.6s var(--ease-out), filter .8s; }
+.dom:hover .thumb img { transform: none; filter: brightness(.82) saturate(.9) sepia(.12) contrast(1.05); }
+.dom .thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,4,3,.55), transparent 60%), linear-gradient(135deg, color-mix(in srgb, var(--c) 18%, transparent), transparent 60%); }
+.dom h3 { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 640; letter-spacing: -.04em; line-height: .98; color: var(--ink-2); transition: color .5s, transform .8s var(--ease-out); }
+.dom:hover h3 { color: var(--ink); transform: translateX(10px); }
+.dom h3 .serif { color: var(--c); }
+.dom-body p { color: var(--ink-2); font-size: 1.08rem; max-width: 52ch; }
+.dom-body .chips { margin-top: 20px; }
+.dom-body .chip { font-size: .74rem; padding: 7px 11px; }
+.shows { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; }
+.shows > .mono { color: var(--ink-3); }
+.shows ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.shows a { text-decoration: none; color: var(--ink); font-weight: 560; display: inline-flex; align-items: center; gap: 8px; }
+.shows a::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c); }
+.shows a:hover { color: var(--c); }
+@media (max-width: 1000px) { .dom { grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); } .dom-body { grid-column: 2; } }
+@media (max-width: 760px) { .x-head { grid-template-columns: 1fr; } .dom { grid-template-columns: 1fr; } .dom-body { grid-column: auto; } .dom .thumb { aspect-ratio: 21 / 9; } }
+
+/* Standards wall */
+.wall-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); gap: 24px 64px; align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+.wall-head .h2 .serif { color: var(--amber-hi); }
+.std { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+.std > li { padding: 30px clamp(14px, 1.6vw, 24px) 34px; border-left: 1px solid var(--line); display: grid; align-content: start; gap: 18px; }
+.std > li:first-child { border-left: 0; padding-left: 0; }
+.std svg { width: 34px; height: 34px; fill: none; stroke: var(--amber-hi); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.std .mono { color: var(--ink-3); }
+.std ul { list-style: none; display: grid; gap: 10px; }
+.std ul li { font-size: clamp(1.05rem, 1.4vw, 1.3rem); font-weight: 560; letter-spacing: -.02em; line-height: 1.25; }
+@media (max-width: 1100px) { .std { grid-template-columns: repeat(3, minmax(0, 1fr)); } .std > li:nth-child(4) { border-left: 0; padding-left: 0; } .std > li:nth-child(n+4) { border-top: 1px solid var(--line); } }
+@media (max-width: 760px) { .wall-head { grid-template-columns: 1fr; } .std { grid-template-columns: 1fr 1fr; } .std > li, .std > li:nth-child(4) { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); } .std > li:nth-child(even) { border-left: 1px solid var(--line); padding-left: 16px; } .std > li:first-child, .std > li:nth-child(2) { border-top: 0; } }
+@media (max-width: 520px) { .std { grid-template-columns: 1fr; } .std > li:nth-child(even) { border-left: 0; padding-left: 0; } .std > li:nth-child(2) { border-top: 1px solid var(--line); } }
+
+/* Principles — the Personal drives rhythm */
+.pr { list-style: none; border-top: 1px solid var(--line); }
+.pr li { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px 64px; align-items: baseline; padding: clamp(28px, 3.6vw, 48px) 0; border-bottom: 1px solid var(--line); }
+.pr .pr-t { font-size: clamp(2.2rem, 5.4vw, 4.6rem); font-weight: 640; letter-spacing: -.04em; line-height: .95; color: var(--ink); }
+.pr .pr-t .serif { color: var(--amber-hi); }
+.pr p:not(.pr-t) { color: var(--ink-2); font-size: 1.08rem; max-width: 44ch; }
+@media (max-width: 760px) { .pr li { grid-template-columns: 1fr; } }
+
+/* Earlier work */
+.proj { list-style: none; border-top: 1px solid var(--line); }
+.proj > li { display: grid; grid-template-columns: 9rem minmax(0, 1fr) minmax(0, 1.3fr); gap: 12px 40px; align-items: baseline; padding-block: 26px; border-bottom: 1px solid var(--line); }
+.proj .mono { color: var(--amber-hi); }
+.proj h3 { font-size: var(--fs-h3); font-weight: 600; letter-spacing: -.02em; }
+.proj p { color: var(--ink-2); }
+@media (max-width: 760px) { .proj > li { grid-template-columns: 1fr; gap: 8px; } }
+
+
+
+/* Era work — solid ground so the stage reads only in the pinned moments */
+.era-work { position: relative; z-index: 2; background: var(--void); }
+.era-work::before { content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 30vh; pointer-events: none; background: linear-gradient(to top, var(--void), rgba(5,4,3,0)); }
+.era-work > .wrap:first-child { padding-top: clamp(56px, 8vw, 110px); }
+.era-work .ch { padding-block: clamp(64px, 9vw, 130px); }
+.era-work .ch:last-child { padding-bottom: clamp(80px, 11vw, 160px); }
+.roles { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 24px clamp(28px, 4vw, 64px); align-items: start; }
+.roles-k { color: var(--amber-hi); padding-top: 22px; }
+.role-list { list-style: none; border-top: 1px solid var(--line); }
+.role-list > li { display: grid; grid-template-columns: 11rem minmax(0, 1fr) minmax(0, 1fr); gap: 8px 32px; align-items: baseline; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.role-list .yr { color: var(--ink-3); }
+.role-list h3 { font-size: 1.12rem; font-weight: 600; letter-spacing: -.015em; line-height: 1.3; }
+.role-list p { color: var(--ink-2); font-size: .98rem; }
+.role-list .where { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); font: 500 .76rem/1.2 var(--mono); margin-top: 6px; }
+.role-list .where svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.role-list .pts { grid-column: 2 / -1; list-style: none; display: grid; gap: 6px; margin-top: 6px; }
+.role-list .pts li { position: relative; padding-left: 20px; color: var(--ink-2); font-size: .96rem; }
+.role-list .pts li::before { content: ''; position: absolute; left: 0; top: .78em; width: 10px; height: 1px; background: var(--amber); }
+@media (max-width: 860px) { .roles { grid-template-columns: 1fr; } .roles-k { padding-top: 0; } .role-list > li { grid-template-columns: 1fr; gap: 6px; } .role-list .pts { grid-column: auto; } }
+
+/* Flight — the moves between continents */
+.flight { margin-top: clamp(56px, 8vw, 110px); border-radius: 28px; border: 1px solid var(--line); background: radial-gradient(ellipse 70% 120% at 50% -10%, rgba(127,180,255,.08), transparent 70%), rgba(255,214,170,.012); padding: clamp(28px, 4vw, 56px) clamp(18px, 3vw, 48px); }
+.flight-h { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; align-items: baseline; margin-bottom: 24px; }
+.flight-h .h3 .serif { color: #a8c8ff; }
+.flight svg { width: 100%; height: auto; display: block; overflow: visible; }
+.flight .route { fill: none; stroke: #7fb4ff; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 4 7; opacity: .9; }
+.flight .route-draw { fill: none; stroke: #a8c8ff; stroke-width: 2; stroke-linecap: round; stroke-dasharray: var(--len) var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 2.2s var(--ease-out); transition-delay: calc(var(--k) * .7s); }
+.flight.in .route-draw { stroke-dashoffset: 0; }
+.flight .city circle { fill: var(--void); stroke: #7fb4ff; stroke-width: 1.6; }
+.flight .city .dot { fill: #a8c8ff; stroke: none; }
+.flight .city text { fill: var(--ink); font: 600 15px var(--sans); letter-spacing: -.01em; }
+.flight .city text.sub { fill: var(--ink-3); font: 500 11px var(--mono); }
+.flight .leg-label { fill: #a8c8ff; font: 500 11px var(--mono); }
+.flight ol { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 32px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.flight ol li { color: var(--ink-2); font-size: .95rem; }
+.flight ol b { font: 500 .78rem/1 var(--mono); color: #a8c8ff; margin-right: 10px; }
+.reduced .flight .route-draw, .static .flight .route-draw { transition: none; stroke-dashoffset: 0; }
+
+/* Origin block in the Student era */
+.origin-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.origin-grid > div { padding: 28px 0 32px; border-bottom: 1px solid var(--line); }
+.origin-grid > div + div { padding-left: clamp(20px, 3vw, 48px); border-left: 1px solid var(--line); }
+.origin-grid .mono { color: var(--amber-hi); }
+.origin-grid h3 { margin-top: 10px; font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 620; letter-spacing: -.03em; line-height: 1.1; }
+.origin-grid p { color: var(--ink-2); margin-top: 6px; }
+@media (max-width: 760px) { .origin-grid { grid-template-columns: 1fr; } .origin-grid > div + div { padding-left: 0; border-left: 0; } }
+
+/* Intro index */
+.intro-index { margin-top: 44px; display: flex; flex-wrap: wrap; gap: 10px; list-style: none; }
+.intro-index a { display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line-2); text-decoration: none; color: var(--ink-2); font: 500 .8rem/1 var(--mono); transition: color .25s, border-color .25s, background .25s; }
+.intro-index a:hover { color: var(--ink); border-color: rgba(255,138,42,.6); background: rgba(255,138,42,.06); }
+.intro-index i { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
+
+/* Expertise + charts sit on solid ground */
+.after { position: relative; z-index: 2; background: var(--void); }
+.x-head a { color: var(--ink); }
+
+/* Charts */
+.c-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; margin-bottom: 28px; }
+.c-head .h1 .serif { color: var(--amber-hi); }
+.c-head p { color: var(--ink-2); margin-top: 18px; max-width: 58ch; }
+.c-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; }
+.seg { display: inline-flex; padding: 4px; border-radius: 999px; border: 1px solid var(--line-2); }
+.seg button { font: 500 .76rem/1 var(--mono); color: var(--ink-2); padding: 9px 13px; border-radius: 999px; transition: color .2s, background .2s; }
+.seg button[aria-pressed="true"] { background: rgba(255,214,170,.09); color: var(--ink); }
+.seg button:hover { color: var(--ink); }
+.tool { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-2); font: 500 .8rem/1 var(--mono); color: var(--ink-2); transition: color .2s, border-color .2s; }
+.tool:hover { color: var(--ink); border-color: rgba(255,138,42,.5); }
+.tool.primary { background: var(--amber); color: #140a02; border-color: transparent; }
+.tool.primary:hover { background: var(--amber-hi); color: #140a02; }
+.tool kbd { font: inherit; font-size: .7rem; opacity: .7; border: 1px solid currentColor; border-radius: 4px; padding: 1px 5px; }
+.lanes-box { border-radius: 24px; border: 1px solid var(--line); background: rgba(255,214,170,.012); padding: 18px clamp(8px, 1.4vw, 20px) 12px; }
+#lanes { height: 520px; }
+.ms { list-style: none; counter-reset: ms; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; margin-top: 28px; border-top: 1px solid var(--line); }
+.ms li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.ms .n { grid-row: span 2; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 600 .72rem/1 var(--mono); color: #140a02; background: var(--amber); }
+.ms .n.move { background: #7fb4ff; }
+.ms b { font-weight: 600; font-size: .98rem; letter-spacing: -.01em; }
+.ms b span { font: 500 .74rem/1 var(--mono); color: var(--ink-3); margin-left: 8px; }
+.ms em { font-style: normal; color: var(--ink-2); font-size: .9rem; }
+@media (max-width: 1000px) { .ms { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .ms { grid-template-columns: 1fr; } .c-head { grid-template-columns: 1fr; } .c-tools { justify-content: flex-start; } }
+.stream-box { margin-top: clamp(64px, 8vw, 110px); }
+.stream-box .h2 .serif { color: var(--amber-hi); }
+.stream-box > p { color: var(--ink-2); margin: 16px 0 24px; max-width: 62ch; }
+#stream { height: 460px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; margin-bottom: 10px; }
+.legend li { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-small); color: var(--ink-2); }
+.legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; }
+.caption { margin-top: 16px; color: var(--ink-3); font-size: var(--fs-small); max-width: 92ch; line-height: 1.55; }
+.caption b { color: var(--ink-2); font-weight: 560; }
+.tbl-wrap { margin-top: 28px; overflow-x: auto; }
+.tbl-wrap[hidden] { display: none; }
+.tbl { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.tbl caption { text-align: left; font: 500 .78rem/1 var(--mono); color: var(--ink-3); padding: 0 0 12px; }
+.tbl th, .tbl td { text-align: left; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl th { font: 500 .74rem/1.2 var(--mono); color: var(--ink-3); letter-spacing: .03em; }
+.tbl td { color: var(--ink-2); }
+.tbl td:first-child { white-space: nowrap; font: 500 .8rem/1.4 var(--mono); color: var(--ink-3); }
+.tbl strong { color: var(--ink); font-weight: 560; }
+.tt { min-width: 260px; max-width: 360px; padding: 14px 16px; white-space: normal; font-family: var(--sans); border-radius: 14px; background: rgba(13,10,7,.92); border: 1px solid rgba(255,214,170,.16); box-shadow: 0 24px 60px -16px rgba(0,0,0,.75); }
+.tt .k { font: 500 .72rem/1.2 var(--mono); color: var(--ink-3); letter-spacing: .04em; }
+.tt .t { margin-top: 6px; font-size: .98rem; font-weight: 600; color: var(--ink); line-height: 1.25; }
+.tt .o { margin-top: 2px; font-size: .84rem; color: var(--ink-2); }
+.tt .d { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; font: 500 .76rem/1.3 var(--mono); color: var(--ink); }
+.tt .d em { font-style: normal; color: var(--ink-3); }
+.tt .row { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: .84rem; color: var(--ink-2); }
+.tt .row b { font: 600 .84rem/1 var(--mono); color: var(--ink); min-width: 44px; text-align: right; }
+.tt .row i { width: 12px; height: 2px; border-radius: 2px; display: inline-block; }
+.highcharts-tooltip-container { z-index: 120 !important; }
+
+
+/* Career page: keep each pinned era inside one screen */
+.era-pin { padding-top: var(--nav-h); }
+.era-copy > * { max-width: min(640px, 50vw); }
+.era-copy > .era-name { max-width: min(880px, 62vw); font-size: clamp(2.8rem, 6.2vw, 5.4rem); }
+.era-line { font-size: clamp(1.6rem, 2.6vw, 2.4rem); }
+.era-body { margin-bottom: 26px; }
+.proof { gap: 18px 36px; margin-bottom: 22px; }
+.proof strong { font-size: clamp(1.45rem, 2.1vw, 1.9rem); }
+@media (max-height: 860px) and (min-width: 761px) { .era-pin .chips { display: none; } .era-body { font-size: 1rem; } }
+html.presenting .c-head { display: none; }
+@media (max-width: 760px) {
+  .era-stage { height: auto; }
+  .era-pin { position: relative; height: auto; min-height: 100svh; align-items: flex-end; padding: calc(var(--nav-h) + 38vh) 0 56px; }
+  .era-copy > .era-name { max-width: none; font-size: clamp(2.6rem, 12vw, 3.6rem); }
+  .era-copy > * { max-width: none; }
+}
+
+
+/* Presentation mode */
+.pres-cap { display: none; }
+html.presenting body > *:not(main), html.presenting main > *:not(.after), html.presenting .after > *:not(#charts) { display: none !important; }
+html.presenting #stage, html.presenting .scrim, html.presenting #year, html.presenting .rail { display: none !important; }
+html.presenting #charts { min-height: 100vh; padding-block: 28px; display: flex; flex-direction: column; }
+html.presenting #charts .wrap { max-width: none; }
+html.presenting .c-head p, html.presenting .ms, html.presenting .tbl-wrap, html.presenting .stream-box > p, html.presenting .caption { display: none; }
+html.presenting .pres-cap { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin: 6px 0 22px; }
+.pres-cap .mono { color: var(--amber-hi); }
+.pres-cap h3 { margin-top: 8px; font-size: clamp(2.2rem, 4.6vw, 4.2rem); font-weight: 640; letter-spacing: -.04em; line-height: 1; }
+.pres-cap h3 .serif { color: var(--amber-hi); }
+.pres-cap p { color: var(--ink-2); max-width: 52ch; margin-top: 10px; font-size: 1.1rem; }
+.pres-cap .step { font: 500 .8rem/1 var(--mono); color: var(--ink-3); white-space: nowrap; }
+html.presenting #lanes { height: 58vh; }
+html.presenting #stream { height: 58vh; }
+html.presenting .p-lanes-off .lanes-box, html.presenting .p-stream-off .stream-box { display: none; }
+html.presenting .stream-box { margin-top: 0; }
+
+.close-c { position: relative; z-index: 2; background: var(--void); }
+.close-c .display .serif { color: var(--amber-hi); }
+.close-row { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* compact career: summary, folds, tabs */
+.about-me { padding-block: clamp(56px, 7vw, 100px); border-top: 1px solid var(--line); }
+.about-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+.about-who { font-size: clamp(1.4rem, 2.3vw, 2rem); line-height: 1.3; font-weight: 560; letter-spacing: -.02em; color: var(--ink); margin: 22px 0 20px; max-width: 30ch; text-wrap: balance; }
+.about-copy .body { margin-top: 14px; }
+.strengths { list-style: none; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.strengths li { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; color: var(--ink); display: flex; gap: 14px; align-items: baseline; }
+.strengths li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); flex: none; transform: translateY(-2px); }
+.sig { margin-top: 28px; padding: 26px 26px 24px; border-radius: 22px; border: 1px solid rgba(255,138,42,.45); background: linear-gradient(160deg, rgba(255,138,42,.12), rgba(255,138,42,.02) 60%), var(--deep); }
+.sig-k { display: flex; align-items: center; gap: 10px; color: var(--amber-hi); }
+.sig-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 4px rgba(255,138,42,.18); }
+.sig h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 620; letter-spacing: -.03em; margin: 12px 0 10px; }
+.sig p:not(.sig-k) { color: var(--ink-2); line-height: 1.6; }
+.sig .chips { margin-top: 18px; }
+.sig .chip { border-color: rgba(255,138,42,.4); color: var(--ink); }
+@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
+details.more { border-top: 1px solid var(--line); margin-top: 22px; }
+details.more > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 0; color: var(--ink-2); }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary .more-l { color: var(--ink); font-weight: 560; display: inline-flex; align-items: center; gap: 10px; }
+details.more > summary .more-l::after { content: ''; width: 9px; height: 9px; border-right: 1.5px solid var(--amber); border-bottom: 1.5px solid var(--amber); transform: rotate(45deg) translateY(-3px); transition: transform .35s var(--ease-out); }
+details.more[open] > summary .more-l::after { transform: rotate(225deg) translate(-2px,-2px); }
+details.more > summary:hover .more-l { color: var(--amber-hi); }
+details.roles.more { max-width: var(--max); margin-inline: auto; }
+.more-body { padding-bottom: 12px; }
+.after-tabs { position: sticky; top: calc(var(--nav-h) + 12px); z-index: 40; display: flex; justify-content: center; padding-top: clamp(64px, 9vw, 120px); pointer-events: none; }
+.after-tabs .tabs { pointer-events: auto; display: inline-flex; gap: 4px; padding: 5px; border-radius: 999px; background: rgba(13,10,7,.78); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--line-2); max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.after-tabs [role="tab"] { white-space: nowrap; padding: 10px 18px; border-radius: 999px; color: var(--ink-3); font-weight: 520; font-size: .92rem; transition: color .25s, background .25s; }
+.after-tabs [role="tab"][aria-selected="true"] { color: var(--void); background: var(--amber); }
+.after-tabs [role="tab"]:hover:not([aria-selected="true"]) { color: var(--ink); }
+.tabpanel { padding-top: clamp(40px, 5vw, 72px) !important; }
+.how-gap { height: clamp(64px, 8vw, 110px); }
+
+/* compact platform card: photo beside the story */
+.era-stage { height: 105vh; }
+.era-work .ch { padding-block: clamp(28px, 3.4vw, 52px); }
+.era-work .ch:last-child { padding-bottom: clamp(56px, 7vw, 96px); }
+.era-work > .wrap:first-child { padding-top: clamp(40px, 5vw, 72px); }
+@media (min-width: 901px) {
+  .era-work .ch > .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: clamp(32px, 4vw, 64px); align-items: center; }
+  .era-work .ch .stage { grid-column: 1; grid-row: 1; margin: 0; aspect-ratio: 4 / 3; }
+  .era-work .ch .ch-story { grid-column: 2; grid-row: 1; display: block; }
+  .era-work .ch .ch-more { grid-column: 1 / -1; grid-row: 2; }
+  .era-work .ch .pull { position: static; font-size: clamp(2.2rem, 3.6vw, 3.4rem); margin-bottom: 18px; }
+  .era-work .ch .ch-text { margin-top: 0; }
+}
+@media (max-width: 900px) {
+  .era-work .ch .stage { aspect-ratio: 16 / 10; margin-bottom: 28px; }
+  .era-work .ch .pull { position: static; font-size: clamp(2rem, 8vw, 2.8rem); }
+}
+.x-link { padding-block: clamp(64px, 8vw, 110px) 0; }
+.xl-card { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; padding: clamp(28px, 4vw, 48px); border-radius: 26px; border: 1px solid var(--line-2); background: radial-gradient(70% 120% at 100% 0%, rgba(255,138,42,.14), transparent 60%), var(--deep); }
+.xl-card .body { margin-top: 12px; max-width: 58ch; }
+.era-work::after { content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 34vh; pointer-events: none; background: linear-gradient(to bottom, var(--void), rgba(5,4,3,.6) 45%, rgba(5,4,3,0)); z-index: 2; }
+
+/* keep "In short" readable over the particle canvas */
+.about-me { position: relative; z-index: 3; background: var(--void); border-top: 0; }
+.about-me::before, .about-me::after { content: ''; position: absolute; left: 0; right: 0; height: 22vh; pointer-events: none; }
+.about-me::before { bottom: 100%; background: linear-gradient(to top, var(--void), rgba(5,4,3,0)); }
+.about-me::after { top: 100%; background: linear-gradient(to bottom, var(--void), rgba(5,4,3,0)); }
+.strengths li { color: var(--ink); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav" role="banner">
+  <a class="brand" href="index.html">Ponmudi <i>Pandiyan</i></a>
+  <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="career.html" aria-current="page">Career</a></li>
+    <li><a href="expertise.html">Expertise</a></li>
+    <li><a href="personal.html">Personal</a></li>
+    <li><a class="ext" href="https://www.linkedin.com/in/ponmudi-pandiyan/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+  </ul>
+</header>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+<div id="year" aria-hidden="true">2026</div>
+<nav class="rail" aria-label="Eras"><ol id="rail"><li><button type="button" data-i="0" aria-label="Product leader, 2023 – now"><span class="r-yr">Now</span><span class="r-name">Product leader</span><span class="r-mark" aria-hidden="true"></span></button></li><li><button type="button" data-i="1" aria-label="Product owner, 2019 – 2024"><span class="r-yr">2019</span><span class="r-name">Product owner</span><span class="r-mark" aria-hidden="true"></span></button></li><li><button type="button" data-i="2" aria-label="Compliance architect, 2014 – 2019"><span class="r-yr">2014</span><span class="r-name">Compliance architect</span><span class="r-mark" aria-hidden="true"></span></button></li><li><button type="button" data-i="3" aria-label="Software engineer &amp; architect, 2006 – 2014"><span class="r-yr">2006</span><span class="r-name">Software engineer &amp; architect</span><span class="r-mark" aria-hidden="true"></span></button></li><li><button type="button" data-i="4" aria-label="Student, 2002 – 2006"><span class="r-yr">2002</span><span class="r-name">Student</span><span class="r-mark" aria-hidden="true"></span></button></li></ol></nav>
+
+<main id="main">
+  <section class="intro" id="timeline" aria-labelledby="intro-name">
+    <div class="wrap">
+      <div class="intro-copy">
+        <h1 class="display" id="intro-name">Career, <span class="ln2 serif">rewound.</span></h1>
+        <p class="lede">Engineering and product leader with 20+ years across software, telecom and AI, leading the certification, diagnostics and AI platforms behind a national wireless network.</p>
+        <ul class="intro-index" aria-label="On this page">
+          <li><a href="#about"><i aria-hidden="true"></i>In short</a></li>
+          <li><a href="#era-intelligence"><i aria-hidden="true"></i>Timeline</a></li>
+          <li><a href="#work"><i aria-hidden="true"></i>Platforms</a></li>
+          <li><a href="expertise.html"><i aria-hidden="true"></i>Expertise</a></li>
+          <li><a href="#charts"><i aria-hidden="true"></i>Charts</a></li>
+        </ul>
+        <div class="cue" aria-hidden="true">
+          <div class="cue-line"></div>
+          <div><strong>Scroll to rewind</strong><span class="mono">2026 → 2002</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-me" id="about" aria-labelledby="about-h">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <h2 class="h2 rv" id="about-h">In <span class="serif">short.</span></h2>
+        <p class="about-who rv" style="--d:1">An engineering and product leader who turns complex device and network data into products teams actually use.</p>
+        <p class="body rv" style="--d:2">Today I own the analytics &amp; AI platform and device diagnostics at Verizon — device dashboards, an AI knowledge assistant and a tool that represents network KPIs and analytics.</p>
+        <p class="body rv" style="--d:3">I lead from architecture to adoption: I design the system, build alongside the team, and stay with it until field engineers and support teams rely on it.</p>
+      </div>
+      <div class="about-side">
+        <ul class="strengths rv" style="--d:2" aria-label="Core strengths"><li>Device certification &amp; conformance</li><li>Diagnostics &amp; network KPI analytics</li><li>AI-native engineering with Claude Code</li><li>Platform architecture on AWS</li><li>Product ownership &amp; roadmaps</li></ul>
+        <div class="sig rv" style="--d:3">
+          <p class="mono sig-k"><span class="sig-dot" aria-hidden="true"></span>Signature skill</p>
+          <h3>AI-native engineering</h3>
+          <p>Builds with Claude Code and agentic AI workflows — from architecture to shipped product — multiplying a small team’s output.</p>
+          <ul class="chips"><li class="chip">Claude Code</li><li class="chip">Agentic workflows</li><li class="chip">Prompt &amp; context engineering</li><li class="chip">MCP integrations</li><li class="chip">AI-assisted code review</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="era" id="era-intelligence" data-i="0" aria-labelledby="h-intelligence">
+    <div class="era-stage"><div class="era-pin"><span class="era-ghost" aria-hidden="true">2023</span><div class="era-copy">
+      <h2 class="display era-name" id="h-intelligence"><span class="mask"><span class="ln">Product leader</span></span></h2>
+      <p class="mono era-meta"><span class="bar" aria-hidden="true"></span>2023 – now · AI &amp; device analytics</p>
+      <p class="h2 era-line">Turning telemetry and knowledge into <span class="serif">answers.</span></p>
+      <p class="era-body">Product manager for device diagnostics and owner of the analytics &amp; AI platform: device dashboards, an AI knowledge assistant and a tool that represents network KPIs and analytics.</p>
+      <ul class="proof"><li><strong>Modem-level</strong><span>field diagnostics</span></li><li><strong>360°</strong><span>view of every device</span></li><li><strong>Instant</strong><span>AI answers</span></li></ul>
+      <ul class="chips" aria-label="Technologies"><li class="chip">Gen AI</li><li class="chip">RAG</li><li class="chip">Vector DB</li><li class="chip">Network KPI analytics</li><li class="chip">Device 360</li><li class="chip">Modem diagnostics</li></ul>
+    </div></div></div>
+    <div class="era-work" id="work">
+<div class="wrap"><details class="roles more"><summary><span class="mono">Roles · 2023 – now</span><span class="more-l">Show roles</span></summary><ol class="role-list"><li class="rv"><span class="mono yr">Nov 2024 – now</span><div><h3>Distinguished Member of Technical Staff — Product Manager</h3><p>Verizon Wireless</p></div><p>Device Diagnostics &amp; Analytics</p><ul class="pts"><li>Architected and led the evolution of a multi-component diagnostics and analytics platform spanning client apps, servers and portals.</li><li>Automated log collection from Android, iOS and network scanners, with big-data pipelines post-processing them into actionable insight.</li><li>Designed geographical KPI visualisation that lets network engineers monitor and improve performance.</li></ul></li></ol></details></div>
+<article class="ch ch--b" id="aiplat" style="--c:#ff5a1f" aria-labelledby="aiplat-t">
+    <div class="wrap">
+      <figure class="stage rv" data-scene="aiplat">
+        <div class="plate" aria-hidden="true"></div>
+        <figcaption><span class="mono">2023 – Present</span><span class="st mono">Active</span><span class="mono">Owner</span></figcaption>
+      </figure>
+      <div class="ch-story">
+        <h3 class="pull rv" id="aiplat-t">Analytics &amp; <span class="serif">AI platform</span></h3>
+        <div class="ch-text">
+          <p class="ch-metric rv"><strong>Instant</strong><span>answers for support teams from AI</span></p>
+          <p class="ch-summary rv" style="--d:1">One place where device and network data become decisions: device dashboards that give teams a 360° view of every device, and AI that answers questions and explains trends, alongside a tool that represents network KPIs and analytics.</p>
+        </div>
+      </div>
+      <details class="more ch-more"><summary><span class="more-l">How it works</span><span class="mono">achievements · flow · stack</span></summary><div class="more-body">
+          <ul class="ach"><li class="rv" style="--d:0">Device 360 view with scorecards and side-by-side comparison</li><li class="rv" style="--d:1">Readiness and performance dashboards: 5G standalone, chipsets, live network and voice KPIs, launch field testing</li><li class="rv" style="--d:2">Adoption and lifecycle analytics: eSIM and SIM, device returns, executive KPI views and custom dashboards</li><li class="rv" style="--d:0">Ask-anything AI over the dashboards and a device AI advisor</li><li class="rv" style="--d:1">A retrieval-augmented knowledge assistant that answers most support questions instantly</li><li class="rv" style="--d:2">A tool that represents network KPIs and analytics, including call-drop and RAT-change trends</li></ul>
+      <figure class="flowx rv" style="--n:4">
+        <ol class="steps" aria-label="How it flows, in order">
+          <li class="steps-run" aria-hidden="true"><i></i></li><li><span class="badge" style="--k:0" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.8"/><path d="M5 5.5v13c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-13"/><path d="M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8"/></svg></span><h4>Device &amp; network data</h4></li><li><span class="badge" style="--k:1" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="12" r="2"/><path d="M6.6 10.6l3.8-4M6.6 13.4l3.8 4M13.6 6.6l3.8 4M13.6 17.4l3.8-4"/></svg></span><h4>Analytics pipeline</h4></li><li><span class="badge" style="--k:2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4-5"/><path d="M3 20h18"/></svg></span><h4>KPI dashboards</h4></li><li><span class="badge" style="--k:3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M12 7.6l.9 1.9 2.1.9-2.1.9-.9 1.9-.9-1.9-2.1-.9 2.1-.9z"/></svg></span><h4>AI answers &amp; insights</h4></li>
+        </ol>
+        <figcaption class="mono"><span>Simplified flow</span><span>Analytics &amp; AI · 2023 – Present</span></figcaption>
+      </figure>
+      <div class="ch-stack"><span class="mono">Stack</span><ul class="chips"><li class="chip">Gen AI</li><li class="chip">LLaMA-RAG</li><li class="chip">Vector DB</li><li class="chip">AI/ML</li><li class="chip">Network KPI analytics</li><li class="chip">Angular</li><li class="chip">NodeJS</li><li class="chip">AWS</li><li class="chip">Kafka</li><li class="chip">Elasticsearch</li></ul></div></div></details>
+    </div>
+  </article>
+<article class="ch ch--b" id="diag" style="--c:#7fb4ff" aria-labelledby="diag-t">
+    <div class="wrap">
+      <figure class="stage rv" data-scene="diag">
+        <div class="plate" aria-hidden="true"></div>
+        <figcaption><span class="mono">2019 – Present</span><span class="st mono">Active</span><span class="mono">Product manager</span></figcaption>
+      </figure>
+      <div class="ch-story">
+        <h3 class="pull rv" id="diag-t">Device <span class="serif">diagnostics</span></h3>
+        <div class="ch-text">
+          <p class="ch-metric rv"><strong>Modem-level</strong><span>diagnostics for the field fleet</span></p>
+          <p class="ch-summary rv" style="--d:1">Product manager for an advanced diagnostics system that field engineers and regional teams use to troubleshoot network KPIs down to Layer 3 and modem level, plus an LWM2M-based system that makes remote diagnostics of low-category devices possible and easy.</p>
+        </div>
+      </div>
+      <details class="more ch-more"><summary><span class="more-l">How it works</span><span class="mono">achievements · flow · stack</span></summary><div class="more-body">
+          <ul class="ach"><li class="rv" style="--d:0">Drove adoption with field engineers and regional teams as the product’s reach into the network</li><li class="rv" style="--d:1">Layer-3 and modem-level diagnostics to troubleshoot network KPIs where problems actually start</li><li class="rv" style="--d:2">Automated log collection from Android, iOS and network scanners, post-processed into actionable insight</li><li class="rv" style="--d:0">Geographical KPI visualisation across the field-device fleet</li><li class="rv" style="--d:1">LWM2M remote diagnostics for low-category and IoT devices, built on CoAP, UDP and TCP</li></ul>
+      <figure class="flowx rv" style="--n:4">
+        <ol class="steps" aria-label="How it flows, in order">
+          <li class="steps-run" aria-hidden="true"><i></i></li><li><span class="badge" style="--k:0" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/><path d="M19.5 7a4 4 0 0 1 0 5M21.5 5a7 7 0 0 1 0 9"/></svg></span><h4>Field devices &amp; scanners</h4></li><li><span class="badge" style="--k:1" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"/></svg></span><h4>Modem / Layer-3 logs</h4></li><li><span class="badge" style="--k:2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4.5h18l-7 8v6l-4 2v-8z"/></svg></span><h4>Processing pipeline</h4></li><li><span class="badge" style="--k:3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6-5.6-6-10a6 6 0 0 1 12 0c0 4.4-6 10-6 10z"/><path d="M10 11.5v-1.5M12 11.5V8M14 11.5v-2.5"/></svg></span><h4>KPI maps &amp; troubleshooting</h4></li>
+        </ol>
+        <figcaption class="mono"><span>Simplified flow</span><span>Diagnostics · 2019 – Present</span></figcaption>
+      </figure>
+      <div class="ch-stack"><span class="mono">Stack</span><ul class="chips"><li class="chip">LWM2M</li><li class="chip">CoAP</li><li class="chip">UDP</li><li class="chip">TCP</li><li class="chip">OMADM</li><li class="chip">Kafka</li><li class="chip">Elasticsearch</li><li class="chip">Grafana</li><li class="chip">MQTT</li><li class="chip">AWS</li><li class="chip">Angular</li><li class="chip">NodeJS</li></ul></div></div></details>
+    </div>
+  </article>
+
+    </div>
+  </section>
+  <section class="era" id="era-network" data-i="1" aria-labelledby="h-network">
+    <div class="era-stage"><div class="era-pin"><span class="era-ghost" aria-hidden="true">2019</span><div class="era-copy">
+      <h2 class="display era-name" id="h-network"><span class="mask"><span class="ln">Product owner</span></span></h2>
+      <p class="mono era-meta"><span class="bar" aria-hidden="true"></span>2019 – 2024 · Self-service certification &amp; diagnostics</p>
+      <p class="h2 era-line">Certifying the devices on a national <span class="serif">network.</span></p>
+      <p class="era-body">Principal Engineer, then Distinguished MTS: architect and lead for mobile conformance certification, turning it into self-service certification with remote test execution across LTE, 5G and IoT, plus LWM2M remote diagnostics for low-category devices.</p>
+      <ul class="proof"><li><strong>Self-service</strong><span>certification for OEMs</span></li><li><strong>Months → weeks</strong><span>release cycles</span></li><li><strong>LTE · 5G · IoT</strong><span>device classes</span></li></ul>
+      <ul class="chips" aria-label="Technologies"><li class="chip">3GPP</li><li class="chip">LTE</li><li class="chip">5G NR</li><li class="chip">eUICC / RSP</li><li class="chip">OMADM</li><li class="chip">LWM2M</li><li class="chip">GCF / PTCRB</li></ul>
+    </div></div></div>
+    <div class="era-work">
+<div class="wrap"><details class="roles more"><summary><span class="mono">Roles · 2019 – 2024</span><span class="more-l">Show roles</span></summary><ol class="role-list"><li class="rv"><span class="mono yr">Jun 2022 – Nov 2024</span><div><h3>Distinguished Member of Technical Staff — Product Manager</h3><p>Verizon Wireless</p></div><p>Certification Tools</p><ul class="pts"><li>Moved into product leadership, owning strategy and vision for next-generation diagnostic and automated test tools.</li><li>Brought AWS microservices, LWM2M, OMADM and APN configuration into the tooling for field operations and manufacturers.</li><li>Added real-time analysis and troubleshooting to the low-category device diagnostics tool for low-power and IoT devices.</li></ul></li><li class="rv"><span class="mono yr">Sep 2019 – Jun 2022</span><div><h3>Principal Engineer</h3><p>Verizon Wireless</p></div><p>Mobile conformance certification — architect &amp; lead</p><ul class="pts"><li>Led architecture of a device testing automation tool integrating 3GPP, OMADM and LWM2M for live-network tests, cutting vendor time-to-market.</li><li>Designed low-category device diagnostics over CoAP, UDP and TCP for low-power devices used by field and manufacturing teams.</li><li>Designed and deployed scalable AWS solutions for device and network data flow.</li></ul></li></ol></details></div>
+<article class="ch" id="cert" style="--c:#ffc178" aria-labelledby="cert-t">
+    <div class="wrap">
+      <figure class="stage rv" data-scene="cert">
+        <div class="plate" aria-hidden="true"></div>
+        <figcaption><span class="mono">2019 – 2024</span><span class="st mono">Running</span><span class="mono">Conformance certification architect &amp; lead, then product owner</span></figcaption>
+      </figure>
+      <div class="ch-story">
+        <h3 class="pull rv" id="cert-t">Certification, made <span class="serif">self-service</span></h3>
+        <div class="ch-text">
+          <p class="ch-metric rv"><strong>Months → weeks</strong><span>from device submission to certification</span></p>
+          <p class="ch-summary rv" style="--d:1">Turned device certification into a self-service product: OEMs run network conformance, live-network and diagnostic test suites remotely, so new devices reach market faster and new OEMs can come on board without months of hand-holding.</p>
+        </div>
+      </div>
+      <details class="more ch-more"><summary><span class="more-l">How it works</span><span class="mono">achievements · flow · stack</span></summary><div class="more-body">
+          <ul class="ach"><li class="rv" style="--d:0">Self-service certification with advanced remote test execution</li><li class="rv" style="--d:1">Automation across the major network conformance suites (3GPP, OMADM, LWM2M) plus live-network and diagnostics tests</li><li class="rv" style="--d:2">Release cycles cut from months to weeks across LTE, 5G and IoT (CAT-M, CAT1, CAT4+)</li><li class="rv" style="--d:0">GCF/PTCRB alignment and eUICC/RSP acceptance testing (LPA, SM-DS, SMDP+)</li><li class="rv" style="--d:1">Simpler onboarding that helps bring new OEMs onto the network</li></ul>
+      <figure class="flowx rv" style="--n:4">
+        <ol class="steps" aria-label="How it flows, in order">
+          <li class="steps-run" aria-hidden="true"><i></i></li><li><span class="badge" style="--k:0" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="2"/><path d="M2 19.5h20"/><path d="M10.5 8l4.5 3.2-2 .6 1.3 2.4-1.1.6-1.3-2.4-1.4 1.4z"/></svg></span><h4>OEM self-service</h4></li><li><span class="badge" style="--k:1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17.5a4 4 0 0 1-.6-7.95A6 6 0 0 1 17.8 9a4.3 4.3 0 0 1 .2 8.5"/><path d="M12 20.5v-8M9 15.5l3-3 3 3"/></svg></span><h4>Remote execution</h4></li><li><span class="badge" style="--k:2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 10.5v10M9 20.5h6"/><circle cx="12" cy="8.5" r="2"/><path d="M7.6 4.6a6 6 0 0 0 0 7.8M16.4 4.6a6 6 0 0 1 0 7.8M5 2.5a9.5 9.5 0 0 0 0 12M19 2.5a9.5 9.5 0 0 1 0 12"/></svg></span><h4>Conformance &amp; live-network tests</h4></li><li><span class="badge" style="--k:3" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9.5" r="6"/><path d="M9.4 9.6l1.8 1.8 3.4-3.6"/><path d="M8.6 14.6L7.2 21l4.8-2.4 4.8 2.4-1.4-6.4"/></svg></span><h4>Results &amp; certification</h4></li>
+        </ol>
+        <figcaption class="mono"><span>Simplified flow</span><span>Certification · 2019 – 2024</span></figcaption>
+      </figure>
+      <div class="ch-stack"><span class="mono">Stack</span><ul class="chips"><li class="chip">3GPP</li><li class="chip">LTE</li><li class="chip">5G NR</li><li class="chip">OMADM</li><li class="chip">LWM2M</li><li class="chip">eUICC</li><li class="chip">CI/CD</li><li class="chip">AWS</li><li class="chip">Kafka</li><li class="chip">Angular</li><li class="chip">NodeJS</li><li class="chip">MongoDB</li></ul></div></div></details>
+    </div>
+  </article>
+
+    </div>
+  </section>
+  <section class="era" id="era-interfaces" data-i="2" aria-labelledby="h-interfaces">
+    <div class="era-stage"><div class="era-pin"><span class="era-ghost" aria-hidden="true">2014</span><div class="era-copy">
+      <h2 class="display era-name" id="h-interfaces"><span class="mask"><span class="ln">Compliance architect</span></span></h2>
+      <p class="mono era-meta"><span class="bar" aria-hidden="true"></span>2014 – 2019 · Compliance &amp; certification tooling</p>
+      <p class="h2 era-line">Making complex systems <span class="serif">usable.</span></p>
+      <p class="era-body">Lead front-end developer at Verizon through Diversant: a responsive cloud portal for device management, then certification-requirement and device-subsystem tooling for the compliance workflow.</p>
+      <ul class="proof"><li><strong>CAT-M · CAT1 · CAT4+</strong><span>certification platform</span></li><li><strong>4</strong><span>screen classes, one codebase</span></li></ul>
+      <ul class="chips" aria-label="Technologies"><li class="chip">Angular</li><li class="chip">TypeScript</li><li class="chip">NodeJS</li><li class="chip">MongoDB</li><li class="chip">Kafka</li><li class="chip">BackboneJS</li></ul>
+    </div></div></div>
+    <div class="era-work">
+<div class="wrap"><details class="roles more"><summary><span class="mono">Roles · 2014 – 2019</span><span class="more-l">Show roles</span></summary><ol class="role-list"><li class="rv"><span class="mono yr">Jan 2016 – Sep 2019</span><div><h3>Lead Front-End Developer</h3><p>Diversant · Verizon</p></div><p>Device certification tooling</p><ul class="pts"><li>Architected the certification platform for CAT-M, CAT1 and CAT4+ devices and its requirement tooling.</li><li>Built device-subsystem tracking and communication portals; LTE protocol conformance validation.</li><li>Worked on RSP acceptance test components: eUICC, LPA, SM-DS and SMDP+.</li></ul></li><li class="rv"><span class="mono yr">Mar 2014 – Dec 2015</span><div><h3>Lead Front-End Developer</h3><p>Diversant · Verizon</p></div><p>Responsive cloud portal</p><ul class="pts"><li>Designed and built a responsive single-page cloud portal for mobile, tablet, desktop and widescreen.</li><li>Set UI design direction for mobile; performance and profiling input; design reviews.</li></ul></li></ol></details></div>
+<article class="ch" id="compliance" style="--c:#ff8a2a" aria-labelledby="compliance-t">
+    <div class="wrap">
+      <figure class="stage rv" data-scene="compliance">
+        <div class="plate" aria-hidden="true"></div>
+        <figcaption><span class="mono">2016 – 2022</span><span class="st mono">Running</span><span class="mono">Architect &amp; lead developer</span></figcaption>
+      </figure>
+      <div class="ch-story">
+        <h3 class="pull rv" id="compliance-t">Device compliance <span class="serif">workflow</span></h3>
+        <div class="ch-text">
+          <p class="ch-metric rv"><strong>End to end</strong><span>one workflow from device profile to sign-off</span></p>
+          <p class="ch-summary rv" style="--d:1">The end-to-end compliance workflow for device certification, from the first device profile to final sign-off, run through a dedicated portal that keeps every phase, test and decision in one place.</p>
+        </div>
+      </div>
+      <details class="more ch-more"><summary><span class="more-l">How it works</span><span class="mono">achievements · flow · stack</span></summary><div class="more-body">
+          <ul class="ach"><li class="rv" style="--d:0">One workflow from device profile through every certification phase to finish</li><li class="rv" style="--d:1">Feature lockdown testing and multi-phase test tracking</li><li class="rv" style="--d:2">A dedicated portal for the entire workflow, extended with many advanced capabilities over the years</li><li class="rv" style="--d:0">Requirement and device-subsystem tracking with LTE protocol conformance validation</li><li class="rv" style="--d:1">MongoDB sharding and replicas for scale</li></ul>
+      <figure class="flowx rv" style="--n:4">
+        <ol class="steps" aria-label="How it flows, in order">
+          <li class="steps-run" aria-hidden="true"><i></i></li><li><span class="badge" style="--k:0" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.6-1.6 1.7-2.4 3-2.4s2.4.8 3 2.4M14 10h4M14 13h3"/></svg></span><h4>Device profile</h4></li><li><span class="badge" style="--k:1" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg></span><h4>Requirements &amp; lockdown</h4></li><li><span class="badge" style="--k:2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20h5v-5h5v-5h5V5h3"/><path d="M3 20.5h18"/></svg></span><h4>Phased testing</h4></li><li><span class="badge" style="--k:3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.4 1.8 3-.2.9 2.9 2.5 1.7-1 2.8 1 2.8-2.5 1.7-.9 2.9-3-.2L12 21.5l-2.4-1.8-3 .2-.9-2.9-2.5-1.7 1-2.8-1-2.8 2.5-1.7.9-2.9 3 .2z"/><path d="M8.5 12l2.3 2.3 4.7-4.8"/></svg></span><h4>Sign-off</h4></li>
+        </ol>
+        <figcaption class="mono"><span>Simplified flow</span><span>Compliance · 2016 – 2022</span></figcaption>
+      </figure>
+      <div class="ch-stack"><span class="mono">Stack</span><ul class="chips"><li class="chip">Angular</li><li class="chip">NodeJS</li><li class="chip">MongoDB</li><li class="chip">Kafka</li><li class="chip">MQTT</li><li class="chip">OMADM</li><li class="chip">LWM2M</li><li class="chip">LTE</li></ul></div></div></details>
+    </div>
+  </article>
+
+    </div>
+  </section>
+  <section class="era" id="era-enterprise" data-i="3" aria-labelledby="h-enterprise">
+    <div class="era-stage"><div class="era-pin"><span class="era-ghost" aria-hidden="true">2006</span><div class="era-copy">
+      <h2 class="display era-name" id="h-enterprise"><span class="mask"><span class="ln">Software engineer &amp; architect</span></span></h2>
+      <p class="mono era-meta"><span class="bar" aria-hidden="true"></span>2006 – 2014 · Fortune 500 systems at Infosys</p>
+      <p class="h2 era-line">Shipping for Fortune 500 <span class="serif">clients.</span></p>
+      <p class="era-body">Four years with Infosys in Chennai (2006–2010) building for AOL, Comcast, Baker Hughes and Cable Vision, then onsite in the US as coordinator and team lead for Warner Music Group: Atlantic Records in New York (2010–2013) and Warner Bros. Records in Burbank, California (2013–2014).</p>
+      <ul class="proof"><li><strong>Chennai → New York</strong><span>moved onsite in 2010</span></li><li><strong>Team lead</strong><span>onsite coordinator from 2010</span></li></ul>
+      <ul class="chips" aria-label="Technologies"><li class="chip">Java</li><li class="chip">J2EE</li><li class="chip">Adobe Flex</li><li class="chip">Struts</li><li class="chip">Oracle</li><li class="chip">E-commerce</li><li class="chip">Onsite leadership</li></ul>
+    </div></div></div>
+    <div class="era-work">
+<div class="wrap"><details class="roles more"><summary><span class="mono">Roles · 2006 – 2014</span><span class="more-l">Show roles</span></summary><ol class="role-list"><li class="rv"><span class="mono yr">Nov 2010 – Jan 2013</span><div><h3>Onsite Coordinator &amp; Team Lead</h3><p>Infosys · Warner Music Group</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>New York</span></div><p>E-commerce sites for Atlantic Records artists and bands</p><ul class="pts"><li>Flew from Chennai to New York in November 2010 as onsite coordinator and team lead for Infosys.</li><li>Led delivery of e-commerce websites for Atlantic Records artists and bands.</li><li>Bridged onsite client teams and the offshore team: requirements, planning and release coordination.</li></ul></li><li class="rv"><span class="mono yr">Jan 2013 – Mar 2014</span><div><h3>Onsite Coordinator &amp; Team Lead</h3><p>Infosys · Warner Music Group</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Burbank, California</span></div><p>E-commerce sites for Warner Bros. Records artists and bands</p><ul class="pts"><li>Moved to Burbank, California, to lead the Warner Bros. Records artist and band e-commerce sites.</li><li>Onsite coordination and team leadership between the client and the offshore team.</li></ul></li><li class="rv"><span class="mono yr">Nov 2010 – Mar 2014</span><div><h3>Technical Analyst — Onsite Coordinator &amp; Team Lead</h3><p>Infosys · Nike</p></div><p>Equipment &amp; Apparel Product Image Management</p><ul class="pts"><li>Coordinator and team lead for Nike’s global equipment and apparel catalogue.</li><li>Built a rich Flex UI on a J2EE/SOA backend, extending Flex AdvancedDataGrid internals.</li><li>Agile delivery, builds and deployments across environments; liaison between onsite and offshore teams.</li></ul></li><li class="rv"><span class="mono yr">Feb 2009 – May 2009</span><div><h3>Senior System Engineer</h3><p>Infosys · Cable Vision</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>Automated reporting system</p><ul class="pts"><li>Database design, stored procedures and report generation on Oracle BI.</li></ul></li><li class="rv"><span class="mono yr">Jun 2008 – Mar 2009</span><div><h3>Senior System Engineer</h3><p>Infosys · Baker Hughes</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>Power Hookup Management System</p><ul class="pts"><li>Designed and built desktop and web UI for engineering drawings with an extended Flex component set.</li></ul></li><li class="rv"><span class="mono yr">Apr 2007 – Jun 2008</span><div><h3>Senior System Engineer</h3><p>Infosys · Comcast</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>Location management system</p><ul class="pts"><li>Web application development on Java, Struts and AJAX.</li></ul></li><li class="rv"><span class="mono yr">Jan 2007 – Mar 2007</span><div><h3>Test Engineer</h3><p>Infosys · AOL</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>Automated Billing System</p><ul class="pts"><li>Test plan creation and execution, sanity testing.</li></ul></li><li class="rv"><span class="mono yr">Jun 2006 – Jan 2007</span><div><h3>Test Engineer</h3><p>Infosys · AOL</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>ISP testing</p><ul class="pts"><li>Automated test scripts with QTP, automated and manual execution.</li></ul></li></ol></details></div>
+
+<div class="wrap"><figure class="flight" id="moves" aria-labelledby="moves-h">
+    <div class="flight-h"><h3 class="h3" id="moves-h">From Chennai to the <span class="serif">United States.</span></h3><span class="mono ink-3">The moves, 2010 – 2014</span></div>
+    <svg viewBox="0 0 1000 260" role="img" aria-label="Route: Chennai to New York, New York to Burbank, Burbank to New Jersey"><path class="route" d="M910 190 Q605 20 300 190"/><path class="route-draw" d="M910 190 Q605 20 300 190" style="--len:1028;--k:0"/><path class="route" d="M300 190 Q195 82.8 90 190"/><path class="route-draw" d="M300 190 Q195 82.8 90 190" style="--len:412;--k:1"/><path class="route" d="M90 190 Q225 -60.48000000000002 360 96"/><path class="route-draw" d="M90 190 Q225 -60.48000000000002 360 96" style="--len:679;--k:2"/><text class="leg-label" x="605" y="101" text-anchor="middle">Nov 2010</text><text class="leg-label" x="195" y="132.4" text-anchor="middle">Jan 2013</text><text class="leg-label" x="225" y="37.25999999999999" text-anchor="middle">Mar 2014</text><g class="city"><circle cx="910" cy="190" r="9"/><circle class="dot" cx="910" cy="190" r="3.5"/><text x="910" y="224" text-anchor="middle">Chennai</text><text class="sub" x="910" y="242" text-anchor="middle">Tamil Nadu, India</text></g><g class="city"><circle cx="300" cy="190" r="9"/><circle class="dot" cx="300" cy="190" r="3.5"/><text x="300" y="224" text-anchor="middle">New York</text><text class="sub" x="300" y="242" text-anchor="middle">New York, USA</text></g><g class="city"><circle cx="90" cy="190" r="9"/><circle class="dot" cx="90" cy="190" r="3.5"/><text x="90" y="224" text-anchor="middle">Burbank</text><text class="sub" x="90" y="242" text-anchor="middle">California, USA</text></g><g class="city"><circle cx="360" cy="96" r="9"/><circle class="dot" cx="360" cy="96" r="3.5"/><text x="378" y="94" text-anchor="start">New Jersey</text><text class="sub" x="378" y="112" text-anchor="start">USA</text></g></svg>
+    <ol><li><b>Nov 2010</b>Chennai → New York · Flew from Chennai to New York as onsite coordinator and team lead for Warner Music Group</li><li><b>Jan 2013 (approx.)</b>New York → Burbank · Burbank, for Warner Bros. Records</li><li><b>Mar 2014</b>Burbank → New Jersey · Settled in New Jersey; lead front-end developer at Verizon through Diversant</li></ol></figure></div>
+    </div>
+  </section>
+  <section class="era" id="era-foundations" data-i="4" aria-labelledby="h-foundations">
+    <div class="era-stage"><div class="era-pin"><span class="era-ghost" aria-hidden="true">2002</span><div class="era-copy">
+      <h2 class="display era-name" id="h-foundations"><span class="mask"><span class="ln">Student</span></span></h2>
+      <p class="mono era-meta"><span class="bar" aria-hidden="true"></span>2002 – 2006 · Computer Science, Karunya</p>
+      <p class="h2 era-line">Where the thread <span class="serif">starts.</span></p>
+      <p class="era-body">B.E. in Computer Science &amp; Engineering at Karunya Institute of Technology, Anna University, Coimbatore.</p>
+      <ul class="proof"><li><strong>B.E.</strong><span>Computer Science &amp; Engineering</span></li></ul>
+      <ul class="chips" aria-label="Technologies"><li class="chip">Coimbatore</li><li class="chip">Anna University</li></ul>
+    </div></div></div>
+    <div class="era-work">
+
+
+<div class="wrap" style="padding-bottom:clamp(80px,11vw,160px)"><div class="origin-grid">
+    <div class="rv"><p class="mono">2002 – 2006</p><h3>B.E. Computer Science &amp; Engineering</h3><p>Karunya Institute of Technology, Anna University · Coimbatore, India</p></div>
+    <div class="rv" style="--d:1"><p class="mono">1990s</p><h3>Schooling in Madurai</h3><p>Born and brought up in Madurai, Tamil Nadu.</p></div>
+  </div></div>
+    </div>
+  </section>
+
+  <section class="x-link wrap" aria-labelledby="xl-h">
+    <div class="xl-card rv">
+      <div><h2 class="h2" id="xl-h">The skills <span class="serif">underneath.</span></h2>
+      <p class="body">AI-native engineering with Claude Code, telecom standards, cloud and data, AI and analytics, frontend and product, and product leadership.</p></div>
+      <a class="btn btn-primary" href="expertise.html">See the expertise <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </section>
+  <div class="after">
+  <nav class="after-tabs wrap" aria-label="Depth">
+    <div class="tabs" role="tablist" aria-label="More about the work">
+      <button role="tab" id="t-charts" aria-controls="charts" aria-selected="true">At a glance</button>
+    </div>
+  </nav>
+
+
+  
+  <section class="section tabpanel" id="charts" role="tabpanel" aria-labelledby="t-charts">
+    <div class="wrap">
+      <div class="c-head">
+        <div><h2 class="h1 rv" id="c-h">Twenty years on <span class="serif">one axis.</span></h2>
+        <p class="rv" style="--d:1">Where I lived, the role I played, who I built for and the platforms I owned, on one timeline. Numbered pins mark the milestones listed below.</p></div>
+        <div class="c-tools rv" style="--d:2">
+          <div class="seg" role="group" aria-label="Zoom">
+            <button type="button" data-range="all" aria-pressed="true">All</button><button type="button" data-range="2006,2014.25">2006–14</button><button type="button" data-range="2014,2019.75">2014–19</button><button type="button" data-range="2019,now">2019–now</button>
+          </div>
+          <button class="tool" type="button" id="tblBtn" aria-expanded="false" aria-controls="tblWrap">Table view</button>
+          <button class="tool" type="button" id="fsBtn">Fullscreen <kbd>F</kbd></button>
+          <button class="tool primary" type="button" id="presBtn">Present <kbd>P</kbd></button>
+        </div>
+      </div>
+      <div class="pres-cap" aria-live="polite"><div><p class="mono" id="pcYears"></p><h3 id="pcTitle"></h3><p id="pcLine"></p></div><span class="step" id="pcStep"></span></div>
+      <div class="lanes-box rv"><div id="lanes" role="img" aria-label="Career timeline with four lanes: where I lived, role, clients and platforms, from 2002 to today, with numbered milestones"></div></div>
+      <ol class="ms" id="msList"></ol>
+      <div class="tbl-wrap" id="tblWrap" hidden></div>
+      <div class="stream-box">
+        <h3 class="h2 rv">How the focus <span class="serif">shifted.</span></h3>
+        <p class="rv">The share of focus by domain, year by year, from the first role in 2006 to today.</p>
+        <ul class="legend" id="streamLegend" aria-label="Domains"></ul>
+        <div id="stream" role="img" aria-label="Stream graph of the share of focus by domain per year"></div>
+        <p class="caption"><b>Derived, not estimated.</b> For each year, every active role and platform contributes weight in proportion to the months it was active. That weight is split evenly across its technologies, each mapped to a domain. Product-manager roles give a third of their weight to leadership and the Principal role a quarter. Each year is then normalised to 100%.</p>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <section class="section close-c" aria-labelledby="close-h">
+    <div class="wrap">
+      <h2 class="display rv" id="close-h">The person <span class="serif">behind it.</span></h2>
+      <div class="close-row rv" style="--d:1">
+        <a class="btn btn-primary" href="personal.html">Madurai to New Jersey <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn-ghost" href="index.html">Back to home</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <p class="foot-big"><a href="mailto:mail2pons@gmail.com">Let’s build something <span class="serif">that matters.</span></a></p>
+      <ul>
+        <li><a href="career.html">Career</a></li>
+        <li><a href="expertise.html">Expertise</a></li>
+      </ul>
+      <ul>
+        <li><a href="personal.html">Personal</a></li>
+        <li><a href="mailto:mail2pons@gmail.com">mail2pons@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/ponmudi-pandiyan/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+      </ul>
+    </div>
+    <div class="foot-meta mono">
+      <span>© <span data-year>2026</span> Ponmudi Pandiyan · New Jersey</span>
+      <span>Distinguished Engineer · Product & Platform Leader · Verizon</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/data/profile.js"></script>
+<script>
+(function () {
+  var P = window.PROFILE; if (!P) return;
+  var LEAD = /Lead|Principal|Product Manager|Product owner|Owner|Architect/i;
+  var yr = function (s) { return s ? +s.slice(0, 4) : new Date().getFullYear(); };
+  P.domains.forEach(function (d) {
+    var box = document.querySelector('.shows[data-dom="' + d.id + '"]'); if (!box) return;
+    var has = function (st) { return st.some(function (t) { return P.techDomain[t] === d.id || d.tags.indexOf(t) > -1; }); };
+    var lead = d.id === 'leadership';
+    var plats = P.platforms.filter(function (p) { return lead ? LEAD.test(p.role) : has(p.stack); });
+    var roles = P.roles.filter(function (r) { return lead ? LEAD.test(r.title) : has(r.stack); });
+    var ul = box.querySelector('ul'); ul.textContent = '';
+    plats.forEach(function (p) { var li = document.createElement('li'), a = document.createElement('a'); a.href = '#' + p.id; a.textContent = p.short; li.appendChild(a); ul.appendChild(li); });
+    var since = roles.length ? Math.min.apply(null, roles.map(function (r) { return yr(r.start); })) : null;
+    box.querySelector('.tail').textContent = roles.length ? roles.length + (roles.length === 1 ? ' role' : ' roles') + ' since ' + since : '';
+  });
+})();
+</script>
+<script>
+/* Page chrome: rail, platform photo plates, flight route, safety net */
+(function () {
+  var root = document.documentElement;
+  var sections = [].slice.call(document.querySelectorAll('.era'));
+  var stages = sections.map(function (s) { return s.querySelector('.era-stage'); });
+  var buttons = [].slice.call(document.querySelectorAll('.rail button'));
+  function absTop(el) { return el.getBoundingClientRect().top + window.scrollY; }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var st = stages[+b.dataset.i];
+      var y = absTop(st) + (root.classList.contains('static') ? -60 : st.offsetHeight * 0.42);
+      window.scrollTo({ top: y, behavior: root.classList.contains('reduced') ? 'auto' : 'smooth' });
+    });
+  });
+  window.__career = { sections: sections, stages: stages, buttons: buttons, absTop: absTop };
+
+  // Platform photo plates — only files declared in the manifest are requested.
+  var FALLBACK = { cert: 'assets/img/eras/network.jpg', diag: 'assets/img/eras/network.jpg', compliance: 'assets/img/eras/enterprise.jpg', aiplat: 'assets/img/eras/intelligence.jpg' };
+  var plates = [].slice.call(document.querySelectorAll('.stage[data-scene]'));
+  fetch('assets/img/platforms/manifest.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }).then(function (m) {
+    var declared = ((m && m.files) || []).map(String), narrow = matchMedia('(max-width: 768px)').matches;
+    plates.forEach(function (st) {
+      var id = st.dataset.scene;
+      var order = (narrow ? [id + '-mobile.webp', id + '-mobile.jpg'] : []).concat([id + '.webp', id + '.jpg']);
+      var photo = order.filter(function (f) { return declared.indexOf(f) > -1; })[0];
+      st.style.setProperty('--plate', 'url("' + (photo ? 'assets/img/platforms/' + photo : FALLBACK[id]) + '")');
+      st.classList.add('has-plate'); if (photo) st.classList.add('has-photo');
+    });
+  });
+  if ('IntersectionObserver' in window) {
+    var near = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('is-near', e.isIntersecting); }); }, { rootMargin: '10% 0px' });
+    plates.forEach(function (st) { near.observe(st); });
+    var fl = document.getElementById('moves');
+    if (fl) new IntersectionObserver(function (es, o) { es.forEach(function (e) { if (e.isIntersecting) { fl.classList.add('in'); o.disconnect(); } }); }, { threshold: .35 }).observe(fl);
+  } else { var f2 = document.getElementById('moves'); if (f2) f2.classList.add('in'); }
+
+  setTimeout(function () { if (!window.__rewindBoot) { root.classList.remove('fx'); root.classList.add('static'); } }, 6000);
+})();
+</script>
+<script src="assets/vendor/highcharts/highcharts.js"></script>
+<script src="assets/vendor/highcharts/xrange.js"></script>
+<script src="assets/vendor/highcharts/streamgraph.js"></script>
+<script src="assets/vendor/highcharts/series-label.js"></script>
+<script src="assets/vendor/highcharts/accessibility.js"></script>
+<script>
+/* Charts: clean four-lane timeline, expertise stream, table view, presentation mode */
+(function () {
+  if (!window.Highcharts || !window.PROFILE) return;
+  var P = window.PROFILE, H = window.Highcharts, root = document.documentElement;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CS = getComputedStyle(root);
+  var SANS = CS.getPropertyValue('--sans').trim() || "'Instrument Sans', system-ui, sans-serif";
+  var MONO = CS.getPropertyValue('--mono').trim() || "'Martian Mono', ui-monospace, monospace";
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var now = new Date(), NOW = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1), CUR = now.getUTCFullYear();
+  var narrow = matchMedia('(max-width: 700px)').matches;
+  function ym(s) { if (!s) return NOW; var p = String(s).split('-'); return Date.UTC(+p[0], (+p[1] || 1) - 1, 1); }
+  function fmt(t) { var d = new Date(t); return MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function fmtS(s) { return s ? fmt(ym(s)) : 'Present'; }
+  function months(a, b) { var da = new Date(a), db = new Date(b); return (db.getUTCFullYear() - da.getUTCFullYear()) * 12 + db.getUTCMonth() - da.getUTCMonth(); }
+  function dur(m) { var y = Math.floor(m / 12), r = m % 12, o = []; if (y) o.push(y + (y === 1 ? ' yr' : ' yrs')); if (r) o.push(r + ' mo'); return o.join(' ') || '< 1 mo'; }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function light(c, k) { return H.color(c).brighten(k).get('rgb'); }
+
+  H.setOptions({
+    chart: { backgroundColor: 'transparent', style: { fontFamily: SANS }, spacing: [10, 8, 10, 8], animation: reduced ? false : { duration: 700 } },
+    title: { text: null }, subtitle: { text: null }, credits: { enabled: false }, exporting: { enabled: false },
+    accessibility: { enabled: true }, legend: { enabled: false },
+    xAxis: { lineColor: 'rgba(255,214,170,.16)', tickColor: 'rgba(255,214,170,.16)', gridLineColor: 'rgba(255,214,170,.06)', labels: { style: { color: '#b4a597', fontFamily: MONO, fontSize: '11px' } } },
+    yAxis: { gridLineColor: 'rgba(255,214,170,.06)', lineColor: 'rgba(255,214,170,.16)', title: { text: null }, labels: { style: { color: '#b4a597', fontSize: '13px' } } },
+    tooltip: { useHTML: true, backgroundColor: 'rgba(0,0,0,0)', borderWidth: 0, shadow: false, padding: 0, style: { color: '#f4ece3', fontSize: '13px' }, outside: true, hideDelay: 120 },
+    plotOptions: { series: { animation: reduced ? false : { duration: 900 }, states: { inactive: { opacity: .4 } } } }
+  });
+
+  /* ---------- lane data, all derived from PROFILE ---------- */
+  var ERA_COLOR = { intelligence: '#d55181', network: '#3987e5', interfaces: '#c98500', enterprise: '#199e70', foundations: '#9085e9' };
+  var PLAT_COLOR = { cert: '#ffc178', diag: '#7fb4ff', compliance: '#ff8a2a', aiplat: '#ff6a3d' };
+  var eras = P.eras.slice().sort(function (a, b) { return a.from - b.from; });
+  var eraRange = eras.map(function (e, i) {
+    var a = e.id === 'foundations' ? ym(P.education.start) : Date.UTC(e.from, i ? 0 : 5, 1);
+    var nx = eras[i + 1]; var b = nx ? Date.UTC(nx.from, 0, 1) : NOW;
+    if (e.id === 'enterprise') a = ym('2006-06');
+    if (nx && nx.id === 'enterprise') b = ym('2006-06');
+    return { e: e, a: a, b: b };
+  });
+  // Where: Coimbatore from education, then the moves
+  var moves = P.milestones.filter(function (m) { return m.kind === 'move'; });
+  var where = [{ name: P.education.place.split(',')[0], sub: P.education.school, a: ym(P.education.start), b: ym(P.education.end) }];
+  var firstJob = P.milestones.filter(function (m) { return m.title === 'Joined Infosys'; })[0];
+  where.push({ name: moves.length ? moves[0].from : 'Chennai', sub: 'Infosys', a: ym(firstJob ? firstJob.date : '2006-06'), b: moves.length ? ym(moves[0].date) : NOW });
+  moves.forEach(function (m, i) { var nx = moves[i + 1]; where.push({ name: m.to, sub: m.note, a: ym(m.date), b: nx ? ym(nx.date) : NOW, approx: m.approx }); });
+  // Employer lane: Infosys → Diversant → Verizon (dates from the roles), weighted by PROFILE.employers
+  var EMPW = {}; (P.employers || []).forEach(function (e) { EMPW[e.name] = e; });
+  var CLW = {}; (P.clients || []).forEach(function (c) { if (c && c.name) CLW[c.name] = c.weight || 1; });
+  var emps = [];
+  P.roles.slice().sort(function (a, b) { return ym(a.start) - ym(b.start); }).forEach(function (r) {
+    var name = r.org.split(' · ')[0].replace(' Wireless', '');
+    var e = emps.filter(function (x) { return x.name === name; })[0];
+    if (!e) { e = { name: name, a: ym(r.start), b: ym(r.end) }; emps.push(e); }
+    e.a = Math.min(e.a, ym(r.start)); e.b = Math.max(e.b, ym(r.end));
+  });
+  // Clients served through Infosys, one bar per client (labels named in the role focus become "Client · Label")
+  var cl = [];
+  P.roles.filter(function (r) { return /^Infosys/.test(r.org); }).sort(function (a, b) { return ym(a.start) - ym(b.start); }).forEach(function (r) {
+    var client = (r.org.split('client ')[1] || '').trim(); if (!client) return;
+    var sub = Object.keys(CLW).filter(function (n) { return n !== client && r.focus.indexOf(n) > -1; })[0];
+    var label = sub ? client + ' · ' + sub : client, w = Math.max(CLW[client] || 1, sub ? CLW[sub] || 1 : 1);
+    var prev = cl.filter(function (c) { return c.label === label; })[0];
+    if (prev && Math.abs(prev.b - ym(r.start)) < 40 * 864e5) { prev.b = Math.max(prev.b, ym(r.end)); return; }
+    cl.push({ label: label, a: ym(r.start), b: ym(r.end), w: w, loc: r.location || '', focus: r.focus });
+  });
+  function rowsFor(list) { var ends = []; list.forEach(function (x) { var r = 0; while (ends[r] !== undefined && ends[r] > x.a + 864e5) r++; ends[r] = x.b; x._row = r; }); return ends.length; }
+  var CR = rowsFor(cl);
+  // Platforms: greedy rows so overlaps stack inside one lane
+  var plats = P.platforms.slice().sort(function (a, b) { return ym(a.start) - ym(b.start); });
+  plats.forEach(function (p) { p.a = ym(p.start); p.b = p.end ? ym(p.end) : NOW; });
+  var PR = rowsFor(plats);
+  var CATS = ['Where', 'Role', 'Employer', 'Clients'], k;
+  for (k = 1; k < CR; k++) CATS.push('');
+  var Y_PL = CATS.length; CATS.push('Platforms');
+  for (k = 1; k < PR; k++) CATS.push('');
+  CATS.push('Milestones');
+  var Y_MS = CATS.length - 1;
+  var SEP = [.5, 1.5, 2.5, Y_PL - .5, Y_MS - .5];
+
+  var WCOL = { 3: '#e6d6c3', 2: '#c9b8a5', 1: '#ab9b8c' }, WPX = { 3: 30, 2: 24, 1: 18 };
+  var bars = { 3: [], 2: [], 1: [] };
+  function add(w, o) { bars[w].push(o); }
+  where.forEach(function (w) { add(3, { x: w.a, x2: w.b, y: 0, name: w.name, color: '#7fb4ff', lane: 'Where', t: w.name, o: w.sub + (w.approx ? ' (month approximate)' : '') }); });
+  eraRange.forEach(function (r) { add(3, { x: r.a, x2: r.b, y: 1, name: r.e.name, color: ERA_COLOR[r.e.id], lane: 'Role', t: r.e.name, o: r.e.area }); });
+  emps.forEach(function (e) { var meta = EMPW[e.name] || {}, w = meta.weight || 2; add(w, { x: e.a, x2: e.b, y: 2, name: e.name + (meta.via ? ' · for ' + meta.via : ''), color: e.name === 'Verizon' ? '#ffb26b' : WCOL[w], lane: 'Employer', t: e.name, o: meta.note || '' }); });
+  cl.forEach(function (c) { add(c.w, { x: c.a, x2: c.b, y: 3 + c._row, name: c.label, color: WCOL[c.w], lane: 'Client, through Infosys', t: c.label, o: c.focus + (c.loc ? ' · ' + c.loc : '') }); });
+  plats.forEach(function (p) { add(3, { x: p.a, x2: p.b, y: Y_PL + p._row, name: p.short || p.name, color: PLAT_COLOR[p.id] || '#ffb26b', lane: 'Platform', t: p.name, o: p.role + ' · ' + p.metric[0] + ' ' + p.metric[1], href: '#' + p.id }); });
+  [3, 2, 1].forEach(function (w) { bars[w].forEach(function (b) { b.borderColor = 'rgba(5,4,3,.9)'; b.color = { linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 }, stops: [[0, light(b.color, .12)], [1, b.color]] }; }); });
+
+  var ms = P.milestones.slice().sort(function (a, b) { return ym(a.date) - ym(b.date); });
+  var pins = ms.map(function (m, i) { return { x: ym(m.date), y: Y_MS, n: i + 1, name: String(i + 1), m: m, marker: { fillColor: m.kind === 'move' ? '#7fb4ff' : '#ff8a2a' } }; });
+  var msList = document.getElementById('msList');
+  msList.innerHTML = ms.map(function (m, i) { return '<li><span class="n' + (m.kind === 'move' ? ' move' : '') + '">' + (i + 1) + '</span><b>' + esc(m.title) + '<span>' + esc(fmtS(m.date)) + (m.approx ? ' (approx.)' : '') + '</span></b><em>' + esc(m.note) + '</em></li>'; }).join('');
+
+  var bands = eraRange.map(function (r, i) { return { from: r.a, to: r.b, color: i % 2 ? 'rgba(255,214,170,.028)' : 'rgba(0,0,0,0)', label: { text: r.e.name, y: -6, verticalAlign: 'top', style: { color: '#8f8274', fontFamily: MONO, fontSize: '11px' } } }; });
+
+  function labelFit() {
+    var p = this.point, w = (p.shapeArgs && p.shapeArgs.width) || 0, n = Math.floor((w - 18) / 7.2);
+    if (n < 3) return '';
+    var s = p.name; return s.length > n ? s.slice(0, Math.max(1, n - 1)) + '…' : s;
+  }
+  var X0 = Date.UTC(2002, 0, 1);
+  var lanes = H.chart('lanes', {
+    chart: Object.assign({ marginTop: 26, marginLeft: narrow ? 78 : 96, marginRight: 14 }, narrow ? { backgroundColor: '#080605', scrollablePlotArea: { minWidth: 980, scrollPositionX: 1 } } : {}),
+    accessibility: { description: 'Four lanes from 2002 to today: where I lived, my role, the clients I built for and the platforms I owned, plus numbered milestones.' },
+    xAxis: { type: 'datetime', min: X0, max: NOW + 31e9, plotBands: bands, gridLineWidth: 1, tickInterval: 2 * 365 * 864e5, dateTimeLabelFormats: { year: '%Y' }, labels: { format: '{value:%Y}' },
+      plotLines: [{ value: NOW, color: 'rgba(255,138,42,.65)', width: 1, zIndex: 5, label: { text: 'Today', rotation: 0, y: -8, x: -18, style: { color: '#ffb26b', fontFamily: MONO, fontSize: '10px' } } }] },
+    yAxis: { categories: CATS, reversed: true, min: 0, max: CATS.length - 1, gridLineWidth: 0, staticScale: undefined,
+      labels: { style: { color: '#b4a597', fontSize: '12.5px', fontWeight: '500' } },
+      plotLines: SEP.map(function (v, i) { return { value: v, color: i === SEP.length - 1 ? 'rgba(255,214,170,.14)' : 'rgba(255,214,170,.08)', width: 1 }; }) },
+    tooltip: { formatter: function () {
+      var p = this.point;
+      if (p.m) return '<div class="tt"><div class="k">Milestone ' + p.n + ' · ' + esc(fmtS(p.m.date)) + '</div><div class="t">' + esc(p.m.title) + '</div><div class="o">' + esc(p.m.note) + '</div></div>';
+      return '<div class="tt"><div class="k">' + esc(p.lane) + '</div><div class="t">' + esc(p.t) + '</div>' + (p.o ? '<div class="o">' + esc(p.o) + '</div>' : '') +
+        '<div class="d">' + esc(fmt(p.x)) + ' – ' + (p.x2 >= NOW ? 'Present' : esc(fmt(p.x2))) + '<em>' + dur(months(p.x, p.x2)) + '</em></div></div>';
+    } },
+    plotOptions: {
+      xrange: { borderRadius: 7, borderWidth: 1, pointPadding: 0, groupPadding: .16, grouping: false, colorByPoint: false,
+        dataLabels: { enabled: true, inside: true, align: 'left', x: 6, formatter: labelFit, style: { color: '#140a02', textOutline: 'none', fontSize: '12px', fontWeight: '600' } },
+        cursor: 'pointer', point: { events: { click: function () { if (this.href) location.hash = this.href; } } } },
+      scatter: { marker: { symbol: 'circle', radius: 11, lineColor: '#050403', lineWidth: 2 }, stickyTracking: false,
+        dataLabels: { enabled: true, format: '{point.n}', align: 'center', verticalAlign: 'middle', y: 0, inside: true, style: { color: '#140a02', textOutline: 'none', fontFamily: MONO, fontSize: '10px', fontWeight: '700' } } }
+    },
+    series: [3, 2, 1].map(function (w) { return { type: 'xrange', name: 'Career', data: bars[w], pointWidth: (narrow ? .86 : 1) * WPX[w] }; }).concat([{ type: 'scatter', name: 'Milestones', data: pins }])
+  });
+
+  /* zoom presets */
+  var segBtns = [].slice.call(document.querySelectorAll('.seg button'));
+  function zoom(r) {
+    var a = X0, b = NOW + 31e9;
+    if (r && r !== 'all') { var p = r.split(','); var y0 = +p[0]; a = Date.UTC(Math.floor(y0), Math.round((y0 % 1) * 12), 1); if (p[1] === 'now') b = NOW + 31e9; else { var y1 = +p[1]; b = Date.UTC(Math.floor(y1), Math.round((y1 % 1) * 12), 1); } }
+    lanes.xAxis[0].setExtremes(a, b, true, reduced ? false : { duration: 700 });
+    segBtns.forEach(function (b2) { b2.setAttribute('aria-pressed', String(b2.dataset.range === (r || 'all'))); });
+  }
+  segBtns.forEach(function (b) { b.addEventListener('click', function () { zoom(b.dataset.range); }); });
+
+  /* table view */
+  var tblBtn = document.getElementById('tblBtn'), tblWrap = document.getElementById('tblWrap');
+  var rows = P.roles.map(function (r) { return '<tr><td>' + esc(fmtS(r.start)) + ' – ' + esc(fmtS(r.end)) + '</td><td><strong>' + esc(r.title) + '</strong></td><td>' + esc(r.org) + '</td><td>' + esc(r.focus) + '</td><td>' + esc(r.location || '') + '</td></tr>'; }).join('');
+  rows += '<tr><td>' + esc(P.education.start.slice(0, 4)) + ' – ' + esc(P.education.end.slice(0, 4)) + '</td><td><strong>' + esc(P.education.degree) + '</strong></td><td>' + esc(P.education.school) + '</td><td>Education</td><td>' + esc(P.education.place) + '</td></tr>';
+  rows += '<tr><td>' + esc(P.school.years) + '</td><td><strong>' + esc(P.school.what) + '</strong></td><td></td><td>School</td><td>' + esc(P.school.place) + '</td></tr>';
+  var prow = P.platforms.map(function (p) { return '<tr><td>' + esc(p.years) + '</td><td><strong>' + esc(p.name) + '</strong></td><td>' + esc(p.role) + '</td><td>' + esc(p.metric[0] + ' · ' + p.metric[1]) + '</td><td></td></tr>'; }).join('');
+  tblWrap.innerHTML = '<table class="tbl"><caption>Roles, education and platforms</caption><thead><tr><th scope="col">When</th><th scope="col">Role / platform</th><th scope="col">Organisation</th><th scope="col">Focus</th><th scope="col">Where</th></tr></thead><tbody>' + rows + prow + '</tbody></table>';
+  tblBtn.addEventListener('click', function () { var open = tblWrap.hidden; tblWrap.hidden = !open; tblBtn.setAttribute('aria-expanded', String(open)); tblBtn.textContent = open ? 'Hide table' : 'Table view'; });
+
+  /* expertise stream (derived) */
+  var DOM = [
+    { id: 'telecom', name: 'Telecom & standards', color: '#3987e5' }, { id: 'leadership', name: 'Product & leadership', color: '#d95926' },
+    { id: 'cloud', name: 'Cloud & data', color: '#199e70' }, { id: 'frontend', name: 'Frontend & product', color: '#c98500' },
+    { id: 'ai', name: 'AI & analytics', color: '#d55181' }, { id: 'quality', name: 'Quality & testing', color: '#9085e9' }
+  ];
+  P.domains.forEach(function (d) { DOM.forEach(function (x) { if (x.id === d.id) x.name = d.name; }); });
+  var ENT = P.roles.map(function (r) { return { start: ym(r.start), end: ym(r.end), stack: r.stack, lead: /Product Manager/.test(r.title) ? 1 / 3 : /Principal/.test(r.title) ? 1 / 4 : 0 }; })
+    .concat(P.platforms.map(function (p) { return { start: ym(p.start), end: p.end ? ym(p.end) : NOW, stack: p.stack, lead: 0 }; }));
+  function inYear(e, y) { var a = Math.max(e.start, Date.UTC(y, 0, 1)), b = Math.min(e.end, Date.UTC(y + 1, 0, 1)); return b > a ? months(a, b) : 0; }
+  function split(e) { var c = {}, n = 0; e.stack.forEach(function (t) { var d = P.techDomain[t]; if (d) { c[d] = (c[d] || 0) + 1; n++; } }); var o = {}; Object.keys(c).forEach(function (d) { o[d] = c[d] / n * (1 - e.lead); }); if (e.lead) o.leadership = (o.leadership || 0) + e.lead; return o; }
+  var YEARS = []; for (var yy = 2006; yy <= CUR; yy++) YEARS.push(yy);
+  var share = {}; DOM.forEach(function (d) { share[d.id] = []; });
+  YEARS.forEach(function (y) { var tot = {}, sum = 0; ENT.forEach(function (e) { var m = inYear(e, y); if (!m) return; var sp = split(e); Object.keys(sp).forEach(function (d) { var v = sp[d] * m / 12; tot[d] = (tot[d] || 0) + v; sum += v; }); }); DOM.forEach(function (d) { share[d.id].push(sum ? Math.round((tot[d.id] || 0) / sum * 1000) / 10 : 0); }); });
+  var sl = document.getElementById('streamLegend');
+  DOM.forEach(function (d) { var li = document.createElement('li'), i = document.createElement('i'); i.style.background = d.color; li.append(i, document.createTextNode(d.name)); sl.appendChild(li); });
+  var sBands = eras.filter(function (e) { return e.id !== 'foundations'; }).map(function (e, i) {
+    var from = Math.max(e.from, 2006), nx = eras[eras.indexOf(e) + 1], to = nx ? nx.from : CUR + 1;
+    return { from: YEARS.indexOf(from) - .5, to: Math.min(YEARS.length, YEARS.indexOf(Math.min(to, CUR)) + (to > CUR ? 1 : 0)) - .5, color: i % 2 ? 'rgba(255,214,170,.025)' : 'rgba(0,0,0,0)', label: { text: e.name, y: 16, style: { color: '#8f8274', fontFamily: MONO, fontSize: '11px' } } };
+  });
+  var stream = H.chart('stream', {
+    chart: Object.assign({ type: 'streamgraph', marginBottom: 34 }, narrow ? { backgroundColor: '#050403', scrollablePlotArea: { minWidth: 720, scrollPositionX: 1 } } : {}),
+    accessibility: { description: 'Share of focus by domain per year, derived from the technologies of each active role and platform.' },
+    xAxis: { categories: YEARS.map(String), crosshair: { color: 'rgba(255,138,42,.35)', width: 1 }, plotBands: sBands, lineWidth: 0, tickWidth: 0, labels: { step: narrow ? 2 : (innerWidth < 1200 ? 2 : 1) } },
+    yAxis: { visible: false, startOnTick: false, endOnTick: false },
+    tooltip: { shared: true, formatter: function () { var h = '<div class="tt"><div class="k">' + esc(this.x) + ' · share of focus (derived)</div>'; this.points.slice().sort(function (a, b) { return b.y - a.y; }).forEach(function (p) { if (p.y <= 0) return; h += '<div class="row"><b>' + p.y.toFixed(0) + '%</b><i style="background:' + p.color + '"></i>' + esc(p.series.name) + '</div>'; }); return h + '</div>'; } },
+    plotOptions: { streamgraph: { lineWidth: 0, fillOpacity: 1, marker: { enabled: false }, borderColor: '#050403', label: { enabled: true, minFontSize: 11, maxFontSize: 18, style: { color: '#0b0806', fontWeight: '600', textOutline: 'none' } } } },
+    series: DOM.map(function (d) { var ai = d.id === 'ai'; return { name: d.name, id: d.id, data: share[d.id], color: d.color, zIndex: ai ? 2 : 1, fillColor: { linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 }, stops: [[0, light(d.color, ai ? .22 : .1)], [1, H.color(d.color).setOpacity(ai ? 1 : .82).get('rgba')]] }, lineWidth: ai ? 1.5 : 0, lineColor: ai ? '#ffb3d0' : undefined }; })
+  });
+
+  /* presentation mode */
+  var charts = document.getElementById('charts');
+  var steps = [{ r: 'all', y: '2002 – today', t: 'Twenty years on <span class="serif">one axis.</span>', l: 'Where I lived, the role I played, who I built for and what I owned.' }]
+    .concat(P.eras.map(function (e) { var r = eraRange.filter(function (x) { return x.e.id === e.id; })[0]; return { a: r.a, b: r.b, y: e.years, t: esc(e.name), l: e.line, era: e.id }; }))
+    .concat([{ stream: true, y: '2006 – today', t: 'How the focus <span class="serif">shifted.</span>', l: 'From interfaces to networks to AI, derived from every role and platform.' }]);
+  var si = 0;
+  function show(i) {
+    si = Math.max(0, Math.min(steps.length - 1, i)); var s = steps[si];
+    document.getElementById('pcYears').textContent = s.y;
+    document.getElementById('pcTitle').innerHTML = s.t;
+    document.getElementById('pcLine').textContent = s.l;
+    document.getElementById('pcStep').textContent = (si + 1) + ' / ' + steps.length + '  ·  ← → to step, Esc to exit';
+    charts.classList.toggle('p-lanes-off', !!s.stream); charts.classList.toggle('p-stream-off', !s.stream);
+    if (!s.stream) { if (s.r === 'all') zoom('all'); else lanes.xAxis[0].setExtremes(s.a - 90 * 864e5, s.b + 90 * 864e5, true, reduced ? false : { duration: 800 }); }
+    setTimeout(function () { lanes.reflow(); stream.reflow(); }, 30);
+  }
+  function present(on) {
+    root.classList.toggle('presenting', on);
+    if (on) { show(0); window.scrollTo(0, 0); } else { charts.classList.remove('p-lanes-off', 'p-stream-off'); zoom('all'); setTimeout(function () { lanes.reflow(); stream.reflow(); charts.scrollIntoView(); }, 30); }
+  }
+  function fullscreen() { if (document.fullscreenElement) document.exitFullscreen(); else if (root.requestFullscreen) root.requestFullscreen().catch(function () {}); }
+  document.getElementById('presBtn').addEventListener('click', function () { present(!root.classList.contains('presenting')); });
+  document.getElementById('fsBtn').addEventListener('click', fullscreen);
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, textarea, select')) return;
+    var k = e.key;
+    if (k === 'p' || k === 'P') { e.preventDefault(); present(!root.classList.contains('presenting')); return; }
+    if (k === 'f' || k === 'F') { e.preventDefault(); fullscreen(); return; }
+    if (!root.classList.contains('presenting')) return;
+    if (k === 'Escape') { present(false); }
+    else if (k === 'ArrowRight' || k === ' ' || k === 'PageDown') { e.preventDefault(); show(si + 1); }
+    else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); show(si - 1); }
+  });
+  window.__career = Object.assign(window.__career || {}, { lanes: lanes, stream: stream, show: show, present: present, share: share });
+})();
+</script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+window.__rewindBoot = true;
+const root = document.documentElement;
+const P = window.PROFILE;
+const { sections, stages, buttons, absTop } = window.__career;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function hasGL() { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } }
+function setRail(cur) { buttons.forEach((b, i) => { if (i === cur) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); }); }
+const rail = document.querySelector('.rail');
+function stageIndex() {
+  const mid = scrollY + innerHeight * .5;
+  for (let k = stages.length - 1; k >= 0; k--) { const t = absTop(stages[k]); if (mid >= t) return { k, t: (mid - t) / stages[k].offsetHeight, top: t }; }
+  return { k: -1, t: 0, top: 0 };
+}
+
+
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const rng = mulberry32(20260);
+const TAU = Math.PI * 2;
+function unit() { const u = rng() * 2 - 1, t = rng() * TAU, s = Math.sqrt(1 - u * u); return [s * Math.cos(t), u, s * Math.sin(t)]; }
+function noise3(x, y, z) { return (Math.sin(x * 1.7 + 1.3) * Math.sin(y * 2.1 + .7) * Math.sin(z * 1.9 + 2.1) + .5 * Math.sin(x * 3.3 + y * 2.2 + .4) * Math.cos(z * 2.9 - y * 1.7)) / 1.5; }
+function put(a, k, x, y, z) { a[k * 3] = x; a[k * 3 + 1] = y; a[k * 3 + 2] = z; }
+
+function neural(N) {
+  const a = new Float32Array(N * 3), S = 54, strands = [];
+  for (let s = 0; s < S; s++) {
+    const d = unit(); let b = unit(); const dot = b[0] * d[0] + b[1] * d[1] + b[2] * d[2];
+    b = [b[0] - d[0] * dot, b[1] - d[1] * dot, b[2] - d[2] * dot]; const bl = Math.hypot(...b) || 1; b = b.map(v => v / bl);
+    strands.push({ d, b, L: 0.9 + rng() * 1.5, c: (rng() - .5) * 1.6 });
+  }
+  for (let k = 0; k < N; k++) {
+    const r = rng();
+    if (r < .5) { const d = unit(); const rad = 1.32 + 0.3 * noise3(d[0] * 2.4, d[1] * 2.4, d[2] * 2.4) + (rng() - .5) * .05; put(a, k, d[0] * rad, d[1] * rad, d[2] * rad); }
+    else if (r < .66) { const d = unit(); const rad = Math.pow(rng(), 2.4) * .72; put(a, k, d[0] * rad, d[1] * rad, d[2] * rad); }
+    else {
+      const s = strands[(rng() * S) | 0], t = Math.pow(rng(), .85), al = 1.3 + t * s.L, bend = Math.sin(t * 2.4) * s.c * .55 * t, j = (1 - t) * .045 + .008, u = unit(), jr = rng();
+      put(a, k, s.d[0] * al + s.b[0] * bend + u[0] * j * jr, s.d[1] * al + s.b[1] * bend + u[1] * j * jr, s.d[2] * al + s.b[2] * bend + u[2] * j * jr);
+    }
+  }
+  return a;
+}
+
+function tower(N) {
+  const a = new Float32Array(N * 3), yb = -2.25, yt = 1.2, L = 9;
+  const w = y => 1.05 + (0.22 - 1.05) * ((y - yb) / (yt - yb));
+  const C = [[1, 1], [1, -1], [-1, -1], [-1, 1]];
+  const ys = Array.from({ length: L + 1 }, (_, l) => yb + (yt - yb) * l / L);
+  for (let k = 0; k < N; k++) {
+    const r = rng(); let x, y, z;
+    if (r < .18) { const c = C[(rng() * 4) | 0]; y = yb + rng() * (yt - yb); const W = w(y); x = c[0] * W; z = c[1] * W; }
+    else if (r < .4) {
+      const l = (rng() * L) | 0, f = (rng() * 4) | 0, ca = C[f], cb = C[(f + 1) % 4], t = rng();
+      if (rng() < .22) { y = ys[l]; const W = w(y); x = (ca[0] + (cb[0] - ca[0]) * t) * W; z = (ca[1] + (cb[1] - ca[1]) * t) * W; }
+      else { y = ys[l] + (ys[l + 1] - ys[l]) * t; const u = rng() < .5 ? t : 1 - t, W = w(y); x = (ca[0] + (cb[0] - ca[0]) * u) * W; z = (ca[1] + (cb[1] - ca[1]) * u) * W; }
+    }
+    else if (r < .5) { const q = (rng() * 3) | 0, ang = q * TAU / 3 + .5, along = (rng() - .5) * .28, rr = .36; y = .95 + rng() * .8; x = Math.cos(ang) * rr - Math.sin(ang) * along; z = Math.sin(ang) * rr + Math.cos(ang) * along; }
+    else if (r < .53) { y = yt + rng() * .95; x = (rng() - .5) * .025; z = (rng() - .5) * .025; }
+    else {
+      const j = (Math.pow(rng(), 1.25) * 6) | 0, R = .55 + j * .5, th = rng() * TAU, th2 = .012 + j * .004;
+      const rr = R + (rng() - .5) * th2 * 2, zz = Math.sin(th) * rr, tl = .5; y = 1.42 + (rng() - .5) * th2 * 1.5 + Math.sin(th * 3 + j) * .025 + zz * Math.sin(tl); x = Math.cos(th) * rr; z = zz * Math.cos(tl);
+    }
+    put(a, k, x, y - .2, z);
+  }
+  return a;
+}
+
+function screens(N) {
+  const a = new Float32Array(N * 3), panels = [];
+  for (let i = 0; i < 5; i++) {
+    const rows = [];
+    for (let v = .44; v > -.52; v -= .12) {
+      let x = -1.12, stopAt = rng() < .3 ? .2 + rng() * .6 : 1.12;
+      while (x < stopAt) { const len = .1 + rng() * .5; if (x + len > stopAt) break; rows.push([x, x + len, v]); x += len + .07; }
+    }
+    panels.push({ c: [-1.6 + i * .8, 1.15 - i * .58, -1.7 + i * .85], yaw: -.42, rows, chart: i % 2 === 1 });
+  }
+  for (let k = 0; k < N; k++) {
+    const p = panels[(rng() * 5) | 0], r = rng(); let u, v;
+    if (r < .24) { const t = rng() * 2 * (2.5 + 1.56), W = 2.5, H = 1.56; if (t < W) { u = -1.25 + t; v = .78; } else if (t < W + H) { u = 1.25; v = .78 - (t - W); } else if (t < 2 * W + H) { u = 1.25 - (t - W - H); v = -.78; } else { u = -1.25; v = -.78 + (t - 2 * W - H); } }
+    else if (r < .32) { if (rng() < .65) { u = -1.15 + rng() * 2.3; v = .62; } else { const d = (rng() * 3) | 0, th = rng() * TAU; u = -1.08 + d * .09 + Math.cos(th) * .025; v = .69 + Math.sin(th) * .025; } }
+    else if (r < .8 || !p.chart) { const s = p.rows[(rng() * p.rows.length) | 0]; u = s[0] + (s[1] - s[0]) * rng(); v = s[2] + (rng() - .5) * .012; }
+    else if (r < .93) { u = .15 + rng() * .95; v = -.42 + .16 * Math.sin(u * 4.2 + 1.3) + .08 * Math.sin(u * 9.1); }
+    else { const t = rng() * TAU; u = -.95 + Math.cos(t) * .2; v = -.64 + Math.sin(t) * .055; }
+    const cy = Math.cos(p.yaw), sy = Math.sin(p.yaw);
+    put(a, k, p.c[0] + u * cy, p.c[1] + v, p.c[2] - u * sy);
+  }
+  return a;
+}
+
+function racks(N) {
+  const a = new Float32Array(N * 3), w = .78, h = 3.5, d = .9;
+  for (let k = 0; k < N; k++) {
+    const i = (rng() * 5) | 0, xi = -2.3 + i * 1.15, zi = -(xi * xi) * .14 - .3, yaw = xi * .12, r = rng();
+    let x, y, z;
+    if (r < .32) {
+      const ax = (rng() * 3) | 0, s1 = rng() < .5 ? -1 : 1, s2 = rng() < .5 ? -1 : 1, t = rng() * 2 - 1;
+      if (ax === 0) { x = t * w / 2; y = s1 * h / 2; z = s2 * d / 2; } else if (ax === 1) { x = s1 * w / 2; y = t * h / 2; z = s2 * d / 2; } else { x = s1 * w / 2; y = s2 * h / 2; z = t * d / 2; }
+    } else if (r < .86) { let q = (rng() * 28) | 0; if (q % 9 === 4) q = (q + 1) % 28; y = -h / 2 + .1 + q * .118 + (rng() - .5) * .01; x = (rng() - .5) * (w - .14); z = d / 2; }
+    else { const q = (rng() * 28) | 0; y = -h / 2 + .1 + q * .118 + (rng() - .5) * .018; x = w / 2 - .1 + (rng() - .5) * .025; z = d / 2 + .01; }
+    const cy = Math.cos(yaw), sy = Math.sin(yaw);
+    put(a, k, xi + x * cy + z * sy, y, zi - x * sy + z * cy);
+  }
+  return a;
+}
+
+function circuit(N) {
+  const a = new Float32Array(N * 3), BX = 2.7, BZ = 1.8;
+  const chips = [[-1.4, -.4, .9, .9], [.9, .6, 1.1, .7], [1.7, -.9, .6, .6], [-.2, 1.1, .5, .4], [-2.1, .9, .5, .5], [.3, -1.1, .7, .45]];
+  const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+  const traces = [];
+  for (let t = 0; t < 90; t++) {
+    const c = chips[(rng() * chips.length) | 0], side = (rng() * 4) | 0, off = rng() - .5;
+    let x = c[0] + (side === 0 ? c[2] / 2 : side === 2 ? -c[2] / 2 : off * c[2] * .85), z = c[1] + (side === 1 ? c[3] / 2 : side === 3 ? -c[3] / 2 : off * c[3] * .85);
+    let di = side; const pts = [[x, z]]; let len = 0;
+    const n = 2 + ((rng() * 4) | 0);
+    for (let s = 0; s < n; s++) {
+      const l = .15 + rng() * .8; let dx = dirs[di][0], dz = dirs[di][1];
+      if (rng() < .25) { const o = dirs[(di + (rng() < .5 ? 1 : 3)) % 4]; dx = (dx + o[0]) * .7071; dz = (dz + o[1]) * .7071; }
+      x = Math.max(-BX, Math.min(BX, x + dx * l)); z = Math.max(-BZ, Math.min(BZ, z + dz * l));
+      const pr = pts[pts.length - 1]; len += Math.hypot(x - pr[0], z - pr[1]); pts.push([x, z]);
+      if (rng() < .5) di = (di + (rng() < .5 ? 1 : 3)) % 4;
+    }
+    traces.push({ pts, len });
+  }
+  const tilt = 1.0, st = Math.sin(tilt), ct = Math.cos(tilt);
+  for (let k = 0; k < N; k++) {
+    const r = rng(); let x, z, y = 0;
+    if (r < .56) {
+      const tr = traces[(rng() * traces.length) | 0]; let target = rng() * tr.len, i = 1;
+      for (; i < tr.pts.length; i++) { const p0 = tr.pts[i - 1], p1 = tr.pts[i], sl = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]); if (target <= sl || i === tr.pts.length - 1) { const f = sl ? Math.min(1, target / sl) : 0; x = p0[0] + (p1[0] - p0[0]) * f; z = p0[1] + (p1[1] - p0[1]) * f; break; } target -= sl; }
+    } else if (r < .76) {
+      const c = chips[(rng() * chips.length) | 0];
+      if (rng() < .6) { const t = rng() * 2 * (c[2] + c[3]); if (t < c[2]) { x = c[0] - c[2] / 2 + t; z = c[1] - c[3] / 2; } else if (t < c[2] + c[3]) { x = c[0] + c[2] / 2; z = c[1] - c[3] / 2 + (t - c[2]); } else if (t < 2 * c[2] + c[3]) { x = c[0] + c[2] / 2 - (t - c[2] - c[3]); z = c[1] + c[3] / 2; } else { x = c[0] - c[2] / 2; z = c[1] + c[3] / 2 - (t - 2 * c[2] - c[3]); } y = .03; }
+      else { const pin = (rng() * 8) | 0, s = rng() < .5 ? -1 : 1, t = rng() * .08; x = c[0] - c[2] / 2 + (pin + .5) * c[2] / 8; z = c[1] + s * (c[3] / 2 + t); }
+    } else if (r < .85) { const tr = traces[(rng() * traces.length) | 0], e = tr.pts[tr.pts.length - 1], th = rng() * TAU; x = e[0] + Math.cos(th) * .04; z = e[1] + Math.sin(th) * .04; }
+    else if (r < .91) { const t = rng() * 2 * (2 * BX + 2 * BZ); if (t < 2 * BX) { x = -BX + t; z = -BZ; } else if (t < 2 * BX + 2 * BZ) { x = BX; z = -BZ + t - 2 * BX; } else if (t < 4 * BX + 2 * BZ) { x = BX - (t - 2 * BX - 2 * BZ); z = BZ; } else { x = -BX; z = BZ - (t - 4 * BX - 2 * BZ); } }
+    else { x = Math.round((rng() * 2 - 1) * BX / .3) * .3; z = Math.round((rng() * 2 - 1) * BZ / .3) * .3; y = -.01; }
+    put(a, k, x * 1.05, y * ct - z * st - .1, y * st + z * ct);
+  }
+  return a;
+}
+
+
+
+const ERA_DIR = 'assets/img/eras/';
+const ids = P.eras.map(e => e.id);
+function loadImg(src) { return new Promise((res, rej) => { const im = new Image(); im.decoding = 'async'; im.onload = () => res(im); im.onerror = rej; im.src = src; }); }
+const assets = (async () => {
+  const getJSON = async name => { try { const r = await fetch(ERA_DIR + name, { cache: 'no-cache' }); return r.ok ? await r.json() : null; } catch (e) { return null; } };
+  const manifest = await getJSON('manifest.json');
+  const declared = (manifest && manifest.files) || [];
+  const files = new Set(declared), out = {};
+  await Promise.all(ids.map(async id => {
+    const pick = files.has(id + '.webp') ? id + '.webp' : id + '.jpg';
+    const vid = declared.find(f => f.endsWith('video/' + id + '.mp4'));
+    const rec = { src: ERA_DIR + pick, video: vid ? (vid.startsWith('assets/') ? vid : ERA_DIR + vid).replace('assets/img/eras/../../', 'assets/') : null, img: null };
+    try { rec.img = await loadImg(rec.src); } catch (e) { rec.src = null; }
+    out[id] = rec;
+  }));
+  return out;
+})();
+
+function goStatic() {
+  root.classList.remove('fx'); root.classList.add('static', 'fx-ready');
+  assets.then(a => {
+    sections.forEach((s, i) => { const r = a[ids[i]]; if (r && r.src) { const pin = s.querySelector('.era-pin'); pin.style.setProperty('--plate', 'url("' + r.src + '")'); if (PLATE_GRADE[ids[i]]) pin.style.setProperty('--tone', '#1b2a44'); pin.classList.add('has-plate'); } });
+  });
+}
+
+const PW = 5.4, PH = 3.6;
+function sampleImage(img, N, out, col, aspect) {
+  const PWl = PH * aspect, cols = Math.ceil(Math.sqrt(N * aspect)), rows = Math.ceil(N / cols);
+  const cv = document.createElement('canvas'); cv.width = cols; cv.height = rows;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  const s = Math.max(cols / img.naturalWidth, rows / img.naturalHeight), dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+  ctx.drawImage(img, (cols - dw) / 2, (rows - dh) / 2, dw, dh);
+  const d = ctx.getImageData(0, 0, cols, rows).data, M = cols * rows, lum = new Float32Array(M);
+  let mean = 0;
+  for (let c = 0; c < M; c++) { lum[c] = (d[c * 4] * .299 + d[c * 4 + 1] * .587 + d[c * 4 + 2] * .114) / 255; mean += lum[c]; }
+  mean /= M; const gain = Math.min(1.25, Math.max(.72, .24 / Math.max(mean, .01)));
+  const sorted = Float32Array.from(lum).sort();
+  const lo = sorted[(M * .02) | 0], hi = Math.max(sorted[(M * .985) | 0], lo + .05);
+  const edge = new Float32Array(M);
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+    const c = y * cols + x, xl = Math.max(0, x - 1), xr = Math.min(cols - 1, x + 1), yu = Math.max(0, y - 1), yd = Math.min(rows - 1, y + 1);
+    edge[c] = Math.abs(lum[y * cols + xr] - lum[y * cols + xl]) + Math.abs(lum[yd * cols + x] - lum[yu * cols + x]);
+  }
+  const es = Float32Array.from(edge).sort(), eHi = Math.max(es[(M * .96) | 0], .02);
+  const B = new Float32Array(M);
+  for (let c = 0; c < M; c++) { const L = Math.min(1, Math.max(0, (lum[c] - lo) / (hi - lo))); B[c] = Math.min(1, .42 * L * L + .8 * Math.min(1, edge[c] / eHi) * (.3 + .7 * L)); }
+  const order = Array.from({ length: M }, (_, c) => c).sort((a, b) => B[b] - B[a]);
+  const ramp = l => l < .5 ? [.16 + (1 - .16) * l * 2 * .85, .05 + (.48 - .05) * l * 2, .01 + (.13 - .01) * l * 2] : [1, .48 + (.9 - .48) * (l - .5) * 2, .13 + (.78 - .13) * (l - .5) * 2];
+  for (let k = 0; k < N; k++) {
+    const c = order[k], cx = c % cols, cy = (c / cols) | 0;
+    const L = Math.min(1, Math.max(0, (lum[c] - lo) / (hi - lo)));
+    const u = (cx + rng()) / cols, v = (cy + rng()) / rows;
+    out[k * 3] = (u - .5) * PWl; out[k * 3 + 1] = (.5 - v) * PH; out[k * 3 + 2] = (B[c] - .3) * .55 + (L - .5) * .3 + (rng() - .5) * .06;
+    const g = ramp(Math.max(L, B[c])), st = L / Math.max(lum[c], .02), w = (.1 + B[c] * 1.15) * gain;
+    for (let q = 0; q < 3; q++) { const raw = Math.min(1, d[c * 4 + q] / 255 * Math.min(st, 4)); col[k * 3 + q] = Math.min(1, (raw * .35 + g[q] * .65) * w); }
+  }
+}
+function proceduralColour(N, i, col) {
+  const pal = [['#ff8a2a', '#ffd9b0'], ['#ff6a1f', '#ffc178'], ['#ffad5c', '#fff0dc'], ['#ff9a4a', '#a8c4ff'], ['#7fb4ff', '#ffb26b']][i].map(c => new THREE.Color(c));
+  const t = new THREE.Color();
+  for (let k = 0; k < N; k++) { t.copy(pal[0]).lerp(pal[1], rng() < .2 ? 1 : rng() * .35).multiplyScalar(.55 + rng() * .45); col[k * 3] = t.r; col[k * 3 + 1] = t.g; col[k * 3 + 2] = t.b; }
+}
+const PLATE_GRADE = { foundations: { tint: [.42, .58, 1.0], sky: .42, gainMul: 1.5 } };
+function plateFromImage(img, id) {
+  const w = 320, h = Math.round(320 * img.naturalHeight / img.naturalWidth), cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const g2 = cv.getContext('2d', { willReadFrequently: true }); g2.drawImage(img, 0, 0, w, h);
+  const px2 = g2.getImageData(0, 0, w, h).data; let m = 0; for (let k = 0; k < px2.length; k += 4) m += (px2[k] * .299 + px2[k + 1] * .587 + px2[k + 2] * .114) / 255; m /= (px2.length / 4);
+  const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.userData.aspect = w / h; const pg = PLATE_GRADE[id] || {}; t.userData.gain = Math.min(2.4, Math.max(.4, .2 / Math.max(m, .01))) * (pg.gainMul || 1); t.userData.tint = pg.tint || [1, .56, .24]; t.userData.sky = pg.sky || 0; return t;
+}
+function plateProcedural() {
+  const w = 320, h = 200, cv = document.createElement('canvas'); cv.width = w; cv.height = h; const g = cv.getContext('2d');
+  g.fillStyle = '#0b0704'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 6; i++) { g.fillStyle = 'rgba(255,150,70,' + (.05 + i * .02) + ')'; g.fillRect(40 + i * 34, 30 + i * 18, 150, 90); }
+  const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.userData.aspect = w / h; return t;
+}
+
+function start() {
+  const canvas = document.getElementById('stage');
+  const mobile = innerWidth < 768;
+  const N = mobile ? 22000 : 60000;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile ? 1.25 : 1.75));
+  renderer.setSize(innerWidth, innerHeight, false);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .95;
+  renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.setClearColor(0x050403, 1);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, .1, 60); camera.position.set(0, 0, 9);
+
+  const procs = [neural, tower, screens, racks, circuit];
+  const geo = new THREE.BufferGeometry();
+  for (let i = 0; i < 5; i++) { const pos = procs[i](N), col = new Float32Array(N * 3); proceduralColour(N, i, col); geo.setAttribute('p' + i, new THREE.BufferAttribute(pos, 3)); geo.setAttribute('c' + i, new THREE.BufferAttribute(col, 3)); }
+  geo.setAttribute('position', new THREE.BufferAttribute(geo.attributes.p0.array.slice(), 3));
+  const aR = new Float32Array(N * 4);
+  for (let k = 0; k < N; k++) { aR[k * 4] = rng(); aR[k * 4 + 1] = Math.pow(rng(), 2.2); aR[k * 4 + 2] = rng(); aR[k * 4 + 3] = rng(); }
+  geo.setAttribute('aR', new THREE.BufferAttribute(aR, 4));
+  geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 9);
+  const uniforms = { uMorph: { value: 0 }, uTime: { value: 0 }, uSize: { value: mobile ? .036 : .026 }, uPixel: { value: 1 }, uFade: { value: 1 } };
+  const mat = new THREE.ShaderMaterial({
+    uniforms, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `
+      attribute vec3 p0; attribute vec3 p1; attribute vec3 p2; attribute vec3 p3; attribute vec3 p4;
+      attribute vec3 c0; attribute vec3 c1; attribute vec3 c2; attribute vec3 c3; attribute vec3 c4; attribute vec4 aR;
+      uniform float uMorph, uTime, uSize, uPixel, uFade;
+      varying vec3 vCol; varying float vA;
+      vec3 P(int i){ if(i==0) return p0; if(i==1) return p1; if(i==2) return p2; if(i==3) return p3; return p4; }
+      vec3 C(int i){ if(i==0) return c0; if(i==1) return c1; if(i==2) return c2; if(i==3) return c3; return c4; }
+      void main(){
+        float m = clamp(uMorph, 0.0, 4.0); int i = int(min(floor(m), 3.0)); float f = m - float(i);
+        float st = aR.x * 0.45; float fe = smoothstep(st, st + 0.55, f); fe = fe * fe * (3.0 - 2.0 * fe);
+        vec3 pos = mix(P(i), P(i + 1), fe); float mid = sin(3.14159265 * fe);
+        vec3 swirl = vec3(sin(pos.y * 1.6 + uTime * .9 + aR.z * 6.0), cos(pos.x * 1.4 - uTime * .8 + aR.z * 5.0), sin(pos.x * 1.7 + pos.y + uTime * .7 + aR.x * 4.0));
+        pos += swirl * mid * 0.8 + normalize(pos + vec3(1e-4)) * mid * 0.9; pos.z += mid * (aR.x - 0.35) * 2.2;
+        pos += vec3(sin(uTime * .6 + aR.z * 12.0), cos(uTime * .5 + aR.z * 9.0), sin(uTime * .55 + aR.z * 7.0)) * 0.01 * (1.0 + aR.y * 2.0);
+        vec4 mv = modelViewMatrix * vec4(pos, 1.0); gl_Position = projectionMatrix * mv;
+        float size = uSize * (0.55 + aR.y * 1.6) * (1.0 + mid * 0.8); gl_PointSize = min(size * uPixel / -mv.z, 40.0);
+        vCol = mix(C(i), C(i + 1), fe); float l = dot(vCol, vec3(.299, .587, .114));
+        float wave = 0.5 + 0.5 * sin(pos.x * 1.3 - uTime * 1.2 + aR.z * 1.5); float fog = smoothstep(16.0, 5.0, -mv.z);
+        vA = (0.015 + l * 0.42 + l * l * 0.45) * (0.85 + 0.3 * wave) * fog * uFade * (0.6 + 0.5 * aR.y) * (1.0 + mid * 0.6);
+      }`,
+    fragmentShader: `varying vec3 vCol; varying float vA;
+      void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.0, d); a *= a; if (a * vA < 0.003) discard; gl_FragColor = vec4(vCol, a * vA); }`
+  });
+  const sculpt = new THREE.Points(geo, mat); sculpt.frustumCulled = false;
+  const group = new THREE.Group(); group.add(sculpt); scene.add(group);
+
+  const plates = ids.map(() => plateProcedural());
+  const pu = { tA: { value: plates[0] }, tB: { value: plates[1] }, uMix: { value: 0 }, aA: { value: 1.6 }, aB: { value: 1.6 }, gA: { value: 1 }, gB: { value: 1 }, kA: { value: new THREE.Vector4(1, .56, .24, 0) }, kB: { value: new THREE.Vector4(1, .56, .24, 0) }, uAspect: { value: innerWidth / innerHeight }, uFade: uniforms.uFade, uTime: uniforms.uTime, uMob: { value: mobile ? 1 : 0 } };
+  const plate = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
+    uniforms: pu, depthTest: false, depthWrite: false,
+    vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }`,
+    fragmentShader: `
+      uniform sampler2D tA, tB; uniform float uMix, aA, aB, gA, gB, uAspect, uFade, uTime, uMob; uniform vec4 kA, kB; varying vec2 vUv;
+      vec2 cover(vec2 uv, float ta){ vec2 s = uAspect > ta ? vec2(1.0, ta / uAspect) : vec2(uAspect / ta, 1.0); return (uv - 0.5) * s * 0.94 + 0.5; }
+      vec3 grade(vec3 c, vec4 k){ float l = dot(c, vec3(.299,.587,.114)); vec3 toned = k.rgb * l * 1.15; vec3 g = mix(toned, c, .12); return g * mix(1.0, 1.0 - k.a, smoothstep(.42, 1.0, vUv.y)); }
+      void main(){
+        vec2 drift = vec2(sin(uTime * .05), cos(uTime * .04)) * .006;
+        vec3 a = grade(texture2D(tA, cover(vUv + drift, aA)).rgb, kA) * gA;
+        vec3 b = grade(texture2D(tB, cover(vUv + drift, aB)).rgb, kB) * gB;
+        vec3 c = mix(a, b, smoothstep(0.0, 1.0, uMix));
+        vec2 q = (vUv - 0.5) * vec2(uAspect, 1.0);
+        float vig = smoothstep(1.15, 0.15, length(q - vec2(uMob > .5 ? 0.0 : 0.25 * uAspect, uMob > .5 ? 0.18 : 0.0)));
+        gl_FragColor = vec4(c * (0.06 + 0.24 * vig) * uFade, 1.0);
+      }`
+  }));
+  plate.renderOrder = -10; plate.frustumCulled = false; scene.add(plate);
+
+  const videos = {}, isPhoto = [false, false, false, false, false];
+  assets.then(a => {
+    ids.forEach((id, i) => {
+      const r = a[id]; if (!r) return;
+      if (r.img) { sampleImage(r.img, N, geo.attributes['p' + i].array, geo.attributes['c' + i].array, innerWidth / innerHeight); isPhoto[i] = true; geo.attributes['p' + i].needsUpdate = true; geo.attributes['c' + i].needsUpdate = true; plates[i] = plateFromImage(r.img, id); }
+      if (r.video) { const v = document.createElement('video'); v.src = r.video; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'metadata';
+        v.addEventListener('loadeddata', () => { const t = new THREE.VideoTexture(v); t.colorSpace = THREE.SRGBColorSpace; t.userData.aspect = v.videoWidth / v.videoHeight; t.userData.gain = 1.4; plates[i] = t; videos[i] = v; }, { once: true }); }
+    });
+    geo.attributes.position.array.set(geo.attributes.p0.array); geo.attributes.position.needsUpdate = true;
+  });
+
+  const DN = mobile ? 700 : 1800, dpos = new Float32Array(DN * 3), dr = new Float32Array(DN);
+  for (let k = 0; k < DN; k++) { put(dpos, k, (rng() - .5) * 26, (rng() - .5) * 16, -rng() * 18 + 3); dr[k] = rng(); }
+  const dgeo = new THREE.BufferGeometry(); dgeo.setAttribute('position', new THREE.BufferAttribute(dpos, 3)); dgeo.setAttribute('aR', new THREE.BufferAttribute(dr, 1));
+  const dmat = new THREE.ShaderMaterial({
+    uniforms: { uTime: uniforms.uTime, uPixel: uniforms.uPixel, uFade: uniforms.uFade, uScroll: { value: 0 } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `attribute float aR; uniform float uTime, uPixel, uScroll; varying float vA;
+      void main(){ vec3 p = position; p.y += mod(uScroll * 0.002 * (0.4 + aR) + uTime * 0.04 * aR + 8.0, 16.0) - 8.0; p.x += sin(uTime * .1 + aR * 20.0) * .3;
+        vec4 mv = modelViewMatrix * vec4(p, 1.0); gl_Position = projectionMatrix * mv; gl_PointSize = (0.02 + aR * 0.04) * uPixel / -mv.z; vA = (0.12 + aR * 0.3) * smoothstep(22.0, 6.0, -mv.z); }`,
+    fragmentShader: `varying float vA; uniform float uFade; void main(){ float d = length(gl_PointCoord - .5); float a = smoothstep(.5, 0., d); gl_FragColor = vec4(vec3(1., .72, .45), a * vA * uFade); }`
+  });
+  const dust = new THREE.Points(dgeo, dmat); dust.frustumCulled = false; scene.add(dust);
+
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), mobile ? .45 : .55, .5, .3);
+  composer.addPass(bloom); composer.addPass(new OutputPass());
+
+  function layout() {
+    const w = innerWidth, h = innerHeight, mob = w < 768;
+    renderer.setSize(w, h, false); composer.setSize(w, h); bloom.setSize(w, h);
+    camera.aspect = w / h; camera.updateProjectionMatrix(); pu.uAspect.value = w / h;
+    uniforms.uPixel.value = renderer.domElement.height / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
+    const halfW = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * 9 * camera.aspect;
+    group.userData.base = mob ? { x: 0, y: 1.35, s: Math.min(.55, halfW * 2 / PW * .98) } : { x: Math.min(halfW * .44, 2.7), y: .05, s: w < 1100 ? .82 : 1 };
+    const visH = 2 * 9 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2);
+    group.userData.photo = { x: 0, y: 0, s: visH / (.94 * PH) };
+  }
+  layout(); addEventListener('resize', layout);
+
+  /* scroll → morph / year / era. Morph happens at the start of each pinned stage; the work below sits on solid ground. */
+  const yearEl = document.getElementById('year');
+  const after = document.querySelector('.after');
+  const target = { m: 0, year: P.eras[0].to, fade: 1 }, cur = { m: 0, year: P.eras[0].to, fade: 1 };
+  let curEra = -2, live = true;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const ease = x => x * x * (3 - 2 * x);
+  function readScroll() {
+    const s = stageIndex(), k = s.k, t = clamp(s.t, 0, 1);
+    if (k < 0) { target.m = 0; target.year = P.eras[0].to; }
+    else {
+      target.m = k === 0 ? 0 : (k - 1) + ease(clamp(t / .38, 0, 1));
+      const from = k === 0 ? P.eras[0].to : P.eras[k - 1].from, to = P.eras[k].from;
+      target.year = from + (to - from) * clamp(t / .8, 0, 1);
+    }
+    const inStage = k >= 0 && s.t <= 1.02, introVisible = scrollY < innerHeight * .9;
+    const afterTop = absTop(after), endT = clamp((scrollY + innerHeight - afterTop) / (innerHeight * .8), 0, 1);
+    target.fade = 1 - endT;
+    const era = inStage ? k : -1;
+    if (era !== curEra) { curEra = era; setRail(era); }
+    rail.style.opacity = inStage ? '1' : '0'; rail.style.pointerEvents = inStage ? '' : 'none';
+    yearEl.style.opacity = inStage || introVisible ? '1' : '0';
+    live = introVisible || inStage || endT < 1 && scrollY + innerHeight > absTop(stages[0]);
+    dmat.uniforms.uScroll.value = scrollY;
+  }
+  addEventListener('scroll', readScroll, { passive: true }); addEventListener('resize', readScroll); readScroll();
+
+  let px = 0, py = 0, tx = 0, ty = 0;
+  addEventListener('pointermove', e => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; }, { passive: true });
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.set(['.intro-copy', '.era-copy'], { opacity: 1 });
+  gsap.timeline({ delay: .2 })
+    .from('#intro-name', { yPercent: 30, opacity: 0, filter: 'blur(16px)', duration: 1.6, ease: 'expo.out' })
+    .from('.intro .lede', { y: 24, opacity: 0, duration: 1.1, ease: 'expo.out' }, '-=1.1')
+    .from('.intro-index li', { y: 14, opacity: 0, duration: .8, stagger: .06, ease: 'expo.out' }, '-=.8')
+    .from('.cue', { opacity: 0, x: -16, duration: .9, ease: 'expo.out' }, '-=.6');
+  gsap.to('.intro-copy', { opacity: 0, y: -60, filter: 'blur(8px)', ease: 'none', scrollTrigger: { trigger: '#timeline', start: 'top top', end: 'bottom 30%', scrub: true } });
+  stages.forEach(st => {
+    const q = sel => st.querySelectorAll(sel);
+    const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+    tl.fromTo(q('.ln'), { yPercent: 115, rotate: 2 }, { yPercent: 0, rotate: 0, duration: 1.3 })
+      .fromTo(q('.era-meta'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1 }, '-=1.0')
+      .fromTo(q('.era-line'), { opacity: 0, filter: 'blur(14px)', y: 18 }, { opacity: 1, filter: 'blur(0px)', y: 0, duration: 1.2 }, '-=.85')
+      .fromTo(q('.era-body'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1 }, '-=.9')
+      .fromTo(q('.proof li'), { clipPath: 'inset(0 0 100% 0)', y: 14 }, { clipPath: 'inset(0 0 0% 0)', y: 0, duration: 1, stagger: .1 }, '-=.8')
+      .fromTo(q('.chip'), { opacity: 0, scale: .86 }, { opacity: 1, scale: 1, duration: .7, stagger: .035, ease: 'back.out(2)' }, '-=.8');
+    ScrollTrigger.create({ trigger: st, start: 'top 45%', end: 'bottom top', onEnter: () => tl.play(), onEnterBack: () => tl.play(), onLeaveBack: () => tl.reverse() });
+    gsap.fromTo(st.querySelector('.era-copy'), { opacity: 1, y: 0, filter: 'blur(0px)' }, { opacity: 0, y: -70, filter: 'blur(10px)', ease: 'none', immediateRender: false, scrollTrigger: { trigger: st, start: 'bottom 75%', end: 'bottom 25%', scrub: true } });
+  });
+
+  const clock = new THREE.Clock();
+  let running = true, raf = 0, plateI = -1;
+  function frame() {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime, k = 1 - Math.pow(.0016, dt);
+    cur.m += (target.m - cur.m) * k * .9; cur.year += (target.year - cur.year) * k; cur.fade += (target.fade - cur.fade) * k;
+    const yr = Math.round(cur.year); if (yearEl.textContent !== String(yr)) yearEl.textContent = yr;
+    if (!live && Math.abs(target.m - cur.m) < .001) return;
+    uniforms.uMorph.value = cur.m; uniforms.uTime.value = t; uniforms.uFade.value = cur.fade;
+    const i = Math.min(Math.floor(cur.m), 3), f = cur.m - i;
+    if (pu.tA.value !== plates[i] || pu.tB.value !== plates[i + 1]) {
+      pu.tA.value = plates[i]; pu.tB.value = plates[i + 1];
+      pu.aA.value = plates[i].userData.aspect || 1.6; pu.aB.value = plates[i + 1].userData.aspect || 1.6;
+      pu.gA.value = plates[i].userData.gain || 1; pu.gB.value = plates[i + 1].userData.gain || 1;
+      const ka = plates[i].userData.tint || [1, .56, .24], kb = plates[i + 1].userData.tint || [1, .56, .24];
+      pu.kA.value.set(ka[0], ka[1], ka[2], plates[i].userData.sky || 0); pu.kB.value.set(kb[0], kb[1], kb[2], plates[i + 1].userData.sky || 0);
+    }
+    pu.uMix.value = f;
+    if (plateI !== i) { plateI = i; Object.entries(videos).forEach(([vi, v]) => { if (+vi === i || +vi === i + 1) v.play().catch(() => {}); else v.pause(); }); }
+    px += (tx - px) * k * .5; py += (ty - py) * k * .5;
+    let wp = 0; for (let j = 0; j < 5; j++) if (!isPhoto[j]) wp += Math.max(0, 1 - Math.abs(cur.m - j)); wp = Math.min(1, wp);
+    const bq = group.userData.base, bp = group.userData.photo, L = (a, b2) => a + (b2 - a) * wp;
+    const gx = L(bp.x, bq.x), gy = L(bp.y, bq.y);
+    group.position.set(gx, gy, 0); group.scale.setScalar(L(bp.s, bq.s));
+    group.rotation.y = (innerWidth < 768 ? 0 : -.3) * wp + px * (.05 + .27 * wp) + Math.sin(t * .15) * (.012 + .05 * wp);
+    group.rotation.x = py * (.04 + .12 * wp) + Math.sin(t * .2) * .02 * wp;
+    camera.position.set(px * .3, -py * .2, 9); camera.lookAt(gx * .35 * wp, gy * .5 * wp, 0);
+    composer.render();
+  }
+  frame(); root.classList.add('fx-ready');
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && running) { cancelAnimationFrame(raf); running = false; Object.values(videos).forEach(v => v.pause()); }
+    else if (!document.hidden && !running) { running = true; clock.getDelta(); plateI = -1; frame(); }
+  });
+  addEventListener('pagehide', () => { cancelAnimationFrame(raf); geo.dispose(); mat.dispose(); dgeo.dispose(); dmat.dispose(); plates.forEach(p => p && p.dispose()); renderer.dispose(); });
+  window.__rewind = { cur, target };
+}
+
+if (reduced || !hasGL() || !window.gsap || !window.ScrollTrigger) goStatic();
+else { try { start(); } catch (e) { console.error(e); goStatic(); } }
+</script>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.after-tabs [role="tab"]'));
+  if(!tabs.length) return;
+  function show(t, focus){
+    tabs.forEach(function(b){ var on=b===t; b.setAttribute('aria-selected',on); b.tabIndex=on?0:-1; document.getElementById(b.getAttribute('aria-controls')).hidden=!on; });
+    if(focus) t.focus();
+    window.dispatchEvent(new Event('resize'));
+    if(window.Highcharts) Highcharts.charts.forEach(function(c){ if(c) c.reflow(); });
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){ show(b); });
+    b.addEventListener('keydown',function(e){ var k=e.key, n=null; if(k==='ArrowRight') n=tabs[(i+1)%tabs.length]; if(k==='ArrowLeft') n=tabs[(i-1+tabs.length)%tabs.length]; if(k==='Home') n=tabs[0]; if(k==='End') n=tabs[tabs.length-1]; if(n){ e.preventDefault(); show(n,true);} });
+  });
+  function fromHash(){
+    var id=(location.hash||'').slice(1); if(!id) return;
+    var el=document.getElementById(id); if(!el) return;
+    var panel=el.closest('.tabpanel'); if(panel){ var t=document.querySelector('[aria-controls="'+panel.id+'"]'); if(t) show(t); }
+    var d=el.closest('details'); if(d) d.open=true;
+  }
+  fromHash(); window.addEventListener('hashchange',fromHash);
+  document.addEventListener('keydown',function(e){ if((e.key==='p'||e.key==='P')&&!e.metaKey&&!e.ctrlKey){ var t=document.getElementById('t-charts'); if(t&&t.getAttribute('aria-selected')!=='true') show(t); } }, true);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<script>
+/* Page chrome: rail, platform photo plates, flight route, safety net */
+(function () {
+  var root = document.documentElement;
+  var sections = [].slice.call(document.querySelectorAll('.era'));
+  var stages = sections.map(function (s) { return s.querySelector('.era-stage'); });
+  var buttons = [].slice.call(document.querySelectorAll('.rail button'));
+  function absTop(el) { return el.getBoundingClientRect().top + window.scrollY; }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var st = stages[+b.dataset.i];
+      var y = absTop(st) + (root.classList.contains('static') ? -60 : st.offsetHeight * 0.42);
+      window.scrollTo({ top: y, behavior: root.classList.contains('reduced') ? 'auto' : 'smooth' });
+    });
+  });
+  window.__career = { sections: sections, stages: stages, buttons: buttons, absTop: absTop };
+
+  // Platform photo plates — only files declared in the manifest are requested.
+  var FALLBACK = { cert: 'assets/img/eras/network.jpg', diag: 'assets/img/eras/network.jpg', compliance: 'assets/img/eras/enterprise.jpg', aiplat: 'assets/img/eras/intelligence.jpg' };
+  var plates = [].slice.call(document.querySelectorAll('.stage[data-scene]'));
+  fetch('assets/img/platforms/manifest.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }).then(function (m) {
+    var declared = ((m && m.files) || []).map(String), narrow = matchMedia('(max-width: 768px)').matches;
+    plates.forEach(function (st) {
+      var id = st.dataset.scene;
+      var order = (narrow ? [id + '-mobile.webp', id + '-mobile.jpg'] : []).concat([id + '.webp', id + '.jpg']);
+      var photo = order.filter(function (f) { return declared.indexOf(f) > -1; })[0];
+      st.style.setProperty('--plate', 'url("' + (photo ? 'assets/img/platforms/' + photo : FALLBACK[id]) + '")');
+      st.classList.add('has-plate'); if (photo) st.classList.add('has-photo');
+    });
+  });
+  if ('IntersectionObserver' in window) {
+    var near = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('is-near', e.isIntersecting); }); }, { rootMargin: '10% 0px' });
+    plates.forEach(function (st) { near.observe(st); });
+    var fl = document.getElementById('moves');
+    if (fl) new IntersectionObserver(function (es, o) { es.forEach(function (e) { if (e.isIntersecting) { fl.classList.add('in'); o.disconnect(); } }); }, { threshold: .35 }).observe(fl);
+  } else { var f2 = document.getElementById('moves'); if (f2) f2.classList.add('in'); }
+
+  setTimeout(function () { if (!window.__rewindBoot) { root.classList.remove('fx'); root.classList.add('static'); } }, 6000);
+})();
+</script>
+<script src="assets/vendor/highcharts/highcharts.js"></script>
+<script src="assets/vendor/highcharts/xrange.js"></script>
+<script src="assets/vendor/highcharts/streamgraph.js"></script>
+<script src="assets/vendor/highcharts/series-label.js"></script>
+<script src="assets/vendor/highcharts/accessibility.js"></script>
+<script>
+/* Charts: clean four-lane timeline, expertise stream, table view, presentation mode */
+(function () {
+  if (!window.Highcharts || !window.PROFILE) return;
+  var P = window.PROFILE, H = window.Highcharts, root = document.documentElement;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CS = getComputedStyle(root);
+  var SANS = CS.getPropertyValue('--sans').trim() || "'Instrument Sans', system-ui, sans-serif";
+  var MONO = CS.getPropertyValue('--mono').trim() || "'Martian Mono', ui-monospace, monospace";
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var now = new Date(), NOW = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1), CUR = now.getUTCFullYear();
+  var narrow = matchMedia('(max-width: 700px)').matches;
+  function ym(s) { if (!s) return NOW; var p = String(s).split('-'); return Date.UTC(+p[0], (+p[1] || 1) - 1, 1); }
+  function fmt(t) { var d = new Date(t); return MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function fmtS(s) { return s ? fmt(ym(s)) : 'Present'; }
+  function months(a, b) { var da = new Date(a), db = new Date(b); return (db.getUTCFullYear() - da.getUTCFullYear()) * 12 + db.getUTCMonth() - da.getUTCMonth(); }
+  function dur(m) { var y = Math.floor(m / 12), r = m % 12, o = []; if (y) o.push(y + (y === 1 ? ' yr' : ' yrs')); if (r) o.push(r + ' mo'); return o.join(' ') || '< 1 mo'; }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function light(c, k) { return H.color(c).brighten(k).get('rgb'); }
+
+  H.setOptions({
+    chart: { backgroundColor: 'transparent', style: { fontFamily: SANS }, spacing: [10, 8, 10, 8], animation: reduced ? false : { duration: 700 } },
+    title: { text: null }, subtitle: { text: null }, credits: { enabled: false }, exporting: { enabled: false },
+    accessibility: { enabled: true }, legend: { enabled: false },
+    xAxis: { lineColor: 'rgba(255,214,170,.16)', tickColor: 'rgba(255,214,170,.16)', gridLineColor: 'rgba(255,214,170,.06)', labels: { style: { color: '#b4a597', fontFamily: MONO, fontSize: '11px' } } },
+    yAxis: { gridLineColor: 'rgba(255,214,170,.06)', lineColor: 'rgba(255,214,170,.16)', title: { text: null }, labels: { style: { color: '#b4a597', fontSize: '13px' } } },
+    tooltip: { useHTML: true, backgroundColor: 'rgba(0,0,0,0)', borderWidth: 0, shadow: false, padding: 0, style: { color: '#f4ece3', fontSize: '13px' }, outside: true, hideDelay: 120 },
+    plotOptions: { series: { animation: reduced ? false : { duration: 900 }, states: { inactive: { opacity: .4 } } } }
+  });
+
+  /* ---------- lane data, all derived from PROFILE ---------- */
+  var ERA_COLOR = { intelligence: '#d55181', network: '#3987e5', interfaces: '#c98500', enterprise: '#199e70', foundations: '#9085e9' };
+  var PLAT_COLOR = { cert: '#ffc178', diag: '#7fb4ff', compliance: '#ff8a2a', aiplat: '#ff6a3d' };
+  var eras = P.eras.slice().sort(function (a, b) { return a.from - b.from; });
+  var eraRange = eras.map(function (e, i) {
+    var a = e.id === 'foundations' ? ym(P.education.start) : Date.UTC(e.from, i ? 0 : 5, 1);
+    var nx = eras[i + 1]; var b = nx ? Date.UTC(nx.from, 0, 1) : NOW;
+    if (e.id === 'enterprise') a = ym('2006-06');
+    if (nx && nx.id === 'enterprise') b = ym('2006-06');
+    return { e: e, a: a, b: b };
+  });
+  // Where: Coimbatore from education, then the moves
+  var moves = P.milestones.filter(function (m) { return m.kind === 'move'; });
+  var where = [{ name: P.education.place.split(',')[0], sub: P.education.school, a: ym(P.education.start), b: ym(P.education.end) }];
+  var firstJob = P.milestones.filter(function (m) { return m.title === 'Joined Infosys'; })[0];
+  where.push({ name: moves.length ? moves[0].from : 'Chennai', sub: 'Infosys', a: ym(firstJob ? firstJob.date : '2006-06'), b: moves.length ? ym(moves[0].date) : NOW });
+  moves.forEach(function (m, i) { var nx = moves[i + 1]; where.push({ name: m.to, sub: m.note, a: ym(m.date), b: nx ? ym(nx.date) : NOW, approx: m.approx }); });
+  // Employer lane: Infosys → Diversant → Verizon (dates from the roles), weighted by PROFILE.employers
+  var EMPW = {}; (P.employers || []).forEach(function (e) { EMPW[e.name] = e; });
+  var CLW = {}; (P.clients || []).forEach(function (c) { if (c && c.name) CLW[c.name] = c.weight || 1; });
+  var emps = [];
+  P.roles.slice().sort(function (a, b) { return ym(a.start) - ym(b.start); }).forEach(function (r) {
+    var name = r.org.split(' · ')[0].replace(' Wireless', '');
+    var e = emps.filter(function (x) { return x.name === name; })[0];
+    if (!e) { e = { name: name, a: ym(r.start), b: ym(r.end) }; emps.push(e); }
+    e.a = Math.min(e.a, ym(r.start)); e.b = Math.max(e.b, ym(r.end));
+  });
+  // Clients served through Infosys, one bar per client (labels named in the role focus become "Client · Label")
+  var cl = [];
+  P.roles.filter(function (r) { return /^Infosys/.test(r.org); }).sort(function (a, b) { return ym(a.start) - ym(b.start); }).forEach(function (r) {
+    var client = (r.org.split('client ')[1] || '').trim(); if (!client) return;
+    var sub = Object.keys(CLW).filter(function (n) { return n !== client && r.focus.indexOf(n) > -1; })[0];
+    var label = sub ? client + ' · ' + sub : client, w = Math.max(CLW[client] || 1, sub ? CLW[sub] || 1 : 1);
+    var prev = cl.filter(function (c) { return c.label === label; })[0];
+    if (prev && Math.abs(prev.b - ym(r.start)) < 40 * 864e5) { prev.b = Math.max(prev.b, ym(r.end)); return; }
+    cl.push({ label: label, a: ym(r.start), b: ym(r.end), w: w, loc: r.location || '', focus: r.focus });
+  });
+  function rowsFor(list) { var ends = []; list.forEach(function (x) { var r = 0; while (ends[r] !== undefined && ends[r] > x.a + 864e5) r++; ends[r] = x.b; x._row = r; }); return ends.length; }
+  var CR = rowsFor(cl);
+  // Platforms: greedy rows so overlaps stack inside one lane
+  var plats = P.platforms.slice().sort(function (a, b) { return ym(a.start) - ym(b.start); });
+  plats.forEach(function (p) { p.a = ym(p.start); p.b = p.end ? ym(p.end) : NOW; });
+  var PR = rowsFor(plats);
+  var CATS = ['Where', 'Role', 'Employer', 'Clients'], k;
+  for (k = 1; k < CR; k++) CATS.push('');
+  var Y_PL = CATS.length; CATS.push('Platforms');
+  for (k = 1; k < PR; k++) CATS.push('');
+  CATS.push('Milestones');
+  var Y_MS = CATS.length - 1;
+  var SEP = [.5, 1.5, 2.5, Y_PL - .5, Y_MS - .5];
+
+  var WCOL = { 3: '#e6d6c3', 2: '#c9b8a5', 1: '#ab9b8c' }, WPX = { 3: 30, 2: 24, 1: 18 };
+  var bars = { 3: [], 2: [], 1: [] };
+  function add(w, o) { bars[w].push(o); }
+  where.forEach(function (w) { add(3, { x: w.a, x2: w.b, y: 0, name: w.name, color: '#7fb4ff', lane: 'Where', t: w.name, o: w.sub + (w.approx ? ' (month approximate)' : '') }); });
+  eraRange.forEach(function (r) { add(3, { x: r.a, x2: r.b, y: 1, name: r.e.name, color: ERA_COLOR[r.e.id], lane: 'Role', t: r.e.name, o: r.e.area }); });
+  emps.forEach(function (e) { var meta = EMPW[e.name] || {}, w = meta.weight || 2; add(w, { x: e.a, x2: e.b, y: 2, name: e.name + (meta.via ? ' · for ' + meta.via : ''), color: e.name === 'Verizon' ? '#ffb26b' : WCOL[w], lane: 'Employer', t: e.name, o: meta.note || '' }); });
+  cl.forEach(function (c) { add(c.w, { x: c.a, x2: c.b, y: 3 + c._row, name: c.label, color: WCOL[c.w], lane: 'Client, through Infosys', t: c.label, o: c.focus + (c.loc ? ' · ' + c.loc : '') }); });
+  plats.forEach(function (p) { add(3, { x: p.a, x2: p.b, y: Y_PL + p._row, name: p.short || p.name, color: PLAT_COLOR[p.id] || '#ffb26b', lane: 'Platform', t: p.name, o: p.role + ' · ' + p.metric[0] + ' ' + p.metric[1], href: '#' + p.id }); });
+  [3, 2, 1].forEach(function (w) { bars[w].forEach(function (b) { b.borderColor = 'rgba(5,4,3,.9)'; b.color = { linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 }, stops: [[0, light(b.color, .12)], [1, b.color]] }; }); });
+
+  var ms = P.milestones.slice().sort(function (a, b) { return ym(a.date) - ym(b.date); });
+  var pins = ms.map(function (m, i) { return { x: ym(m.date), y: Y_MS, n: i + 1, name: String(i + 1), m: m, marker: { fillColor: m.kind === 'move' ? '#7fb4ff' : '#ff8a2a' } }; });
+  var msList = document.getElementById('msList');
+  msList.innerHTML = ms.map(function (m, i) { return '<li><span class="n' + (m.kind === 'move' ? ' move' : '') + '">' + (i + 1) + '</span><b>' + esc(m.title) + '<span>' + esc(fmtS(m.date)) + (m.approx ? ' (approx.)' : '') + '</span></b><em>' + esc(m.note) + '</em></li>'; }).join('');
+
+  var bands = eraRange.map(function (r, i) { return { from: r.a, to: r.b, color: i % 2 ? 'rgba(255,214,170,.028)' : 'rgba(0,0,0,0)', label: { text: r.e.name, y: -6, verticalAlign: 'top', style: { color: '#8f8274', fontFamily: MONO, fontSize: '11px' } } }; });
+
+  function labelFit() {
+    var p = this.point, w = (p.shapeArgs && p.shapeArgs.width) || 0, n = Math.floor((w - 18) / 7.2);
+    if (n < 3) return '';
+    var s = p.name; return s.length > n ? s.slice(0, Math.max(1, n - 1)) + '…' : s;
+  }
+  var X0 = Date.UTC(2002, 0, 1);
+  var lanes = H.chart('lanes', {
+    chart: Object.assign({ marginTop: 26, marginLeft: narrow ? 78 : 96, marginRight: 14 }, narrow ? { backgroundColor: '#080605', scrollablePlotArea: { minWidth: 980, scrollPositionX: 1 } } : {}),
+    accessibility: { description: 'Four lanes from 2002 to today: where I lived, my role, the clients I built for and the platforms I owned, plus numbered milestones.' },
+    xAxis: { type: 'datetime', min: X0, max: NOW + 31e9, plotBands: bands, gridLineWidth: 1, tickInterval: 2 * 365 * 864e5, dateTimeLabelFormats: { year: '%Y' }, labels: { format: '{value:%Y}' },
+      plotLines: [{ value: NOW, color: 'rgba(255,138,42,.65)', width: 1, zIndex: 5, label: { text: 'Today', rotation: 0, y: -8, x: -18, style: { color: '#ffb26b', fontFamily: MONO, fontSize: '10px' } } }] },
+    yAxis: { categories: CATS, reversed: true, min: 0, max: CATS.length - 1, gridLineWidth: 0, staticScale: undefined,
+      labels: { style: { color: '#b4a597', fontSize: '12.5px', fontWeight: '500' } },
+      plotLines: SEP.map(function (v, i) { return { value: v, color: i === SEP.length - 1 ? 'rgba(255,214,170,.14)' : 'rgba(255,214,170,.08)', width: 1 }; }) },
+    tooltip: { formatter: function () {
+      var p = this.point;
+      if (p.m) return '<div class="tt"><div class="k">Milestone ' + p.n + ' · ' + esc(fmtS(p.m.date)) + '</div><div class="t">' + esc(p.m.title) + '</div><div class="o">' + esc(p.m.note) + '</div></div>';
+      return '<div class="tt"><div class="k">' + esc(p.lane) + '</div><div class="t">' + esc(p.t) + '</div>' + (p.o ? '<div class="o">' + esc(p.o) + '</div>' : '') +
+        '<div class="d">' + esc(fmt(p.x)) + ' – ' + (p.x2 >= NOW ? 'Present' : esc(fmt(p.x2))) + '<em>' + dur(months(p.x, p.x2)) + '</em></div></div>';
+    } },
+    plotOptions: {
+      xrange: { borderRadius: 7, borderWidth: 1, pointPadding: 0, groupPadding: .16, grouping: false, colorByPoint: false,
+        dataLabels: { enabled: true, inside: true, align: 'left', x: 6, formatter: labelFit, style: { color: '#140a02', textOutline: 'none', fontSize: '12px', fontWeight: '600' } },
+        cursor: 'pointer', point: { events: { click: function () { if (this.href) location.hash = this.href; } } } },
+      scatter: { marker: { symbol: 'circle', radius: 11, lineColor: '#050403', lineWidth: 2 }, stickyTracking: false,
+        dataLabels: { enabled: true, format: '{point.n}', align: 'center', verticalAlign: 'middle', y: 0, inside: true, style: { color: '#140a02', textOutline: 'none', fontFamily: MONO, fontSize: '10px', fontWeight: '700' } } }
+    },
+    series: [3, 2, 1].map(function (w) { return { type: 'xrange', name: 'Career', data: bars[w], pointWidth: (narrow ? .86 : 1) * WPX[w] }; }).concat([{ type: 'scatter', name: 'Milestones', data: pins }])
+  });
+
+  /* zoom presets */
+  var segBtns = [].slice.call(document.querySelectorAll('.seg button'));
+  function zoom(r) {
+    var a = X0, b = NOW + 31e9;
+    if (r && r !== 'all') { var p = r.split(','); var y0 = +p[0]; a = Date.UTC(Math.floor(y0), Math.round((y0 % 1) * 12), 1); if (p[1] === 'now') b = NOW + 31e9; else { var y1 = +p[1]; b = Date.UTC(Math.floor(y1), Math.round((y1 % 1) * 12), 1); } }
+    lanes.xAxis[0].setExtremes(a, b, true, reduced ? false : { duration: 700 });
+    segBtns.forEach(function (b2) { b2.setAttribute('aria-pressed', String(b2.dataset.range === (r || 'all'))); });
+  }
+  segBtns.forEach(function (b) { b.addEventListener('click', function () { zoom(b.dataset.range); }); });
+
+  /* table view */
+  var tblBtn = document.getElementById('tblBtn'), tblWrap = document.getElementById('tblWrap');
+  var rows = P.roles.map(function (r) { return '<tr><td>' + esc(fmtS(r.start)) + ' – ' + esc(fmtS(r.end)) + '</td><td><strong>' + esc(r.title) + '</strong></td><td>' + esc(r.org) + '</td><td>' + esc(r.focus) + '</td><td>' + esc(r.location || '') + '</td></tr>'; }).join('');
+  rows += '<tr><td>' + esc(P.education.start.slice(0, 4)) + ' – ' + esc(P.education.end.slice(0, 4)) + '</td><td><strong>' + esc(P.education.degree) + '</strong></td><td>' + esc(P.education.school) + '</td><td>Education</td><td>' + esc(P.education.place) + '</td></tr>';
+  rows += '<tr><td>' + esc(P.school.years) + '</td><td><strong>' + esc(P.school.what) + '</strong></td><td></td><td>School</td><td>' + esc(P.school.place) + '</td></tr>';
+  var prow = P.platforms.map(function (p) { return '<tr><td>' + esc(p.years) + '</td><td><strong>' + esc(p.name) + '</strong></td><td>' + esc(p.role) + '</td><td>' + esc(p.metric[0] + ' · ' + p.metric[1]) + '</td><td></td></tr>'; }).join('');
+  tblWrap.innerHTML = '<table class="tbl"><caption>Roles, education and platforms</caption><thead><tr><th scope="col">When</th><th scope="col">Role / platform</th><th scope="col">Organisation</th><th scope="col">Focus</th><th scope="col">Where</th></tr></thead><tbody>' + rows + prow + '</tbody></table>';
+  tblBtn.addEventListener('click', function () { var open = tblWrap.hidden; tblWrap.hidden = !open; tblBtn.setAttribute('aria-expanded', String(open)); tblBtn.textContent = open ? 'Hide table' : 'Table view'; });
+
+  /* expertise stream (derived) */
+  var DOM = [
+    { id: 'telecom', name: 'Telecom & standards', color: '#3987e5' }, { id: 'leadership', name: 'Product & leadership', color: '#d95926' },
+    { id: 'cloud', name: 'Cloud & data', color: '#199e70' }, { id: 'frontend', name: 'Frontend & product', color: '#c98500' },
+    { id: 'ai', name: 'AI & analytics', color: '#d55181' }, { id: 'quality', name: 'Quality & testing', color: '#9085e9' }
+  ];
+  P.domains.forEach(function (d) { DOM.forEach(function (x) { if (x.id === d.id) x.name = d.name; }); });
+  var ENT = P.roles.map(function (r) { return { start: ym(r.start), end: ym(r.end), stack: r.stack, lead: /Product Manager/.test(r.title) ? 1 / 3 : /Principal/.test(r.title) ? 1 / 4 : 0 }; })
+    .concat(P.platforms.map(function (p) { return { start: ym(p.start), end: p.end ? ym(p.end) : NOW, stack: p.stack, lead: 0 }; }));
+  function inYear(e, y) { var a = Math.max(e.start, Date.UTC(y, 0, 1)), b = Math.min(e.end, Date.UTC(y + 1, 0, 1)); return b > a ? months(a, b) : 0; }
+  function split(e) { var c = {}, n = 0; e.stack.forEach(function (t) { var d = P.techDomain[t]; if (d) { c[d] = (c[d] || 0) + 1; n++; } }); var o = {}; Object.keys(c).forEach(function (d) { o[d] = c[d] / n * (1 - e.lead); }); if (e.lead) o.leadership = (o.leadership || 0) + e.lead; return o; }
+  var YEARS = []; for (var yy = 2006; yy <= CUR; yy++) YEARS.push(yy);
+  var share = {}; DOM.forEach(function (d) { share[d.id] = []; });
+  YEARS.forEach(function (y) { var tot = {}, sum = 0; ENT.forEach(function (e) { var m = inYear(e, y); if (!m) return; var sp = split(e); Object.keys(sp).forEach(function (d) { var v = sp[d] * m / 12; tot[d] = (tot[d] || 0) + v; sum += v; }); }); DOM.forEach(function (d) { share[d.id].push(sum ? Math.round((tot[d.id] || 0) / sum * 1000) / 10 : 0); }); });
+  var sl = document.getElementById('streamLegend');
+  DOM.forEach(function (d) { var li = document.createElement('li'), i = document.createElement('i'); i.style.background = d.color; li.append(i, document.createTextNode(d.name)); sl.appendChild(li); });
+  var sBands = eras.filter(function (e) { return e.id !== 'foundations'; }).map(function (e, i) {
+    var from = Math.max(e.from, 2006), nx = eras[eras.indexOf(e) + 1], to = nx ? nx.from : CUR + 1;
+    return { from: YEARS.indexOf(from) - .5, to: Math.min(YEARS.length, YEARS.indexOf(Math.min(to, CUR)) + (to > CUR ? 1 : 0)) - .5, color: i % 2 ? 'rgba(255,214,170,.025)' : 'rgba(0,0,0,0)', label: { text: e.name, y: 16, style: { color: '#8f8274', fontFamily: MONO, fontSize: '11px' } } };
+  });
+  var stream = H.chart('stream', {
+    chart: Object.assign({ type: 'streamgraph', marginBottom: 34 }, narrow ? { backgroundColor: '#050403', scrollablePlotArea: { minWidth: 720, scrollPositionX: 1 } } : {}),
+    accessibility: { description: 'Share of focus by domain per year, derived from the technologies of each active role and platform.' },
+    xAxis: { categories: YEARS.map(String), crosshair: { color: 'rgba(255,138,42,.35)', width: 1 }, plotBands: sBands, lineWidth: 0, tickWidth: 0, labels: { step: narrow ? 2 : (innerWidth < 1200 ? 2 : 1) } },
+    yAxis: { visible: false, startOnTick: false, endOnTick: false },
+    tooltip: { shared: true, formatter: function () { var h = '<div class="tt"><div class="k">' + esc(this.x) + ' · share of focus (derived)</div>'; this.points.slice().sort(function (a, b) { return b.y - a.y; }).forEach(function (p) { if (p.y <= 0) return; h += '<div class="row"><b>' + p.y.toFixed(0) + '%</b><i style="background:' + p.color + '"></i>' + esc(p.series.name) + '</div>'; }); return h + '</div>'; } },
+    plotOptions: { streamgraph: { lineWidth: 0, fillOpacity: 1, marker: { enabled: false }, borderColor: '#050403', label: { enabled: true, minFontSize: 11, maxFontSize: 18, style: { color: '#0b0806', fontWeight: '600', textOutline: 'none' } } } },
+    series: DOM.map(function (d) { var ai = d.id === 'ai'; return { name: d.name, id: d.id, data: share[d.id], color: d.color, zIndex: ai ? 2 : 1, fillColor: { linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 }, stops: [[0, light(d.color, ai ? .22 : .1)], [1, H.color(d.color).setOpacity(ai ? 1 : .82).get('rgba')]] }, lineWidth: ai ? 1.5 : 0, lineColor: ai ? '#ffb3d0' : undefined }; })
+  });
+
+  /* presentation mode */
+  var charts = document.getElementById('charts');
+  var steps = [{ r: 'all', y: '2002 – today', t: 'Twenty years on <span class="serif">one axis.</span>', l: 'Where I lived, the role I played, who I built for and what I owned.' }]
+    .concat(P.eras.map(function (e) { var r = eraRange.filter(function (x) { return x.e.id === e.id; })[0]; return { a: r.a, b: r.b, y: e.years, t: esc(e.name), l: e.line, era: e.id }; }))
+    .concat([{ stream: true, y: '2006 – today', t: 'How the focus <span class="serif">shifted.</span>', l: 'From interfaces to networks to AI, derived from every role and platform.' }]);
+  var si = 0;
+  function show(i) {
+    si = Math.max(0, Math.min(steps.length - 1, i)); var s = steps[si];
+    document.getElementById('pcYears').textContent = s.y;
+    document.getElementById('pcTitle').innerHTML = s.t;
+    document.getElementById('pcLine').textContent = s.l;
+    document.getElementById('pcStep').textContent = (si + 1) + ' / ' + steps.length + '  ·  ← → to step, Esc to exit';
+    charts.classList.toggle('p-lanes-off', !!s.stream); charts.classList.toggle('p-stream-off', !s.stream);
+    if (!s.stream) { if (s.r === 'all') zoom('all'); else lanes.xAxis[0].setExtremes(s.a - 90 * 864e5, s.b + 90 * 864e5, true, reduced ? false : { duration: 800 }); }
+    setTimeout(function () { lanes.reflow(); stream.reflow(); }, 30);
+  }
+  function present(on) {
+    root.classList.toggle('presenting', on);
+    if (on) { show(0); window.scrollTo(0, 0); } else { charts.classList.remove('p-lanes-off', 'p-stream-off'); zoom('all'); setTimeout(function () { lanes.reflow(); stream.reflow(); charts.scrollIntoView(); }, 30); }
+  }
+  function fullscreen() { if (document.fullscreenElement) document.exitFullscreen(); else if (root.requestFullscreen) root.requestFullscreen().catch(function () {}); }
+  document.getElementById('presBtn').addEventListener('click', function () { present(!root.classList.contains('presenting')); });
+  document.getElementById('fsBtn').addEventListener('click', fullscreen);
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, textarea, select')) return;
+    var k = e.key;
+    if (k === 'p' || k === 'P') { e.preventDefault(); present(!root.classList.contains('presenting')); return; }
+    if (k === 'f' || k === 'F') { e.preventDefault(); fullscreen(); return; }
+    if (!root.classList.contains('presenting')) return;
+    if (k === 'Escape') { present(false); }
+    else if (k === 'ArrowRight' || k === ' ' || k === 'PageDown') { e.preventDefault(); show(si + 1); }
+    else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); show(si - 1); }
+  });
+  window.__career = Object.assign(window.__career || {}, { lanes: lanes, stream: stream, show: show, present: present, share: share });
+})();
+</script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+window.__rewindBoot = true;
+const root = document.documentElement;
+const P = window.PROFILE;
+const { sections, stages, buttons, absTop } = window.__career;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function hasGL() { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } }
+function setRail(cur) { buttons.forEach((b, i) => { if (i === cur) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); }); }
+const rail = document.querySelector('.rail');
+function stageIndex() {
+  const mid = scrollY + innerHeight * .5;
+  for (let k = stages.length - 1; k >= 0; k--) { const t = absTop(stages[k]); if (mid >= t) return { k, t: (mid - t) / stages[k].offsetHeight, top: t }; }
+  return { k: -1, t: 0, top: 0 };
+}
+
+/*__FORMS__*/
+
+const ERA_DIR = 'assets/img/eras/';
+const ids = P.eras.map(e => e.id);
+function loadImg(src) { return new Promise((res, rej) => { const im = new Image(); im.decoding = 'async'; im.onload = () => res(im); im.onerror = rej; im.src = src; }); }
+const assets = (async () => {
+  const getJSON = async name => { try { const r = await fetch(ERA_DIR + name, { cache: 'no-cache' }); return r.ok ? await r.json() : null; } catch (e) { return null; } };
+  const manifest = await getJSON('manifest.json');
+  const declared = (manifest && manifest.files) || [];
+  const files = new Set(declared), out = {};
+  await Promise.all(ids.map(async id => {
+    const pick = files.has(id + '.webp') ? id + '.webp' : id + '.jpg';
+    const vid = declared.find(f => f.endsWith('video/' + id + '.mp4'));
+    const rec = { src: ERA_DIR + pick, video: vid ? (vid.startsWith('assets/') ? vid : ERA_DIR + vid).replace('assets/img/eras/../../', 'assets/') : null, img: null };
+    try { rec.img = await loadImg(rec.src); } catch (e) { rec.src = null; }
+    out[id] = rec;
+  }));
+  return out;
+})();
+
+function goStatic() {
+  root.classList.remove('fx'); root.classList.add('static', 'fx-ready');
+  assets.then(a => {
+    sections.forEach((s, i) => { const r = a[ids[i]]; if (r && r.src) { const pin = s.querySelector('.era-pin'); pin.style.setProperty('--plate', 'url("' + r.src + '")'); if (PLATE_GRADE[ids[i]]) pin.style.setProperty('--tone', '#1b2a44'); pin.classList.add('has-plate'); } });
+  });
+}
+
+const PW = 5.4, PH = 3.6;
+function sampleImage(img, N, out, col, aspect) {
+  const PWl = PH * aspect, cols = Math.ceil(Math.sqrt(N * aspect)), rows = Math.ceil(N / cols);
+  const cv = document.createElement('canvas'); cv.width = cols; cv.height = rows;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  const s = Math.max(cols / img.naturalWidth, rows / img.naturalHeight), dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+  ctx.drawImage(img, (cols - dw) / 2, (rows - dh) / 2, dw, dh);
+  const d = ctx.getImageData(0, 0, cols, rows).data, M = cols * rows, lum = new Float32Array(M);
+  let mean = 0;
+  for (let c = 0; c < M; c++) { lum[c] = (d[c * 4] * .299 + d[c * 4 + 1] * .587 + d[c * 4 + 2] * .114) / 255; mean += lum[c]; }
+  mean /= M; const gain = Math.min(1.25, Math.max(.72, .24 / Math.max(mean, .01)));
+  const sorted = Float32Array.from(lum).sort();
+  const lo = sorted[(M * .02) | 0], hi = Math.max(sorted[(M * .985) | 0], lo + .05);
+  const edge = new Float32Array(M);
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+    const c = y * cols + x, xl = Math.max(0, x - 1), xr = Math.min(cols - 1, x + 1), yu = Math.max(0, y - 1), yd = Math.min(rows - 1, y + 1);
+    edge[c] = Math.abs(lum[y * cols + xr] - lum[y * cols + xl]) + Math.abs(lum[yd * cols + x] - lum[yu * cols + x]);
+  }
+  const es = Float32Array.from(edge).sort(), eHi = Math.max(es[(M * .96) | 0], .02);
+  const B = new Float32Array(M);
+  for (let c = 0; c < M; c++) { const L = Math.min(1, Math.max(0, (lum[c] - lo) / (hi - lo))); B[c] = Math.min(1, .42 * L * L + .8 * Math.min(1, edge[c] / eHi) * (.3 + .7 * L)); }
+  const order = Array.from({ length: M }, (_, c) => c).sort((a, b) => B[b] - B[a]);
+  const ramp = l => l < .5 ? [.16 + (1 - .16) * l * 2 * .85, .05 + (.48 - .05) * l * 2, .01 + (.13 - .01) * l * 2] : [1, .48 + (.9 - .48) * (l - .5) * 2, .13 + (.78 - .13) * (l - .5) * 2];
+  for (let k = 0; k < N; k++) {
+    const c = order[k], cx = c % cols, cy = (c / cols) | 0;
+    const L = Math.min(1, Math.max(0, (lum[c] - lo) / (hi - lo)));
+    const u = (cx + rng()) / cols, v = (cy + rng()) / rows;
+    out[k * 3] = (u - .5) * PWl; out[k * 3 + 1] = (.5 - v) * PH; out[k * 3 + 2] = (B[c] - .3) * .55 + (L - .5) * .3 + (rng() - .5) * .06;
+    const g = ramp(Math.max(L, B[c])), st = L / Math.max(lum[c], .02), w = (.1 + B[c] * 1.15) * gain;
+    for (let q = 0; q < 3; q++) { const raw = Math.min(1, d[c * 4 + q] / 255 * Math.min(st, 4)); col[k * 3 + q] = Math.min(1, (raw * .35 + g[q] * .65) * w); }
+  }
+}
+function proceduralColour(N, i, col) {
+  const pal = [['#ff8a2a', '#ffd9b0'], ['#ff6a1f', '#ffc178'], ['#ffad5c', '#fff0dc'], ['#ff9a4a', '#a8c4ff'], ['#7fb4ff', '#ffb26b']][i].map(c => new THREE.Color(c));
+  const t = new THREE.Color();
+  for (let k = 0; k < N; k++) { t.copy(pal[0]).lerp(pal[1], rng() < .2 ? 1 : rng() * .35).multiplyScalar(.55 + rng() * .45); col[k * 3] = t.r; col[k * 3 + 1] = t.g; col[k * 3 + 2] = t.b; }
+}
+const PLATE_GRADE = { foundations: { tint: [.42, .58, 1.0], sky: .42, gainMul: 1.5 } };
+function plateFromImage(img, id) {
+  const w = 320, h = Math.round(320 * img.naturalHeight / img.naturalWidth), cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const g2 = cv.getContext('2d', { willReadFrequently: true }); g2.drawImage(img, 0, 0, w, h);
+  const px2 = g2.getImageData(0, 0, w, h).data; let m = 0; for (let k = 0; k < px2.length; k += 4) m += (px2[k] * .299 + px2[k + 1] * .587 + px2[k + 2] * .114) / 255; m /= (px2.length / 4);
+  const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.userData.aspect = w / h; const pg = PLATE_GRADE[id] || {}; t.userData.gain = Math.min(2.4, Math.max(.4, .2 / Math.max(m, .01))) * (pg.gainMul || 1); t.userData.tint = pg.tint || [1, .56, .24]; t.userData.sky = pg.sky || 0; return t;
+}
+function plateProcedural() {
+  const w = 320, h = 200, cv = document.createElement('canvas'); cv.width = w; cv.height = h; const g = cv.getContext('2d');
+  g.fillStyle = '#0b0704'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 6; i++) { g.fillStyle = 'rgba(255,150,70,' + (.05 + i * .02) + ')'; g.fillRect(40 + i * 34, 30 + i * 18, 150, 90); }
+  const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.userData.aspect = w / h; return t;
+}
+
+function start() {
+  const canvas = document.getElementById('stage');
+  const mobile = innerWidth < 768;
+  const N = mobile ? 22000 : 60000;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile ? 1.25 : 1.75));
+  renderer.setSize(innerWidth, innerHeight, false);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .95;
+  renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.setClearColor(0x050403, 1);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, .1, 60); camera.position.set(0, 0, 9);
+
+  const procs = [neural, tower, screens, racks, circuit];
+  const geo = new THREE.BufferGeometry();
+  for (let i = 0; i < 5; i++) { const pos = procs[i](N), col = new Float32Array(N * 3); proceduralColour(N, i, col); geo.setAttribute('p' + i, new THREE.BufferAttribute(pos, 3)); geo.setAttribute('c' + i, new THREE.BufferAttribute(col, 3)); }
+  geo.setAttribute('position', new THREE.BufferAttribute(geo.attributes.p0.array.slice(), 3));
+  const aR = new Float32Array(N * 4);
+  for (let k = 0; k < N; k++) { aR[k * 4] = rng(); aR[k * 4 + 1] = Math.pow(rng(), 2.2); aR[k * 4 + 2] = rng(); aR[k * 4 + 3] = rng(); }
+  geo.setAttribute('aR', new THREE.BufferAttribute(aR, 4));
+  geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 9);
+  const uniforms = { uMorph: { value: 0 }, uTime: { value: 0 }, uSize: { value: mobile ? .036 : .026 }, uPixel: { value: 1 }, uFade: { value: 1 } };
+  const mat = new THREE.ShaderMaterial({
+    uniforms, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `
+      attribute vec3 p0; attribute vec3 p1; attribute vec3 p2; attribute vec3 p3; attribute vec3 p4;
+      attribute vec3 c0; attribute vec3 c1; attribute vec3 c2; attribute vec3 c3; attribute vec3 c4; attribute vec4 aR;
+      uniform float uMorph, uTime, uSize, uPixel, uFade;
+      varying vec3 vCol; varying float vA;
+      vec3 P(int i){ if(i==0) return p0; if(i==1) return p1; if(i==2) return p2; if(i==3) return p3; return p4; }
+      vec3 C(int i){ if(i==0) return c0; if(i==1) return c1; if(i==2) return c2; if(i==3) return c3; return c4; }
+      void main(){
+        float m = clamp(uMorph, 0.0, 4.0); int i = int(min(floor(m), 3.0)); float f = m - float(i);
+        float st = aR.x * 0.45; float fe = smoothstep(st, st + 0.55, f); fe = fe * fe * (3.0 - 2.0 * fe);
+        vec3 pos = mix(P(i), P(i + 1), fe); float mid = sin(3.14159265 * fe);
+        vec3 swirl = vec3(sin(pos.y * 1.6 + uTime * .9 + aR.z * 6.0), cos(pos.x * 1.4 - uTime * .8 + aR.z * 5.0), sin(pos.x * 1.7 + pos.y + uTime * .7 + aR.x * 4.0));
+        pos += swirl * mid * 0.8 + normalize(pos + vec3(1e-4)) * mid * 0.9; pos.z += mid * (aR.x - 0.35) * 2.2;
+        pos += vec3(sin(uTime * .6 + aR.z * 12.0), cos(uTime * .5 + aR.z * 9.0), sin(uTime * .55 + aR.z * 7.0)) * 0.01 * (1.0 + aR.y * 2.0);
+        vec4 mv = modelViewMatrix * vec4(pos, 1.0); gl_Position = projectionMatrix * mv;
+        float size = uSize * (0.55 + aR.y * 1.6) * (1.0 + mid * 0.8); gl_PointSize = min(size * uPixel / -mv.z, 40.0);
+        vCol = mix(C(i), C(i + 1), fe); float l = dot(vCol, vec3(.299, .587, .114));
+        float wave = 0.5 + 0.5 * sin(pos.x * 1.3 - uTime * 1.2 + aR.z * 1.5); float fog = smoothstep(16.0, 5.0, -mv.z);
+        vA = (0.015 + l * 0.42 + l * l * 0.45) * (0.85 + 0.3 * wave) * fog * uFade * (0.6 + 0.5 * aR.y) * (1.0 + mid * 0.6);
+      }`,
+    fragmentShader: `varying vec3 vCol; varying float vA;
+      void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.0, d); a *= a; if (a * vA < 0.003) discard; gl_FragColor = vec4(vCol, a * vA); }`
+  });
+  const sculpt = new THREE.Points(geo, mat); sculpt.frustumCulled = false;
+  const group = new THREE.Group(); group.add(sculpt); scene.add(group);
+
+  const plates = ids.map(() => plateProcedural());
+  const pu = { tA: { value: plates[0] }, tB: { value: plates[1] }, uMix: { value: 0 }, aA: { value: 1.6 }, aB: { value: 1.6 }, gA: { value: 1 }, gB: { value: 1 }, kA: { value: new THREE.Vector4(1, .56, .24, 0) }, kB: { value: new THREE.Vector4(1, .56, .24, 0) }, uAspect: { value: innerWidth / innerHeight }, uFade: uniforms.uFade, uTime: uniforms.uTime, uMob: { value: mobile ? 1 : 0 } };
+  const plate = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
+    uniforms: pu, depthTest: false, depthWrite: false,
+    vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }`,
+    fragmentShader: `
+      uniform sampler2D tA, tB; uniform float uMix, aA, aB, gA, gB, uAspect, uFade, uTime, uMob; uniform vec4 kA, kB; varying vec2 vUv;
+      vec2 cover(vec2 uv, float ta){ vec2 s = uAspect > ta ? vec2(1.0, ta / uAspect) : vec2(uAspect / ta, 1.0); return (uv - 0.5) * s * 0.94 + 0.5; }
+      vec3 grade(vec3 c, vec4 k){ float l = dot(c, vec3(.299,.587,.114)); vec3 toned = k.rgb * l * 1.15; vec3 g = mix(toned, c, .12); return g * mix(1.0, 1.0 - k.a, smoothstep(.42, 1.0, vUv.y)); }
+      void main(){
+        vec2 drift = vec2(sin(uTime * .05), cos(uTime * .04)) * .006;
+        vec3 a = grade(texture2D(tA, cover(vUv + drift, aA)).rgb, kA) * gA;
+        vec3 b = grade(texture2D(tB, cover(vUv + drift, aB)).rgb, kB) * gB;
+        vec3 c = mix(a, b, smoothstep(0.0, 1.0, uMix));
+        vec2 q = (vUv - 0.5) * vec2(uAspect, 1.0);
+        float vig = smoothstep(1.15, 0.15, length(q - vec2(uMob > .5 ? 0.0 : 0.25 * uAspect, uMob > .5 ? 0.18 : 0.0)));
+        gl_FragColor = vec4(c * (0.06 + 0.24 * vig) * uFade, 1.0);
+      }`
+  }));
+  plate.renderOrder = -10; plate.frustumCulled = false; scene.add(plate);
+
+  const videos = {}, isPhoto = [false, false, false, false, false];
+  assets.then(a => {
+    ids.forEach((id, i) => {
+      const r = a[id]; if (!r) return;
+      if (r.img) { sampleImage(r.img, N, geo.attributes['p' + i].array, geo.attributes['c' + i].array, innerWidth / innerHeight); isPhoto[i] = true; geo.attributes['p' + i].needsUpdate = true; geo.attributes['c' + i].needsUpdate = true; plates[i] = plateFromImage(r.img, id); }
+      if (r.video) { const v = document.createElement('video'); v.src = r.video; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'metadata';
+        v.addEventListener('loadeddata', () => { const t = new THREE.VideoTexture(v); t.colorSpace = THREE.SRGBColorSpace; t.userData.aspect = v.videoWidth / v.videoHeight; t.userData.gain = 1.4; plates[i] = t; videos[i] = v; }, { once: true }); }
+    });
+    geo.attributes.position.array.set(geo.attributes.p0.array); geo.attributes.position.needsUpdate = true;
+  });
+
+  const DN = mobile ? 700 : 1800, dpos = new Float32Array(DN * 3), dr = new Float32Array(DN);
+  for (let k = 0; k < DN; k++) { put(dpos, k, (rng() - .5) * 26, (rng() - .5) * 16, -rng() * 18 + 3); dr[k] = rng(); }
+  const dgeo = new THREE.BufferGeometry(); dgeo.setAttribute('position', new THREE.BufferAttribute(dpos, 3)); dgeo.setAttribute('aR', new THREE.BufferAttribute(dr, 1));
+  const dmat = new THREE.ShaderMaterial({
+    uniforms: { uTime: uniforms.uTime, uPixel: uniforms.uPixel, uFade: uniforms.uFade, uScroll: { value: 0 } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `attribute float aR; uniform float uTime, uPixel, uScroll; varying float vA;
+      void main(){ vec3 p = position; p.y += mod(uScroll * 0.002 * (0.4 + aR) + uTime * 0.04 * aR + 8.0, 16.0) - 8.0; p.x += sin(uTime * .1 + aR * 20.0) * .3;
+        vec4 mv = modelViewMatrix * vec4(p, 1.0); gl_Position = projectionMatrix * mv; gl_PointSize = (0.02 + aR * 0.04) * uPixel / -mv.z; vA = (0.12 + aR * 0.3) * smoothstep(22.0, 6.0, -mv.z); }`,
+    fragmentShader: `varying float vA; uniform float uFade; void main(){ float d = length(gl_PointCoord - .5); float a = smoothstep(.5, 0., d); gl_FragColor = vec4(vec3(1., .72, .45), a * vA * uFade); }`
+  });
+  const dust = new THREE.Points(dgeo, dmat); dust.frustumCulled = false; scene.add(dust);
+
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), mobile ? .45 : .55, .5, .3);
+  composer.addPass(bloom); composer.addPass(new OutputPass());
+
+  function layout() {
+    const w = innerWidth, h = innerHeight, mob = w < 768;
+    renderer.setSize(w, h, false); composer.setSize(w, h); bloom.setSize(w, h);
+    camera.aspect = w / h; camera.updateProjectionMatrix(); pu.uAspect.value = w / h;
+    uniforms.uPixel.value = renderer.domElement.height / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
+    const halfW = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * 9 * camera.aspect;
+    group.userData.base = mob ? { x: 0, y: 1.35, s: Math.min(.55, halfW * 2 / PW * .98) } : { x: Math.min(halfW * .44, 2.7), y: .05, s: w < 1100 ? .82 : 1 };
+    const visH = 2 * 9 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2);
+    group.userData.photo = { x: 0, y: 0, s: visH / (.94 * PH) };
+  }
+  layout(); addEventListener('resize', layout);
+
+  /* scroll → morph / year / era. Morph happens at the start of each pinned stage; the work below sits on solid ground. */
+  const yearEl = document.getElementById('year');
+  const after = document.querySelector('.after');
+  const target = { m: 0, year: P.eras[0].to, fade: 1 }, cur = { m: 0, year: P.eras[0].to, fade: 1 };
+  let curEra = -2, live = true;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const ease = x => x * x * (3 - 2 * x);
+  function readScroll() {
+    const s = stageIndex(), k = s.k, t = clamp(s.t, 0, 1);
+    if (k < 0) { target.m = 0; target.year = P.eras[0].to; }
+    else {
+      target.m = k === 0 ? 0 : (k - 1) + ease(clamp(t / .38, 0, 1));
+      const from = k === 0 ? P.eras[0].to : P.eras[k - 1].from, to = P.eras[k].from;
+      target.year = from + (to - from) * clamp(t / .8, 0, 1);
+    }
+    const inStage = k >= 0 && s.t <= 1.02, introVisible = scrollY < innerHeight * .9;
+    const afterTop = absTop(after), endT = clamp((scrollY + innerHeight - afterTop) / (innerHeight * .8), 0, 1);
+    target.fade = 1 - endT;
+    const era = inStage ? k : -1;
+    if (era !== curEra) { curEra = era; setRail(era); }
+    rail.style.opacity = inStage ? '1' : '0'; rail.style.pointerEvents = inStage ? '' : 'none';
+    yearEl.style.opacity = inStage || introVisible ? '1' : '0';
+    live = introVisible || inStage || endT < 1 && scrollY + innerHeight > absTop(stages[0]);
+    dmat.uniforms.uScroll.value = scrollY;
+  }
+  addEventListener('scroll', readScroll, { passive: true }); addEventListener('resize', readScroll); readScroll();
+
+  let px = 0, py = 0, tx = 0, ty = 0;
+  addEventListener('pointermove', e => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; }, { passive: true });
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.set(['.intro-copy', '.era-copy'], { opacity: 1 });
+  gsap.timeline({ delay: .2 })
+    .from('#intro-name', { yPercent: 30, opacity: 0, filter: 'blur(16px)', duration: 1.6, ease: 'expo.out' })
+    .from('.intro .lede', { y: 24, opacity: 0, duration: 1.1, ease: 'expo.out' }, '-=1.1')
+    .from('.intro-index li', { y: 14, opacity: 0, duration: .8, stagger: .06, ease: 'expo.out' }, '-=.8')
+    .from('.cue', { opacity: 0, x: -16, duration: .9, ease: 'expo.out' }, '-=.6');
+  gsap.to('.intro-copy', { opacity: 0, y: -60, filter: 'blur(8px)', ease: 'none', scrollTrigger: { trigger: '#timeline', start: 'top top', end: 'bottom 30%', scrub: true } });
+  stages.forEach(st => {
+    const q = sel => st.querySelectorAll(sel);
+    const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+    tl.fromTo(q('.ln'), { yPercent: 115, rotate: 2 }, { yPercent: 0, rotate: 0, duration: 1.3 })
+      .fromTo(q('.era-meta'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1 }, '-=1.0')
+      .fromTo(q('.era-line'), { opacity: 0, filter: 'blur(14px)', y: 18 }, { opacity: 1, filter: 'blur(0px)', y: 0, duration: 1.2 }, '-=.85')
+      .fromTo(q('.era-body'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1 }, '-=.9')
+      .fromTo(q('.proof li'), { clipPath: 'inset(0 0 100% 0)', y: 14 }, { clipPath: 'inset(0 0 0% 0)', y: 0, duration: 1, stagger: .1 }, '-=.8')
+      .fromTo(q('.chip'), { opacity: 0, scale: .86 }, { opacity: 1, scale: 1, duration: .7, stagger: .035, ease: 'back.out(2)' }, '-=.8');
+    ScrollTrigger.create({ trigger: st, start: 'top 45%', end: 'bottom top', onEnter: () => tl.play(), onEnterBack: () => tl.play(), onLeaveBack: () => tl.reverse() });
+    gsap.fromTo(st.querySelector('.era-copy'), { opacity: 1, y: 0, filter: 'blur(0px)' }, { opacity: 0, y: -70, filter: 'blur(10px)', ease: 'none', immediateRender: false, scrollTrigger: { trigger: st, start: 'bottom 75%', end: 'bottom 25%', scrub: true } });
+  });
+
+  const clock = new THREE.Clock();
+  let running = true, raf = 0, plateI = -1;
+  function frame() {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime, k = 1 - Math.pow(.0016, dt);
+    cur.m += (target.m - cur.m) * k * .9; cur.year += (target.year - cur.year) * k; cur.fade += (target.fade - cur.fade) * k;
+    const yr = Math.round(cur.year); if (yearEl.textContent !== String(yr)) yearEl.textContent = yr;
+    if (!live && Math.abs(target.m - cur.m) < .001) return;
+    uniforms.uMorph.value = cur.m; uniforms.uTime.value = t; uniforms.uFade.value = cur.fade;
+    const i = Math.min(Math.floor(cur.m), 3), f = cur.m - i;
+    if (pu.tA.value !== plates[i] || pu.tB.value !== plates[i + 1]) {
+      pu.tA.value = plates[i]; pu.tB.value = plates[i + 1];
+      pu.aA.value = plates[i].userData.aspect || 1.6; pu.aB.value = plates[i + 1].userData.aspect || 1.6;
+      pu.gA.value = plates[i].userData.gain || 1; pu.gB.value = plates[i + 1].userData.gain || 1;
+      const ka = plates[i].userData.tint || [1, .56, .24], kb = plates[i + 1].userData.tint || [1, .56, .24];
+      pu.kA.value.set(ka[0], ka[1], ka[2], plates[i].userData.sky || 0); pu.kB.value.set(kb[0], kb[1], kb[2], plates[i + 1].userData.sky || 0);
+    }
+    pu.uMix.value = f;
+    if (plateI !== i) { plateI = i; Object.entries(videos).forEach(([vi, v]) => { if (+vi === i || +vi === i + 1) v.play().catch(() => {}); else v.pause(); }); }
+    px += (tx - px) * k * .5; py += (ty - py) * k * .5;
+    let wp = 0; for (let j = 0; j < 5; j++) if (!isPhoto[j]) wp += Math.max(0, 1 - Math.abs(cur.m - j)); wp = Math.min(1, wp);
+    const bq = group.userData.base, bp = group.userData.photo, L = (a, b2) => a + (b2 - a) * wp;
+    const gx = L(bp.x, bq.x), gy = L(bp.y, bq.y);
+    group.position.set(gx, gy, 0); group.scale.setScalar(L(bp.s, bq.s));
+    group.rotation.y = (innerWidth < 768 ? 0 : -.3) * wp + px * (.05 + .27 * wp) + Math.sin(t * .15) * (.012 + .05 * wp);
+    group.rotation.x = py * (.04 + .12 * wp) + Math.sin(t * .2) * .02 * wp;
+    camera.position.set(px * .3, -py * .2, 9); camera.lookAt(gx * .35 * wp, gy * .5 * wp, 0);
+    composer.render();
+  }
+  frame(); root.classList.add('fx-ready');
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && running) { cancelAnimationFrame(raf); running = false; Object.values(videos).forEach(v => v.pause()); }
+    else if (!document.hidden && !running) { running = true; clock.getDelta(); plateI = -1; frame(); }
+  });
+  addEventListener('pagehide', () => { cancelAnimationFrame(raf); geo.dispose(); mat.dispose(); dgeo.dispose(); dmat.dispose(); plates.forEach(p => p && p.dispose()); renderer.dispose(); });
+  window.__rewind = { cur, target };
+}
+
+if (reduced || !hasGL() || !window.gsap || !window.ScrollTrigger) goStatic();
+else { try { start(); } catch (e) { console.error(e); goStatic(); } }
+</script>
