@@ -19,7 +19,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/instrument-sans-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/img/portrait.webp" as="image">
+<link rel="preload" href="assets/img/portrait-holo.webp" as="image">
 <link rel="preload" href="assets/img/hero.jpg" as="image">
 <link rel="modulepreload" href="assets/vendor/three.module.min.js">
 <link rel="stylesheet" href="assets/css/system.css">
@@ -68,7 +68,7 @@
   -webkit-mask-composite: source-out;
   mask: var(--src) var(--posx, 50%) var(--posy, 100%) / var(--fit, contain) no-repeat, var(--src) calc(var(--posx, 50%) + var(--rx, 6px)) calc(var(--posy, 100%) + var(--ry, 5px)) / var(--fit, contain) no-repeat;
   mask-composite: subtract; }
-.hero-figure { position: relative; align-self: end; justify-self: end; width: min(100%, 600px); aspect-ratio: 988 / 1200; margin-bottom: calc(-1 * clamp(48px, 9vh, 110px)); pointer-events: none;
+.hero-figure { position: relative; align-self: end; justify-self: end; width: min(100%, 600px); aspect-ratio: 820 / 894; margin-bottom: calc(-1 * clamp(48px, 9vh, 110px)); pointer-events: none;
   translate: calc(var(--px, 0) * -14px) calc(var(--py, 0) * -8px); transition: translate .8s var(--ease-out); opacity: 0; animation: figIn 2s .3s var(--ease-out) forwards; }
 .hero-figure::before { content: ''; position: absolute; inset: 0 6% 34% -22%; z-index: -1; border-radius: 50%; background: radial-gradient(50% 50% at 44% 46%, rgba(255,138,42,.34), rgba(255,90,31,.1) 55%, transparent 76%); filter: blur(30px); }
 @keyframes figIn { from { opacity: 0; transform: translateY(24px) scale(.985); } to { opacity: 1; transform: none; } }
@@ -295,6 +295,21 @@
 .chapters-on .rail { opacity: 1; visibility: visible; transition: opacity .5s var(--ease-out); }
 .era-line { max-width: 22ch; }
 .ch-outro .btn { margin-top: 40px; }
+
+/* holographic hero portrait */
+.holo { position: absolute; inset: 0; isolation: isolate; }
+.holo img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: contain; object-position: 50% 100%; mix-blend-mode: screen; }
+.holo::before { content: ''; position: absolute; inset: 6% 8% 30% 8%; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, rgba(120,195,255,.18), rgba(255,138,42,.14) 55%, transparent 75%); filter: blur(28px); }
+.holo-scan { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(to bottom, transparent calc(var(--sy, -20%) - 9%), rgba(150,210,255,.07) calc(var(--sy, -20%) - 3%), rgba(185,228,255,.34) var(--sy, -20%), rgba(150,210,255,.07) calc(var(--sy, -20%) + 3%), transparent calc(var(--sy, -20%) + 9%));
+  -webkit-mask: url(assets/img/portrait-holo.webp) 50% 100% / contain no-repeat; mask: url(assets/img/portrait-holo.webp) 50% 100% / contain no-repeat; }
+.holo-dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
+.fx .holo img { animation: holo-flicker 6s steps(1, end) infinite; }
+@property --sy { syntax: '<percentage>'; inherits: false; initial-value: -20%; }
+.fx .holo-scan { animation: holo-sweep 5.5s cubic-bezier(.45,0,.55,1) infinite; }
+@keyframes holo-sweep { 0% { --sy: -20%; } 75% { --sy: 120%; } 100% { --sy: 120%; } }
+@keyframes holo-flicker { 0%, 100% { opacity: 1; } 47% { opacity: 1; } 48% { opacity: .82; } 49% { opacity: 1; } 83% { opacity: .9; } 84% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .holo img, .holo-scan { animation: none !important; } .holo-scan { display: none; } }
 </style>
 <noscript><style>.hero-name .ln > span,.hero-meta,.hero .lede,.hero-cta,.hero-figure{animation:none!important;opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -336,9 +351,10 @@
         </div>
       </div>
       <div class="hero-figure" id="hero-figure">
-        <div class="pfig" style="--src: url(assets/img/portrait.webp)">
-          <img src="assets/img/portrait.webp" alt="Portrait of Ponmudi Pandiyan" width="988" height="1200" fetchpriority="high">
-          <span class="tone" aria-hidden="true"></span><span class="shade" aria-hidden="true"></span><span class="rim" aria-hidden="true"></span>
+        <div class="holo">
+          <img src="assets/img/portrait-holo.webp" alt="Holographic portrait of Ponmudi Pandiyan" width="820" height="894" fetchpriority="high">
+          <span class="holo-scan" aria-hidden="true"></span>
+          <canvas class="holo-dust" aria-hidden="true"></canvas>
         </div>
       </div>
     </div>
@@ -1259,6 +1275,28 @@ function start() {
 if (REDUCED) html.classList.add('no-gl');
 else if (state.near) boot();
 else addEventListener('chapters:near', boot, { once: true });
+</script>
+<script>
+(function () {
+  var cv = document.querySelector('.holo-dust'); if (!cv) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ctx = cv.getContext('2d'), dpr = Math.min(devicePixelRatio || 1, 1.75), P = [], w = 0, h = 0, on = true;
+  function size() { w = cv.clientWidth; h = cv.clientHeight; cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  function spawn(p) { p.x = w * (.18 + Math.random() * .64); p.y = h * (.25 + Math.random() * .7); p.v = .12 + Math.random() * .35; p.r = .5 + Math.random() * 1.4; p.a = 0; p.l = 220 + Math.random() * 260; p.t = 0; p.c = Math.random() < .6 ? '255,190,120' : '150,205,255'; return p; }
+  size(); addEventListener('resize', size);
+  for (var i = 0; i < 70; i++) { var p = spawn({}); p.t = Math.random() * p.l; P.push(p); }
+  new IntersectionObserver(function (e) { on = e[0].isIntersecting; }).observe(cv);
+  (function loop() {
+    requestAnimationFrame(loop); if (!on) return;
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < P.length; i++) {
+      var p = P[i]; p.t++; p.y -= p.v; p.x += Math.sin((p.t + i * 13) / 40) * .15;
+      var k = p.t / p.l; p.a = k < .2 ? k / .2 : k > .75 ? (1 - k) / .25 : 1;
+      if (p.t > p.l) spawn(p);
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fillStyle = 'rgba(' + p.c + ',' + (p.a * .75).toFixed(3) + ')'; ctx.fill();
+    }
+  })();
+})();
 </script>
 </body>
 </html>
