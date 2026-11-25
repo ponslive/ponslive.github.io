@@ -478,6 +478,24 @@ details.roles.more { max-width: var(--max); margin-inline: auto; }
 .about-me::before { bottom: 100%; background: linear-gradient(to top, var(--void), rgba(5,4,3,0)); }
 .about-me::after { top: 100%; background: linear-gradient(to bottom, var(--void), rgba(5,4,3,0)); }
 .strengths li { color: var(--ink); }
+
+/* realistic globe for the moves */
+.flight-scroll { position: relative; }
+.fx .flight-scroll { height: 260vh; }
+.fx .flight-pin { position: sticky; top: 0; height: 100svh; display: flex; align-items: center; }
+.fx .flight-pin .wrap { width: 100%; }
+.globe-stage { position: relative; width: 100%; aspect-ratio: 16 / 8; border-radius: 22px; overflow: hidden; background: radial-gradient(60% 80% at 50% 45%, rgba(255,138,42,.12), transparent 70%), #050403; }
+.globe-stage canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+.globe-fallback { position: absolute; inset: 0; display: flex; align-items: center; padding: 4%; }
+.globe-stage.on .globe-fallback { display: none; }
+.globe-hud { position: absolute; left: clamp(16px, 3vw, 32px); bottom: clamp(14px, 3vw, 28px); display: grid; gap: 6px; pointer-events: none; }
+.gh-leg { color: #ffb26b; }
+.gh-route { font-size: clamp(1.2rem, 2.2vw, 1.8rem); font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+.globe-stage:not(.on) .globe-hud { display: none; }
+.flight ol li { transition: color .4s, opacity .4s; }
+.globe-live .flight ol li { opacity: .42; }
+.globe-live .flight ol li.now { opacity: 1; color: var(--ink); }
+@media (max-width: 760px) { .globe-stage { aspect-ratio: 4 / 5; } .fx .flight-scroll { height: 220vh; } }
 </style>
 </head>
 <body>
@@ -488,8 +506,8 @@ details.roles.more { max-width: var(--max); margin-inline: auto; }
   <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
   <ul class="nav-links" id="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="career.html" aria-current="page">Career</a></li>
     <li><a href="expertise.html">Expertise</a></li>
+    <li><a href="career.html" aria-current="page">Career</a></li>
     <li><a href="personal.html">Personal</a></li>
     <li><a class="ext" href="https://www.linkedin.com/in/ponmudi-pandiyan/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
   </ul>
@@ -510,7 +528,7 @@ details.roles.more { max-width: var(--max); margin-inline: auto; }
           <li><a href="#about"><i aria-hidden="true"></i>In short</a></li>
           <li><a href="#era-intelligence"><i aria-hidden="true"></i>Timeline</a></li>
           <li><a href="#work"><i aria-hidden="true"></i>Platforms</a></li>
-          <li><a href="expertise.html"><i aria-hidden="true"></i>Expertise</a></li>
+          
           <li><a href="#charts"><i aria-hidden="true"></i>Charts</a></li>
         </ul>
         <div class="cue" aria-hidden="true">
@@ -691,10 +709,10 @@ details.roles.more { max-width: var(--max); margin-inline: auto; }
     <div class="era-work">
 <div class="wrap"><details class="roles more"><summary><span class="mono">Roles · 2006 – 2014</span><span class="more-l">Show roles</span></summary><ol class="role-list"><li class="rv"><span class="mono yr">Nov 2010 – Jan 2013</span><div><h3>Onsite Coordinator &amp; Team Lead</h3><p>Infosys · Warner Music Group</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>New York</span></div><p>E-commerce sites for Atlantic Records artists and bands</p><ul class="pts"><li>Flew from Chennai to New York in November 2010 as onsite coordinator and team lead for Infosys.</li><li>Led delivery of e-commerce websites for Atlantic Records artists and bands.</li><li>Bridged onsite client teams and the offshore team: requirements, planning and release coordination.</li></ul></li><li class="rv"><span class="mono yr">Jan 2013 – Mar 2014</span><div><h3>Onsite Coordinator &amp; Team Lead</h3><p>Infosys · Warner Music Group</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Burbank, California</span></div><p>E-commerce sites for Warner Bros. Records artists and bands</p><ul class="pts"><li>Moved to Burbank, California, to lead the Warner Bros. Records artist and band e-commerce sites.</li><li>Onsite coordination and team leadership between the client and the offshore team.</li></ul></li><li class="rv"><span class="mono yr">Nov 2010 – Mar 2014</span><div><h3>Technical Analyst — Onsite Coordinator &amp; Team Lead</h3><p>Infosys · Nike</p></div><p>Equipment &amp; Apparel Product Image Management</p><ul class="pts"><li>Coordinator and team lead for Nike’s global equipment and apparel catalogue.</li><li>Built a rich Flex UI on a J2EE/SOA backend, extending Flex AdvancedDataGrid internals.</li><li>Agile delivery, builds and deployments across environments; liaison between onsite and offshore teams.</li></ul></li><li class="rv"><span class="mono yr">Feb 2009 – May 2009</span><div><h3>Senior System Engineer</h3><p>Infosys · Cable Vision</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>Automated reporting system</p><ul class="pts"><li>Database design, stored procedures and report generation on Oracle BI.</li></ul></li><li class="rv"><span class="mono yr">Jun 2008 – Mar 2009</span><div><h3>Senior System Engineer</h3><p>Infosys · Baker Hughes</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>Power Hookup Management System</p><ul class="pts"><li>Designed and built desktop and web UI for engineering drawings with an extended Flex component set.</li></ul></li><li class="rv"><span class="mono yr">Apr 2007 – Jun 2008</span><div><h3>Senior System Engineer</h3><p>Infosys · Comcast</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>Location management system</p><ul class="pts"><li>Web application development on Java, Struts and AJAX.</li></ul></li><li class="rv"><span class="mono yr">Jan 2007 – Mar 2007</span><div><h3>Test Engineer</h3><p>Infosys · AOL</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>Automated Billing System</p><ul class="pts"><li>Test plan creation and execution, sanity testing.</li></ul></li><li class="rv"><span class="mono yr">Jun 2006 – Jan 2007</span><div><h3>Test Engineer</h3><p>Infosys · AOL</p><span class="where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.5a4.5 4.5 0 0 1 9 0c0 3.3-4.5 7.5-4.5 7.5z"/><circle cx="8" cy="7" r="1.5"/></svg>Chennai, India</span></div><p>ISP testing</p><ul class="pts"><li>Automated test scripts with QTP, automated and manual execution.</li></ul></li></ol></details></div>
 
-<div class="wrap"><figure class="flight" id="moves" aria-labelledby="moves-h">
+<div class="flight-scroll" id="flightScroll"><div class="flight-pin"><div class="wrap"><figure class="flight" id="moves" aria-labelledby="moves-h">
     <div class="flight-h"><h3 class="h3" id="moves-h">From Chennai to the <span class="serif">United States.</span></h3><span class="mono ink-3">The moves, 2010 – 2014</span></div>
-    <svg viewBox="0 0 1000 260" role="img" aria-label="Route: Chennai to New York, New York to Burbank, Burbank to New Jersey"><path class="route" d="M910 190 Q605 20 300 190"/><path class="route-draw" d="M910 190 Q605 20 300 190" style="--len:1028;--k:0"/><path class="route" d="M300 190 Q195 82.8 90 190"/><path class="route-draw" d="M300 190 Q195 82.8 90 190" style="--len:412;--k:1"/><path class="route" d="M90 190 Q225 -60.48000000000002 360 96"/><path class="route-draw" d="M90 190 Q225 -60.48000000000002 360 96" style="--len:679;--k:2"/><text class="leg-label" x="605" y="101" text-anchor="middle">Nov 2010</text><text class="leg-label" x="195" y="132.4" text-anchor="middle">Jan 2013</text><text class="leg-label" x="225" y="37.25999999999999" text-anchor="middle">Mar 2014</text><g class="city"><circle cx="910" cy="190" r="9"/><circle class="dot" cx="910" cy="190" r="3.5"/><text x="910" y="224" text-anchor="middle">Chennai</text><text class="sub" x="910" y="242" text-anchor="middle">Tamil Nadu, India</text></g><g class="city"><circle cx="300" cy="190" r="9"/><circle class="dot" cx="300" cy="190" r="3.5"/><text x="300" y="224" text-anchor="middle">New York</text><text class="sub" x="300" y="242" text-anchor="middle">New York, USA</text></g><g class="city"><circle cx="90" cy="190" r="9"/><circle class="dot" cx="90" cy="190" r="3.5"/><text x="90" y="224" text-anchor="middle">Burbank</text><text class="sub" x="90" y="242" text-anchor="middle">California, USA</text></g><g class="city"><circle cx="360" cy="96" r="9"/><circle class="dot" cx="360" cy="96" r="3.5"/><text x="378" y="94" text-anchor="start">New Jersey</text><text class="sub" x="378" y="112" text-anchor="start">USA</text></g></svg>
-    <ol><li><b>Nov 2010</b>Chennai → New York · Flew from Chennai to New York as onsite coordinator and team lead for Warner Music Group</li><li><b>Jan 2013 (approx.)</b>New York → Burbank · Burbank, for Warner Bros. Records</li><li><b>Mar 2014</b>Burbank → New Jersey · Settled in New Jersey; lead front-end developer at Verizon through Diversant</li></ol></figure></div>
+    <div class="globe-stage" id="globe" aria-hidden="true"><div class="globe-fallback"><svg viewBox="0 0 1000 260" role="img" aria-label="Route: Chennai to New York, New York to Burbank, Burbank to New Jersey"><path class="route" d="M910 190 Q605 20 300 190"/><path class="route-draw" d="M910 190 Q605 20 300 190" style="--len:1028;--k:0"/><path class="route" d="M300 190 Q195 82.8 90 190"/><path class="route-draw" d="M300 190 Q195 82.8 90 190" style="--len:412;--k:1"/><path class="route" d="M90 190 Q225 -60.48000000000002 360 96"/><path class="route-draw" d="M90 190 Q225 -60.48000000000002 360 96" style="--len:679;--k:2"/><text class="leg-label" x="605" y="101" text-anchor="middle">Nov 2010</text><text class="leg-label" x="195" y="132.4" text-anchor="middle">Jan 2013</text><text class="leg-label" x="225" y="37.25999999999999" text-anchor="middle">Mar 2014</text><g class="city"><circle cx="910" cy="190" r="9"/><circle class="dot" cx="910" cy="190" r="3.5"/><text x="910" y="224" text-anchor="middle">Chennai</text><text class="sub" x="910" y="242" text-anchor="middle">Tamil Nadu, India</text></g><g class="city"><circle cx="300" cy="190" r="9"/><circle class="dot" cx="300" cy="190" r="3.5"/><text x="300" y="224" text-anchor="middle">New York</text><text class="sub" x="300" y="242" text-anchor="middle">New York, USA</text></g><g class="city"><circle cx="90" cy="190" r="9"/><circle class="dot" cx="90" cy="190" r="3.5"/><text x="90" y="224" text-anchor="middle">Burbank</text><text class="sub" x="90" y="242" text-anchor="middle">California, USA</text></g><g class="city"><circle cx="360" cy="96" r="9"/><circle class="dot" cx="360" cy="96" r="3.5"/><text x="378" y="94" text-anchor="start">New Jersey</text><text class="sub" x="378" y="112" text-anchor="start">USA</text></g></svg></div><div class="globe-hud"><span class="mono gh-leg" id="ghLeg">Nov 2010</span><span class="gh-route" id="ghRoute">Chennai → New York</span></div></div>
+    <ol><li><b>Nov 2010</b>Chennai → New York · Flew from Chennai to New York as onsite coordinator and team lead for Warner Music Group</li><li><b>Jan 2013 (approx.)</b>New York → Burbank · Burbank, for Warner Bros. Records</li><li><b>Mar 2014</b>Burbank → New Jersey · Settled in New Jersey; lead front-end developer at Verizon through Diversant</li></ol></figure></div></div></div>
     </div>
   </section>
   <section class="era" id="era-foundations" data-i="4" aria-labelledby="h-foundations">
@@ -716,13 +734,6 @@ details.roles.more { max-width: var(--max); margin-inline: auto; }
     </div>
   </section>
 
-  <section class="x-link wrap" aria-labelledby="xl-h">
-    <div class="xl-card rv">
-      <div><h2 class="h2" id="xl-h">The skills <span class="serif">underneath.</span></h2>
-      <p class="body">AI-native engineering with Claude Code, telecom standards, cloud and data, AI and analytics, frontend and product, and product leadership.</p></div>
-      <a class="btn btn-primary" href="expertise.html">See the expertise <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-  </section>
   <div class="after">
   <nav class="after-tabs wrap" aria-label="Depth">
     <div class="tabs" role="tablist" aria-label="More about the work">
@@ -777,8 +788,8 @@ details.roles.more { max-width: var(--max); margin-inline: auto; }
     <div class="foot-grid">
       <p class="foot-big"><a href="mailto:mail2pons@gmail.com">Let’s build something <span class="serif">that matters.</span></a></p>
       <ul>
-        <li><a href="career.html">Career</a></li>
         <li><a href="expertise.html">Expertise</a></li>
+        <li><a href="career.html">Career</a></li>
       </ul>
       <ul>
         <li><a href="personal.html">Personal</a></li>
@@ -1523,6 +1534,41 @@ else { try { start(); } catch (e) { console.error(e); goStatic(); } }
   fromHash(); window.addEventListener('hashchange',fromHash);
   document.addEventListener('keydown',function(e){ if((e.key==='p'||e.key==='P')&&!e.metaKey&&!e.ctrlKey){ var t=document.getElementById('t-charts'); if(t&&t.getAttribute('aria-selected')!=='true') show(t); } }, true);
 })();
+</script>
+<script type="module">
+const stage = document.getElementById('globe');
+const fx = document.documentElement.classList.contains('fx');
+const gl = (() => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } })();
+if (stage && fx && gl) {
+  const cities = [
+    { id: 'chennai', name: 'Chennai', lat: 13.08, lon: 80.27 },
+    { id: 'newyork', name: 'New York', lat: 40.71, lon: -74.0 },
+    { id: 'burbank', name: 'Burbank', lat: 34.18, lon: -118.31 },
+    { id: 'newjersey', name: 'New Jersey', lat: 40.06, lon: -74.4 },
+  ];
+  const legs = [
+    { from: 'chennai', to: 'newyork', when: 'Nov 2010' },
+    { from: 'newyork', to: 'burbank', when: 'Jan 2013' },
+    { from: 'burbank', to: 'newjersey', when: 'Mar 2014' },
+  ];
+  const nm = Object.fromEntries(cities.map((c) => [c.id, c.name]));
+  const items = [...document.querySelectorAll('#moves ol li')];
+  const legEl = document.getElementById('ghLeg'), routeEl = document.getElementById('ghRoute');
+  try {
+    const load = () => import('./assets/js/route-globe.js');
+    const { mountRouteGlobe } = await load().catch(() => new Promise((r) => setTimeout(r, 900)).then(load));
+    let last = -1;
+    const g = await mountRouteGlobe(stage, { cities, legs, onLeg(i) {
+      if (i === last) return; last = i;
+      legEl.textContent = legs[i].when; routeEl.textContent = nm[legs[i].from] + ' \u2192 ' + nm[legs[i].to];
+      items.forEach((li, k) => li.classList.toggle('now', k === i));
+    } });
+    stage.classList.add('on'); document.getElementById('moves').classList.add('globe-live');
+    const sc = document.getElementById('flightScroll');
+    const onScroll = () => { const r = sc.getBoundingClientRect(), span = sc.offsetHeight - innerHeight; g.setProgress(span > 0 ? -r.top / span : 0); };
+    addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  } catch (e) { console.warn('globe fallback', e); }
+}
 </script>
 </body>
 </html>
