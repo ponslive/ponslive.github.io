@@ -277,21 +277,27 @@ window.PROFILE = {
     places: [
       { years: '1990s', place: 'Madurai', region: 'Tamil Nadu, India', what: 'Where my childhood is',
         story: 'I was born and brought up in Madurai and went to school there through the 90s. It is one of the oldest living cities in the world, and it shaped who I am.',
+        life: ['Temple-city festivals', 'Street food after school', 'Where curiosity started'],
         notes: ['The towering gopurams of the Meenakshi Amman temple', 'The Chithirai festival filling the streets', 'Jigarthanda on a hot evening', 'Jasmine \u2014 malli \u2014 sold on every corner'] },
       { years: '2002 \u2013 2006', place: 'Coimbatore', region: 'Tamil Nadu, India', what: 'College and fun days',
         story: 'Four years of Computer Science at Karunya Institute of Technology, at the foot of the Western Ghats. This is where I learned to build things \u2014 and where the friendships and fun days still make me smile.',
+        life: ['College friends for life', 'Hill-town weekends', 'First real projects'],
         notes: ['A campus at the foot of the Western Ghats', 'Cool hill air and the Siruvani water', 'Late-night coding and lifelong friends'] },
       { years: '2006 \u2013 2010', place: 'Chennai', region: 'Tamil Nadu, India', what: 'Where my career began',
         story: 'I started my career at Infosys in Chennai, building for AOL, Comcast, Baker Hughes and Cable Vision. Chennai is still the place I head to first whenever I go back to India.',
+        life: ['Marina Beach evenings', 'First paycheque, first city on my own', 'Still my first stop in India'],
         notes: ['Evenings on Marina Beach', 'Filter coffee and a proper meals', 'The first city that made me an engineer'] },
       { years: '2010 \u2013 2013', place: 'New York', region: 'New York, USA', what: 'Music, artists and the city',
         story: 'I flew to New York as an onsite team lead for Atlantic Records\u2019 artist and band e-commerce sites. Working in music meant meeting artists and going to concerts I still remember.',
+        life: ['Concerts across the city', 'Meeting artists through the work', 'Photos on every walk'],
         notes: ['Meeting artists through the work', 'Concerts across the city', 'Winter walks in Central Park'] },
       { years: '2013 \u2013 2014', place: 'Burbank', region: 'California, USA', what: 'Studios, artists and concerts',
         story: 'Burbank, for Warner Bros. Records \u2014 a city of film and music studios under the hills. I got the chance to meet lots of artists and attend lots of concerts.',
+        life: ['Studios and live music', 'Meeting artists backstage', 'Sunny drives in the hills'],
         notes: ['The media capital of the world, home to the studios', 'Meeting artists and attending concerts', 'Sunshine and the Verdugo hills'] },
-      { years: '2014 \u2013 today', place: 'New Jersey', region: 'USA', what: 'Home and family',
+      { years: '2014 \u2013 today', place: 'New Jersey', region: 'USA', what: 'Home, family and everything I love',
         story: 'New Jersey is home. It is where my wife and I are raising our son, and where I\u2019ve been building for Verizon ever since.',
+        life: ['Time with my son', 'Real-life photos on Instagram', 'Mornings with the markets', 'Reading what\u2019s next in tech'],
         notes: ['Autumn colours every October', 'The Manhattan skyline across the Hudson', 'Weekends with family'] }
     ],
     family: [
@@ -305,7 +311,13 @@ window.PROFILE = {
       { name: 'Craft', body: 'Good code, good design, good communication — all the same discipline. Sloppy thinking in one bleeds into the others.' },
       { name: 'Leadership', body: 'I want to build great engineers, not just great products. Investing in people compounds in ways architecture never can.' }
     ],
-    interests: ['Travel & exploration', 'Cricket — Tamil Nadu fan', 'Photography', 'Reading — tech, philosophy, biographies', 'Family time', 'Cooking South Indian food'],
+    passions: [
+      { id: 'son', title: 'Time with my son', line: 'The best part of any day. Park walks, piano keys and a lot of laughing \u2014 everything else can wait.', tag: 'Family first' },
+      { id: 'photos', title: 'Capturing real moments', line: 'I take a lot of photos \u2014 real, unposed, everyday life \u2014 and share the ones I love on Instagram. Not a photographer, just someone who likes keeping the moment.', tag: 'On Instagram' },
+      { id: 'markets', title: 'Following the markets', line: 'Mornings usually start with the markets: reading through stocks, earnings and the news behind the numbers.', tag: 'Stocks & news' },
+      { id: 'industry', title: 'What\u2019s next in tech', line: 'Keeping up with what is happening across the industry \u2014 AI, devices and networks \u2014 and how it changes what we build.', tag: 'Always reading' }
+    ],
+    interests: ['Time with my son', 'Real-life photography', 'Stocks & market news', 'Tech & industry news', 'Travel', 'Cricket \u2014 Tamil Nadu fan'],
     connect: 'Happy to talk about engineering leadership, platform architecture and where AI is taking the industry. Not looking to move right now, but always interested in people building things that matter.'
   }
 };

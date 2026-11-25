@@ -257,6 +257,14 @@ body { overflow-x: clip; }
 .fx .p-collage .ct { will-change: transform; }
 .fx .fam-tile, .fx .fam-fig { will-change: transform; transform-style: preserve-3d; }
 .fx .fam-strip { perspective: 1200px; }
+
+
+/* "Life here" chips inside each city chapter */
+.life-here { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line-2); max-width: 52ch; }
+.lh-k { color: var(--amber-hi); }
+.life-here ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.life-here li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 999px; background: rgba(5,4,3,.62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid var(--line-2); color: var(--ink); font-size: .92rem; }
+.life-here svg { width: 15px; height: 15px; fill: none; stroke: var(--amber-hi); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 </style>
 </head>
 <body>
@@ -327,7 +335,7 @@ body { overflow-x: clip; }
         <h3 class="place-name rv" id="p-madurai-t" style="--d:1">Madurai</h3>
         <p class="place-line rv" style="--d:2">Where my childhood is</p>
         <p class="place-story rv" style="--d:3">I was born and brought up in Madurai and went to school there through the 90s. It is one of the oldest living cities in the world, and it shaped who I am.</p>
-        <ul class="place-notes rv" style="--d:4"><li>The towering gopurams of the Meenakshi Amman temple</li><li>The Chithirai festival filling the streets</li><li>Jigarthanda on a hot evening</li><li>Jasmine — malli — sold on every corner</li></ul>
+        <div class="life-here rv" style="--d:5"><span class="mono lh-k">Life here</span><ul><li><span>Temple-city festivals</span></li><li><span>Street food after school</span></li><li><span>Where curiosity started</span></li></ul></div>
       </div>
       <span class="sr-only">Aerial view of the Meenakshi Amman temple and Madurai at sunset</span>
     </article>
@@ -339,7 +347,7 @@ body { overflow-x: clip; }
         <h3 class="place-name rv" id="p-coimbatore-t" style="--d:1">Coimbatore</h3>
         <p class="place-line rv" style="--d:2">College and fun days</p>
         <p class="place-story rv" style="--d:3">Four years of Computer Science at Karunya Institute of Technology, at the foot of the Western Ghats. This is where I learned to build things — and where the friendships and fun days still make me smile.</p>
-        <ul class="place-notes rv" style="--d:4"><li>A campus at the foot of the Western Ghats</li><li>Cool hill air and the Siruvani water</li><li>Late-night coding and lifelong friends</li></ul>
+        <div class="life-here rv" style="--d:5"><span class="mono lh-k">Life here</span><ul><li><span>College friends for life</span></li><li><span>Hill-town weekends</span></li><li><span>First real projects</span></li></ul></div>
       </div>
       <span class="sr-only">Karunya Institute of Technology campus with the hills behind, Coimbatore</span>
     </article>
@@ -351,7 +359,7 @@ body { overflow-x: clip; }
         <h3 class="place-name rv" id="p-chennai-t" style="--d:1">Chennai</h3>
         <p class="place-line rv" style="--d:2">Where my career began</p>
         <p class="place-story rv" style="--d:3">I started my career at Infosys in Chennai, building for AOL, Comcast, Baker Hughes and Cable Vision. Chennai is still the place I head to first whenever I go back to India.</p>
-        <ul class="place-notes rv" style="--d:4"><li>Evenings on Marina Beach</li><li>Filter coffee and a proper meals</li><li>The first city that made me an engineer</li></ul>
+        <div class="life-here rv" style="--d:5"><span class="mono lh-k">Life here</span><ul><li><span>Marina Beach evenings</span></li><li><span>First paycheque, first city on my own</span></li><li><span>Still my first stop in India</span></li></ul></div>
       </div>
       <span class="sr-only">Chennai skyline with the coast and the metro line</span>
     </article>
@@ -363,7 +371,7 @@ body { overflow-x: clip; }
         <h3 class="place-name rv" id="p-new-york-t" style="--d:1">New York</h3>
         <p class="place-line rv" style="--d:2">Music, artists and the city</p>
         <p class="place-story rv" style="--d:3">I flew to New York as an onsite team lead for Atlantic Records’ artist and band e-commerce sites. Working in music meant meeting artists and going to concerts I still remember.</p>
-        <ul class="place-notes rv" style="--d:4"><li>Meeting artists through the work</li><li>Concerts across the city</li><li>Winter walks in Central Park</li></ul>
+        <div class="life-here rv" style="--d:5"><span class="mono lh-k">Life here</span><ul><li><span>Concerts across the city</span></li><li><span>Meeting artists through the work</span></li><li><span>Photos on every walk</span></li></ul></div>
       </div>
       <figure class="inset land rv" style="--d:2"><img src="assets/img/personal/me-new-york.jpg" alt="Ponmudi on a bench in Central Park in winter" width="1600" height="1063" loading="lazy" decoding="async"><figcaption class="mono">Central Park, winter</figcaption></figure>
       <span class="sr-only">The Brooklyn Bridge and Manhattan skyline at night</span>
@@ -376,7 +384,7 @@ body { overflow-x: clip; }
         <h3 class="place-name rv" id="p-burbank-t" style="--d:1">Burbank</h3>
         <p class="place-line rv" style="--d:2">Studios, artists and concerts</p>
         <p class="place-story rv" style="--d:3">Burbank, for Warner Bros. Records — a city of film and music studios under the hills. I got the chance to meet lots of artists and attend lots of concerts.</p>
-        <ul class="place-notes rv" style="--d:4"><li>The media capital of the world, home to the studios</li><li>Meeting artists and attending concerts</li><li>Sunshine and the Verdugo hills</li></ul>
+        <div class="life-here rv" style="--d:5"><span class="mono lh-k">Life here</span><ul><li><span>Studios and live music</span></li><li><span>Meeting artists backstage</span></li><li><span>Sunny drives in the hills</span></li></ul></div>
       </div>
       <span class="sr-only">Burbank, California, with the hills behind</span>
     </article>
@@ -386,9 +394,9 @@ body { overflow-x: clip; }
         <p class="mono yr rv">2014 – today <span class="sep">·</span> USA</p>
         
         <h3 class="place-name rv" id="p-new-jersey-t" style="--d:1">New Jersey</h3>
-        <p class="place-line rv" style="--d:2">Home and family</p>
+        <p class="place-line rv" style="--d:2">Home, family and everything I love</p>
         <p class="place-story rv" style="--d:3">New Jersey is home. It is where my wife and I are raising our son, and where I’ve been building for Verizon ever since.</p>
-        <ul class="place-notes rv" style="--d:4"><li>Autumn colours every October</li><li>The Manhattan skyline across the Hudson</li><li>Weekends with family</li></ul>
+        <div class="life-here rv" style="--d:5"><span class="mono lh-k">Life here</span><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>Time with my son</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg><span>Real-life photos on Instagram</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-5 4 3 7-8"/><path d="M15 7h4v4"/></svg><span>Mornings with the markets</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M7.5 7.5a6.4 6.4 0 0 0 0 9M16.5 7.5a6.4 6.4 0 0 1 0 9M4.7 4.7a10.4 10.4 0 0 0 0 14.6M19.3 4.7a10.4 10.4 0 0 1 0 14.6"/></svg><span>Reading what’s next in tech</span></li></ul></div>
       </div>
       <figure class="inset port rv" style="--d:2"><img src="assets/img/personal/family-autumn.jpg" alt="Ponmudi lifting his son into the air under autumn trees" width="1350" height="1800" loading="lazy" decoding="async"><figcaption class="mono">Home, autumn</figcaption></figure>
       <span class="sr-only">The New Jersey skyline across the Hudson</span>
@@ -411,9 +419,9 @@ body { overflow-x: clip; }
         <figure class="fam-fig rv"><img src="assets/img/personal/family-studio.jpg" alt="Ponmudi holding his son, both smiling" width="1192" height="1800" loading="lazy"></figure>
       </div>
       <div class="fam-copy">
-        <h2 class="h2 rv" id="fam-t">Home is <span class="serif">the anchor.</span></h2>
-        <p class="rv" style="--d:1">My family is everything. Monisha, my wife, has been my steadiest supporter through every late-night architecture review, every launch, every pivot.</p>
-        <p class="rv" style="--d:2">Our son has already changed how I think about everything I build — I now think about the world he’ll grow up in.</p>
+        <h2 class="h2 rv" id="fam-t">Time with <span class="serif">my son.</span></h2>
+        <p class="rv" style="--d:1">Monisha, my wife, has been my steadiest supporter through every late-night architecture review, every launch, every pivot.</p>
+        <p class="rv" style="--d:2">Our son is the best part of any day — park walks, piano keys and a lot of laughing. He has already changed how I think about everything I build.</p>
         <p class="quiet rv" style="--d:3">Stepping away from a complex system design and just being present at home recalibrates everything. Technology is a means, not an end.</p>
       </div>
     </div>
@@ -424,22 +432,6 @@ body { overflow-x: clip; }
     </div>
   </section>
 
-  <section class="section" aria-labelledby="life-t" style="padding-top:0">
-    <div class="wrap">
-      <div class="life-head">
-        <h2 class="h2 rv" id="life-t">Life outside <span class="serif">work.</span></h2>
-        <p class="body rv" style="--d:1">The best ideas rarely arrive at a desk.</p>
-      </div>
-      <ul class="interests">
-      <li class="rv" style="--d:0"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 13.5l19-8-6.5 15-3-6.5z"/><path d="M12 14l3.5-3.5"/></svg><span class="it-main">Travel &amp; exploration</span></li>
-      <li class="rv" style="--d:1"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19l9.5-9.5"/><path d="M12.8 7.8l3.4 3.4 4-4-3.4-3.4z"/><circle cx="6.5" cy="7" r="2.2"/></svg><span class="it-main">Cricket</span><span class="it-sub">Tamil Nadu fan</span></li>
-      <li class="rv" style="--d:2"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.4h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.4"/></svg><span class="it-main">Photography</span></li>
-      <li class="rv" style="--d:0"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5.5c3-1.2 5.8-1.2 8.5.8v13c-2.7-2-5.5-2-8.5-.8z"/><path d="M20.5 5.5c-3-1.2-5.8-1.2-8.5.8v13c2.7-2 5.5-2 8.5-.8z"/></svg><span class="it-main">Reading</span><span class="it-sub">tech, philosophy, biographies</span></li>
-      <li class="rv" style="--d:1"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6.5 8 6.5"/><path d="M6 10v9.5h12V10"/><path d="M12 17.2c-2.6-1.8-3.6-3-3.6-4.3a1.8 1.8 0 0 1 3.6-.6 1.8 1.8 0 0 1 3.6.6c0 1.3-1 2.5-3.6 4.3z"/></svg><span class="it-main">Family time</span></li>
-      <li class="rv" style="--d:2"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16a8 8 0 0 1-16 0z"/><path d="M8.5 8.5c0-1.5 1.5-1.5 1.5-3M12 8.5c0-1.5 1.5-1.5 1.5-3M15.5 8.5c0-1.5 1.5-1.5 1.5-3"/></svg><span class="it-main">Cooking South Indian food</span></li>
-      </ul>
-    </div>
-  </section>
 
   <section class="section connect" aria-labelledby="connect-t" style="padding-top:0">
     <div class="wrap">
